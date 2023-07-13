@@ -13,15 +13,16 @@ import { AuthenticationService } from "../../shared/services/authentication.serv
 })
 export class FormLoginComponent {
 	@ViewChild('loginForm') loginForm: NgForm | undefined
+	triedLogin: boolean = false
+	loginAllowed:boolean = false
 
 	constructor(
 		private router: Router,
 		private userDb: UserDbService,
-		// private logDb: LogDbService,
 		private authenticationService: AuthenticationService
 	) {}
 
-	logar() {
+	onLogin() {
 		let email = this.loginForm?.value.email;
 		let password = this.loginForm?.value.password;
 
@@ -31,10 +32,10 @@ export class FormLoginComponent {
 				this.router.navigateByUrl('/home');
 			},
 			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
 				console.error({status: err.status, message: err.error})
 			}
 		})
-
 	}
 
 	fetchUser(email: string, password: string): Observable<any> {
