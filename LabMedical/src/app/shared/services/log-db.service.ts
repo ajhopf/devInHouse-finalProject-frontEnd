@@ -9,8 +9,6 @@ import { logType } from "../models/logtype.enum";
   providedIn: 'root'
 })
 export class LogDbService {
-
-
   constructor(private http: HttpClient) { }
 
   createLog(description: string, logType: logType): Observable<any> {

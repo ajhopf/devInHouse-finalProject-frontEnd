@@ -31,7 +31,6 @@ export class FormLoginComponent {
 			next: (response) => {
 				const role = response.body.role.substring(5);
 				const userName = response.body.name;
-
 				const logDescription ='O(a) '+ role + ' ' + userName + ' efetuou login no sistema';
 
 				this.createSuccesLog(logDescription);
@@ -41,6 +40,7 @@ export class FormLoginComponent {
 			},
 			error: (err) => {
 				console.error({status: err.status, message: err.error})
+
 			}
 		})
 

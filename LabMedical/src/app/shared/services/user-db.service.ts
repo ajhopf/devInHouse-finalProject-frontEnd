@@ -8,7 +8,6 @@ import { URLS } from "../constants/urls"
 	providedIn: 'root'
 })
 export class UserDbService {
-
 	constructor(private http: HttpClient) { }
 
 	getUserByEmailAndPassword(email: string, password: string): Observable<any> {
