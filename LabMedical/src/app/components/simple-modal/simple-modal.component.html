@@ -1,0 +1,11 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+	<h1 class="modal-title fs-3" id="modal-basic-title">{{ header }}</h1>
+	<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+	<h2 class="fs-5">{{ text }}</h2>
+  </div>
+</ng-template>
+
+<button class="btn btn-secondary btn-lg w-100" type="button" (click)="open(content)">{{ buttonText }}</button>
