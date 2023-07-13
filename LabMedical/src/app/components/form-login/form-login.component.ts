@@ -4,8 +4,6 @@ import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 
 import { UserDbService } from "../../shared/services/user-db.service";
-import { LogDbService } from "../../shared/services/log-db.service";
-import { logType } from "../../shared/models/logtype.enum";
 import { AuthenticationService } from "../../shared/services/authentication.service";
 
 @Component({
@@ -19,7 +17,7 @@ export class FormLoginComponent {
 	constructor(
 		private router: Router,
 		private userDb: UserDbService,
-		private logDb: LogDbService,
+		// private logDb: LogDbService,
 		private authenticationService: AuthenticationService
 	) {}
 
@@ -29,12 +27,6 @@ export class FormLoginComponent {
 
 		this.fetchUser(email, password).subscribe({
 			next: (response) => {
-				const role = response.body.role.substring(5);
-				const userName = response.body.name;
-				const logDescription ='O(a) '+ role + ' ' + userName + ' efetuou login no sistema';
-
-				this.createSuccesLog(logDescription);
-
 				this.authenticationService.setSession(response.body);
 				this.router.navigateByUrl('/home');
 			},
@@ -47,11 +39,5 @@ export class FormLoginComponent {
 
 	fetchUser(email: string, password: string): Observable<any> {
 		return this.userDb.getUserByEmailAndPassword(email, password);
-	}
-
-	createSuccesLog(description: string): void {
-		this.logDb.createLog(description, logType.SUCCES).subscribe({
-			error: error => {alert(error)}
-	});
 	}
 }
