@@ -9,7 +9,7 @@ import { FormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { NewUserModalComponent } from './components/new-user-modal/new-user-modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,7 @@ import { ModalComponent } from './components/modal/modal.component';
     FormLoginComponent,
     LoginComponent,
     HomeComponent,
-    ModalComponent
+    NewUserModalComponent
   ],
   imports: [
     BrowserModule,

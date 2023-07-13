@@ -40,7 +40,6 @@ export class FormLoginComponent {
 			},
 			error: (err) => {
 				console.error({status: err.status, message: err.error})
-
 			}
 		})
 
