@@ -1,0 +1,16 @@
+<form class="rounded p-5" (ngSubmit)="logar()" #loginForm='ngForm' >
+  <div class="mb-3">
+	<label for="email" class="form-label">Email</label>
+	<input id="email" type="email" class="form-control" name="email" aria-describedby="emailHelp" ngModel>
+  </div>
+  <div class="mb-3">
+	<label for="password" class="form-label">Senha</label>
+	<input id="password" type="password" class="form-control" name="password" ngModel>
+  </div>
+  <button type="button" class="btn btn-link mb-3" onclick="alert('Em desenvolvimento!')">Recuperar Senha</button>
+  <div class = "d-flex justify-content-between">
+	<button type="button" class="btn btn-secondary btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">Cadastro</button>
+	<button type="submit" class="btn btn-primary btn-lg">Login</button>
+  </div>
+</form>
+<!--<app-modal-cadastro></app-modal-cadastro>-->
