@@ -8,15 +8,14 @@ import { URLS } from "../constants/urls"
 	providedIn: 'root'
 })
 export class UserDbService {
-	BASE_URL = URLS.usersEndpoints;
 
 	constructor(private http: HttpClient) { }
 
 	getUserByEmailAndPassword(email: string, password: string): Observable<any> {
 		return this.http.post(
-			`${ this.BASE_URL }/login`,
+			`${ URLS.usersEndpoints.login }`,
 			{"email": email, "password": password},
 			{observe: 'response'}
-		)
+		);
 	}
 }
