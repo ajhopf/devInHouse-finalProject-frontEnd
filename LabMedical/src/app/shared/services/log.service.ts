@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { URLS } from "../constants/urls";
-import { logType } from "../models/logtype.enum";
+import {environment} from "../../enviroments/enviroment";
+import { LogTypeEnum } from "../enums/logtype.enum";
 
 @Injectable({
   providedIn: 'root'
 })
-export class LogDbService {
+export class LogService {
   constructor(private http: HttpClient) { }
 
-  createLog(description: string, logType: logType): Observable<any> {
+  createLog(description: string, logType: LogTypeEnum): Observable<any> {
     return this.http.post(
-      `${ URLS.logsEndpoints.createLog }`,
+      `${ environment.URL_POST_LOG }`,
       {"description": description, "logType": logType},
       {observe: 'response'}
     )
