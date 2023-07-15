@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
@@ -7,7 +8,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthenticationService {
 	private jwtHelper: JwtHelperService;
 
-	constructor() {
+	constructor(private router: Router) {
 		this.jwtHelper = new JwtHelperService();
 	}
 
@@ -29,6 +30,12 @@ export class AuthenticationService {
 
 	isTokenValid(token: string): boolean {
 		return !this.jwtHelper.isTokenExpired(token);
+	}
+
+	logout() {
+		// TODO Enviar requisição para o back para desativar o token
+		localStorage.clear()
+		this.router.navigate(['/public/login']);
 	}
 
 }
