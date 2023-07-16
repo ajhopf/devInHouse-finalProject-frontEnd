@@ -1,0 +1,17 @@
+.menu {
+  grid-row: 1 / span 2;
+  overflow: hidden;
+}
+.toolbar {
+
+}
+.content {
+  overflow: auto;
+}
+.grid-container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: min-content auto;
+  grid-template-rows: 45px auto;
+
+}

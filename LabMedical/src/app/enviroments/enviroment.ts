@@ -1,0 +1,64 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+import {RolesEnum} from "../shared/enums/roles.enum";
+import {RouteModel} from "../shared/models/route.model";
+
+const URL_PRINCIPAL = 'http://localhost:8080/api';
+//User controller endpoints
+const URL_POST_LOGIN: string = `${URL_PRINCIPAL}/usuarios/login`
+
+
+const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
+const ROUTES: RouteModel[] = [
+  {
+    url: "home",
+    category: "Geral",
+    title: "home",
+    role: [
+      RolesEnum.ROLE_PATIENT,
+      RolesEnum.ROLE_NURSE,
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN
+    ]
+  },
+  {
+    url: "exemplo/router",
+    category: "Exemplo Categoria",
+    title: "Exemplo Router",
+    role: [
+      RolesEnum.ROLE_PATIENT,
+      RolesEnum.ROLE_NURSE,
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN
+    ]
+  },
+  {
+    url: "exemplo/router2",
+    category: "Exemplo Categoria",
+    title: "Exemplo Router2",
+    role: [
+      RolesEnum.ROLE_PATIENT,
+      RolesEnum.ROLE_NURSE,
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN
+    ]
+  }
+
+]
+export const environment = {
+  production: false,
+  URL_POST_LOGIN: URL_POST_LOGIN,
+  URL_POST_LOG: URL_POST_LOG,
+  ROUTES: ROUTES
+};
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+

@@ -1,0 +1,48 @@
+import {Component, OnInit} from '@angular/core';
+import {RouteModel} from "../../../models/route.model";
+import {environment} from "../../../../enviroments/enviroment";
+
+@Component({
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.scss']
+})
+export class MenuComponent implements OnInit {
+  isMenuExpanded = true;
+  // @ts-ignore
+  menuItems: [{ [key: string]: RouteModel[] }] = [];
+  toggleMenu() {
+    this.isMenuExpanded = !this.isMenuExpanded;
+  }
+
+  ngOnInit(): void {
+    this.initMenuItems()
+  }
+
+  initMenuItems(): void {
+    environment.ROUTES.forEach( (route: RouteModel): void => {
+      let index: number = this.menuItems.findIndex(
+        (el:{ [key: string]: RouteModel[] }): boolean => el.hasOwnProperty(route.category)
+      );
+      if(index === -1)
+        this.menuItems.push({[route.category]: [route]})
+      else
+        this.menuItems[index][route.category].push(route)
+    })
+  }
+
+  getObjectKeys(obj: any): string[] {
+    return Object.keys(obj);
+  }
+
+  getRoutes(category: { [p: string]: RouteModel[] }) {
+    let categoryName: string = Object.keys(category)[0]
+    return category[categoryName]
+  }
+
+  protected readonly JSON = JSON;
+
+  getCategoryName(category: { [p: string]: RouteModel[] }) {
+    return Object.keys(category)[0]
+  }
+}

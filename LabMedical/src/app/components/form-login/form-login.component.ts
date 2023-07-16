@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { Observable } from "rxjs";
 
-import { UserDbService } from "../../shared/services/user-db.service";
+import { UserService } from "../../shared/services/user.service";
 import { AuthenticationService } from "../../shared/services/authentication.service";
 
 @Component({
@@ -18,7 +18,7 @@ export class FormLoginComponent {
 
 	constructor(
 		private router: Router,
-		private userDb: UserDbService,
+		private userService: UserService,
 		private authenticationService: AuthenticationService
 	) {}
 
@@ -39,6 +39,6 @@ export class FormLoginComponent {
 	}
 
 	fetchUser(email: string, password: string): Observable<any> {
-		return this.userDb.getUserByEmailAndPassword(email, password);
+		return this.userService.getUserByEmailAndPassword(email, password);
 	}
 }
