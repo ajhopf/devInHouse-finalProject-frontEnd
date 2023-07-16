@@ -1,26 +1,23 @@
-<div [ngStyle]="{'height' : isMenuExpanded ? '45px' : '100vh'}" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-  <button style="width: 55px" class="btn btn-light" (click)="toggleMenu()" >
-    <img style="width: 25px" src="assets/images/list.png">
+<div [ngStyle]="{'height' : isMenuExpanded ? '45px' : '100vh'}" class="d-flex flex-column flex-shrink-0 p-2 text-bg-dark">
+  <button style="width: 45px; height: 35px" class="btn btn-light" (click)="toggleMenu()" >
+    <img style="width: 100%; height: 100%;padding-bottom: 4px" src="assets/images/list.png">
   </button>
 </div>
 <menu [ngClass]="isMenuExpanded ? 'menu-expanded' : 'menu-retracted' " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark menu" >
-  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+  <a href="/home" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <span class="fs-4">LABMedical</span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-<!--    <div *ngFor="let category of menuItems">-->
-<!--      <div *ngFor="let routes of getRoutes(category)">-->
-<!--        {{ JSON.stringify(routes) }}-->
-<!--      </div>-->
-<!--    </div>-->
     <div *ngFor="let category of menuItems">
       <li>
         <h5>{{getCategoryName(category)}}</h5>
       </li>
-      <li *ngFor="let route of getRoutes(category)" class="nav-item">
+      <li *ngFor="let route of getRoutes(category)" class="nav-item d-flex justify-content-start align-items-center ms-3">
+
         <a routerLink="/{{route.url}}" routerLinkActive="active"
            class="nav-link text-white" aria-current="page">
+          <img ngSrc="{{route.icon}}" alt="Logo" width="20" height="20" class="d-inline-block align-text-top">
           {{route.title}}
         </a>
       </li>

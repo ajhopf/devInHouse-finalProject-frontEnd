@@ -21,7 +21,8 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
-    ]
+    ],
+    icon: "./assets/images/inicio.png"
   },
   {
     url: "exemplo/router",
@@ -32,7 +33,8 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
-    ]
+    ],
+    icon: "./assets/images/inicio.png"
   },
   {
     url: "exemplo/router2",
@@ -43,7 +45,8 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
-    ]
+    ],
+    icon: "./assets/images/inicio.png"
   }
 
 ]
