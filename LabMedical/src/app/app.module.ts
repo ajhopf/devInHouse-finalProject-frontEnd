@@ -19,6 +19,8 @@ import { TesteComponent } from './pages/teste/teste.component';
 import { Teste2Component } from './pages/teste/teste2/teste2.component';
 
 
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,10 @@ import { Teste2Component } from './pages/teste/teste2/teste2.component';
     ToolbarComponent,
     DropDownMenuComponent,
     TesteComponent,
-    Teste2Component
+    Teste2Component,
+    SimpleModalComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent
   ],
   imports: [
     BrowserModule,
