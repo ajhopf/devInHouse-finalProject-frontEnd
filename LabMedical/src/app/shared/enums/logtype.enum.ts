@@ -1,3 +1,3 @@
 export enum LogTypeEnum {
-	SUCCES, INFO, ERROR
+	SUCCESS, INFO, ERROR
 }

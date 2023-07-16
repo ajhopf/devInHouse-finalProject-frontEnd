@@ -17,6 +17,7 @@ import {ToolbarComponent} from "./shared/layouts/components/toolbar/toolbar.comp
 import {DropDownMenuComponent} from "./shared/layouts/components/drop-down-menu/drop-down-menu.component";
 import { TesteComponent } from './pages/teste/teste.component';
 import { Teste2Component } from './pages/teste/teste2/teste2.component';
+import {NgOptimizedImage} from "@angular/common";
 
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
@@ -40,13 +41,14 @@ import { ResetPasswordFormComponent } from './components/reset-password/reset-pa
     ResetPasswordComponent,
     ResetPasswordFormComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    NgbModule,
-    HttpClientModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        NgbModule,
+        HttpClientModule,
+        NgOptimizedImage
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })
