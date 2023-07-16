@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
 import { SimpleModalComponent } from './components/simple-modal/simple-modal.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SimpleModalComponent } from './components/simple-modal/simple-modal.com
     FormLoginComponent,
     LoginComponent,
     HomeComponent,
-    SimpleModalComponent
+    SimpleModalComponent,
+    ResetPasswordComponent,
+    ResetPasswordFormComponent
   ],
   imports: [
     BrowserModule,
