@@ -13,8 +13,6 @@ import { AuthenticationService } from "../../shared/services/authentication.serv
 })
 export class FormLoginComponent {
 	@ViewChild('loginForm') loginForm: NgForm | undefined
-	triedLogin: boolean = false
-	loginAllowed:boolean = false
 
 	constructor(
 		private router: Router,
