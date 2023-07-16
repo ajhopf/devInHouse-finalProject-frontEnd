@@ -2,7 +2,7 @@
   <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
     <img [src]="loggedUser.photoUrl"
          alt="" width="32" height="32" class="rounded-circle me-2">
-    <strong>{{loggedUser.name}}</strong>
+    <strong>{{returnRoleName(loggedUser.role)}} {{loggedUser.name}}</strong>
   </a>
   <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
     <li><a (click)="authService.logout()" class="dropdown-item">sair</a></li>

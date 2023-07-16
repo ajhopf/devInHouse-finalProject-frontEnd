@@ -15,10 +15,9 @@ export class UserService {
     photoUrl: '',
     password: '',
     email : '',
-    role: ''
   }
 
-  private _user : any = JSON.parse(sessionStorage.getItem('user') || JSON.stringify(this.emptyUser))
+  private _user : any = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
 	constructor(private http: HttpClient) { }
 
 	getUserByEmailAndPassword(email: string, password: string): Observable<any> {
@@ -30,6 +29,7 @@ export class UserService {
 	}
 
   getUser() : UserModel {
+    console.log()
     return this._user;
   }
 
