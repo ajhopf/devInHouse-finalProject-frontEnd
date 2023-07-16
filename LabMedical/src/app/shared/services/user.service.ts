@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import {UserModel} from "../models/user.model";
-import {environment} from "../../enviroments/enviroment";
+import { UserModel } from "../models/user.model";
+import { environment } from "../../enviroments/enviroment";
 
 @Injectable({
 	providedIn: 'root'
@@ -32,4 +32,25 @@ export class UserService {
   getUser() : UserModel {
     return this._user;
   }
+
+	getUserByEmail(email: string): Observable<any> {
+		return this.http.get(
+			`${ environment.URL_POST_USER_BY_EMAIL + email } `,
+			{observe: 'response'}
+		)
+	}
+
+	updateUserPassword(userId: number, email: string, newPassword: string): Observable<any> {
+		let requestBody = {
+			id: userId,
+			email: email,
+			password: newPassword
+		}
+
+		return this.http.put(
+			`${ environment.URL_POST_RESET_PASSWORD }`,
+			requestBody,
+			{observe: 'response'})
+	}
+
 }

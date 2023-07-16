@@ -8,7 +8,8 @@ import {RouteModel} from "../shared/models/route.model";
 const URL_PRINCIPAL = 'http://localhost:8080/api';
 //User controller endpoints
 const URL_POST_LOGIN: string = `${URL_PRINCIPAL}/usuarios/login`
-
+const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
+const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const ROUTES: RouteModel[] = [
@@ -53,6 +54,8 @@ const ROUTES: RouteModel[] = [
 export const environment = {
   production: false,
   URL_POST_LOGIN: URL_POST_LOGIN,
+  URL_POST_USER_BY_EMAIL: URL_POST_USER_BY_EMAIL,
+  URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
   ROUTES: ROUTES
 };

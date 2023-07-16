@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { Observable, switchMap } from "rxjs";
 import { NgForm } from "@angular/forms";
-import { UserDbService } from "../../../shared/services/user-db.service";
+import { UserService } from "../../../shared/services/user.service";
 
 @Component({
 	selector: 'reset-password-form',
@@ -15,7 +15,7 @@ export class ResetPasswordFormComponent {
 	resetDone: boolean = false;
 
 	constructor(
-		private userDb: UserDbService
+		private userService: UserService
 	) {}
 
 	onResetPassword() {
@@ -35,10 +35,10 @@ export class ResetPasswordFormComponent {
 	}
 
 	fetchUserByEmail(email: string): Observable<any> {
-		return this.userDb.getUserByEmail(email);
+		return this.userService.getUserByEmail(email);
 	}
 
 	resetUserPassword(userId: number, email: string) {
-		return this.userDb.updateUserPassword(userId, email, "12345");
+		return this.userService.updateUserPassword(userId, email, "12345");
 	}
 }
