@@ -5,5 +5,5 @@ export interface RouteModel {
   url: string
   category: string
   title: string
-  role : RolesEnum[]
+  roles : RolesEnum[]
 }

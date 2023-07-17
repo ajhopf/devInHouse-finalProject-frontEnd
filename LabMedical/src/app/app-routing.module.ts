@@ -1,11 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from "./pages/login/login.component";
-import { HomeComponent } from "./pages/home/home.component";
-import { AuthGuard } from "./shared/guards/auth-guard.guard";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginComponent} from "./pages/login/login.component";
+import {HomeComponent} from "./pages/home/home.component";
+import {AuthGuard} from "./shared/guards/auth.guard";
 import {NoneLayoutComponent} from "./shared/layouts/none-layout/none-layout.component";
 import {FullLayoutComponent} from "./shared/layouts/full-layout/full-layout.component";
 import {TesteComponent} from "./pages/teste/teste.component";
+import {RolesEnum} from "./shared/enums/roles.enum";
+import {RoleGuard} from "./shared/guards/role.guard";
+import {Teste2Component} from "./pages/teste/teste2/teste2.component";
 
 const routes: Routes = [
   {
@@ -21,8 +24,11 @@ const routes: Routes = [
   },
   {
     path: 'exemplo/router',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     title: 'Exemplo Router',
+    data: {
+      requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR]
+    },
     component: FullLayoutComponent, children: [
       {
         path:'',
@@ -32,12 +38,15 @@ const routes: Routes = [
   },
   {
     path: 'exemplo/router2',
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, RoleGuard],
     title: 'Exemplo Router 2',
+    data: {
+      requiredRoles: [RolesEnum.ROLE_ADMIN]
+    },
     component: FullLayoutComponent, children: [
       {
         path:'',
-        component: TesteComponent
+        component: Teste2Component
       }
     ]
   },
