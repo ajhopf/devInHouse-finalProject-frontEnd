@@ -18,7 +18,6 @@ const ROUTES: RouteModel[] = [
     category: "Geral",
     title: "home",
     role: [
-      RolesEnum.ROLE_PATIENT,
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
@@ -30,8 +29,6 @@ const ROUTES: RouteModel[] = [
     category: "Exemplo Categoria",
     title: "Exemplo Router",
     role: [
-      RolesEnum.ROLE_PATIENT,
-      RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
     ],
@@ -42,9 +39,6 @@ const ROUTES: RouteModel[] = [
     category: "Exemplo Categoria",
     title: "Exemplo Router2",
     role: [
-      RolesEnum.ROLE_PATIENT,
-      RolesEnum.ROLE_NURSE,
-      RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
