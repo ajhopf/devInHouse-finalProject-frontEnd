@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {RouteModel} from "../../../models/route.model";
 import {environment} from "../../../../enviroments/enviroment";
+import {UserService} from "../../../services/user.service";
+import {Router} from "@angular/router";
+import {RolesEnum} from "../../../enums/roles.enum";
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +11,7 @@ import {environment} from "../../../../enviroments/enviroment";
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  constructor(private userService: UserService) {}
   isMenuExpanded = true;
   // @ts-ignore
   menuItems: [{ [key: string]: RouteModel[] }] = [];
@@ -24,15 +28,13 @@ export class MenuComponent implements OnInit {
       let index: number = this.menuItems.findIndex(
         (el:{ [key: string]: RouteModel[] }): boolean => el.hasOwnProperty(route.category)
       );
-      if(index === -1)
+      if(!route.roles.find((role: RolesEnum) => role === this.userService.getUser().role ))
+        return;
+      else if(index === -1)
         this.menuItems.push({[route.category]: [route]})
       else
         this.menuItems[index][route.category].push(route)
     })
-  }
-
-  getObjectKeys(obj: any): string[] {
-    return Object.keys(obj);
   }
 
   getRoutes(category: { [p: string]: RouteModel[] }) {

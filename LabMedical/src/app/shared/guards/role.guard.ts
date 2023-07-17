@@ -16,8 +16,6 @@ export class RoleGuard implements CanActivate {
     console.log(requiredRoles)
     if(requiredRoles.find((role: RolesEnum ): boolean => role === this.userService.getUser().role))
       return true
-      // if(this.userService.getUser().role === RolesEnum.ROLE_ADMIN)
-      // return true;
     this.router.navigate(['/home']);
     return false;
   }

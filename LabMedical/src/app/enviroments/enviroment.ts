@@ -17,7 +17,7 @@ const ROUTES: RouteModel[] = [
     url: "home",
     category: "Geral",
     title: "home",
-    role: [
+    roles: [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
@@ -28,7 +28,7 @@ const ROUTES: RouteModel[] = [
     url: "exemplo/router",
     category: "Exemplo Categoria",
     title: "Exemplo Router",
-    role: [
+    roles: [
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN
     ],
@@ -38,7 +38,7 @@ const ROUTES: RouteModel[] = [
     url: "exemplo/router2",
     category: "Exemplo Categoria",
     title: "Exemplo Router2",
-    role: [
+    roles: [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
