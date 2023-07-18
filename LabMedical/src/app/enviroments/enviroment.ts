@@ -10,6 +10,7 @@ const URL_PRINCIPAL = 'http://localhost:8080/api';
 const URL_POST_LOGIN: string = `${URL_PRINCIPAL}/usuarios/login`
 const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
 const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
+const URL_GET_ALL_USERS: string = `${URL_PRINCIPAL}/usuarios/listar`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const ROUTES: RouteModel[] = [
@@ -42,6 +43,15 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "usuarios/listar",
+    category: "Usuarios",
+    title: "Usuarios",
+    roles: [
+      RolesEnum.ROLE_ADMIN
+    ],
+    icon: "./assets/images/inicio.png"
   }
 
 ]
@@ -51,6 +61,7 @@ export const environment = {
   URL_POST_USER_BY_EMAIL: URL_POST_USER_BY_EMAIL,
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
+  URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   ROUTES: ROUTES
 };
 

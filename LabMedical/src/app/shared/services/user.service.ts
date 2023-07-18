@@ -53,4 +53,11 @@ export class UserService {
 			{observe: 'response'})
 	}
 
+	getUsersList(): Observable<any> {
+		return this.http.get(
+			`${ environment.URL_GET_ALL_USERS } `,
+			{observe: 'response'}
+		)
+	}
+
 }

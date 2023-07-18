@@ -22,6 +22,8 @@ import {NgOptimizedImage} from "@angular/common";
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
+import { UserComponent } from './pages/user/user.component';
+import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { ResetPasswordFormComponent } from './components/reset-password/reset-pa
     Teste2Component,
     SimpleModalComponent,
     ResetPasswordComponent,
-    ResetPasswordFormComponent
+    ResetPasswordFormComponent,
+    UserComponent,
+    UsersTableComponent
   ],
     imports: [
         BrowserModule,
