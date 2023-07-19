@@ -10,6 +10,7 @@ import {RolesEnum} from "./shared/enums/roles.enum";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {Teste2Component} from "./pages/teste/teste2/teste2.component";
 import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
+import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
       {
         path: 'listar',
         component: UsersTableComponent
+      },
+      {
+        path: 'cadastrar',
+        component: UserRegisterFormComponent
       }
     ]
   },

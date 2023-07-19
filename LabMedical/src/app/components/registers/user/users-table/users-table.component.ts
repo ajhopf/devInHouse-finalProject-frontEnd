@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -10,7 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UsersTableComponent implements OnInit {
   pacientes: UserModel[] =[]
-  constructor(private userService: UserService){
+  constructor(private userService: UserService, private router: Router){
     
   }
 
@@ -41,4 +42,10 @@ export class UsersTableComponent implements OnInit {
   filtrar(){
 
   }
+  
+  navegate(){
+    this.router.navigateByUrl("usuarios/cadastrar")
+  }
+
+  
 }

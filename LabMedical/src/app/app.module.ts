@@ -24,6 +24,8 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
 import { UserComponent } from './pages/user/user.component';
 import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
+import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
+import { ButtonFormsComponent } from './components/button-forms/button-forms.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { UsersTableComponent } from './components/registers/user/users-table/use
     ResetPasswordComponent,
     ResetPasswordFormComponent,
     UserComponent,
-    UsersTableComponent
+    UsersTableComponent,
+    UserRegisterFormComponent,
+    ButtonFormsComponent
   ],
     imports: [
         BrowserModule,

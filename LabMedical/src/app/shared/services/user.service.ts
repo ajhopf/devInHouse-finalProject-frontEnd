@@ -60,4 +60,11 @@ export class UserService {
 		)
 	}
 
+	saveUser(user: UserModel){
+		return this.http.post(`${environment.URL_POST_REGISTER_USERS}`,
+		user,
+		{observe: 'response'}
+		)
+	}
+
 }

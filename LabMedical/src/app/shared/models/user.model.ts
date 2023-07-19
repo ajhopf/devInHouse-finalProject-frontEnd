@@ -7,4 +7,7 @@ export interface UserModel {
   password?: string
   email?: string
   role?: RolesEnum
+  gender?: string
+  cpf?: string
+  telephone?: string 
 }
