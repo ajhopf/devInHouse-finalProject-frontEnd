@@ -63,7 +63,7 @@ export class UserService {
 	getUserById(id: number): Observable<any> {
 		console.log(`${ environment.URL_GET_USER_BY_ID}/${id} `)
 		return this.http.get(
-			`${ environment.URL_GET_USER_BY_ID}/${id} `,
+			`${ environment.URL_GET_USER_BY_ID}/${id}`,
 			{observe: 'response'}
 		)
 	}

@@ -3,7 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-import { tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-register-form',
@@ -16,7 +16,9 @@ export class UserRegisterFormComponent implements OnInit{
   @ViewChild('signIn') signInForm: NgForm;
   formValid: boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {}
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+    
+  }
 
   ngOnInit(): void {
     if (this.route.snapshot.params['id']) {
@@ -54,12 +56,20 @@ export class UserRegisterFormComponent implements OnInit{
   }
 
   getUserByID(id: number) {
-    this.userService.getUserById(id).pipe(
-      tap((response: any) => {
-        this.user = response.body;
-      })
-    ).subscribe();
+    this.fetchUser(id).subscribe({
+			next: (response: any) => {
+				this.user = response.body
+			},
+			error: (err) => {
+				alert('Erro de solicitação de usuário')
+				console.error({status: err.status, message: err.error})
+			}
+		})
   }
+
+  fetchUser(id: number): Observable<any> {
+		return this.userService.getUserById(id);
+	}
 
   navigate() {
     this.router.navigateByUrl("usuarios/listar")
