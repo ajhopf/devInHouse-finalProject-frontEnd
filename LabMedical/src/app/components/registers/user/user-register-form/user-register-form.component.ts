@@ -1,21 +1,30 @@
 import { UserService } from 'src/app/shared/services/user.service';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/shared/models/user.model';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-user-register-form',
   templateUrl: './user-register-form.component.html',
   styleUrls: ['./user-register-form.component.css']
 })
-export class UserRegisterFormComponent {
+export class UserRegisterFormComponent implements OnInit{
   user: UserModel = {}
   OBRIGATORIO: string = '../../../assets/images/obrigatorio.png' 
   @ViewChild('signIn') signInForm: NgForm;
   formValid: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    if (this.route.snapshot.params['id']) {
+      this.getUserByID(this.route.snapshot.params['id']);
+    } else {
+      this.user = {};
+    }
+  }
 
   saveUser() {
     if(this.formValid){
@@ -42,6 +51,14 @@ export class UserRegisterFormComponent {
   cleanForm() {
     this.user = {}
     this.signInForm.reset();
+  }
+
+  getUserByID(id: number) {
+    this.userService.getUserById(id).pipe(
+      tap((response: any) => {
+        this.user = response.body;
+      })
+    ).subscribe();
   }
 
   navigate() {

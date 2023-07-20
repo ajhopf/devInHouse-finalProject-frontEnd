@@ -15,12 +15,12 @@
             <th scope="col">Opções</th>
           </tr>
         </thead>
-        <tbody *ngIf="pacientes.length > 0; else empty">
-              <tr *ngFor="let paciente of pacientes" class="text-center">
-                  <td>{{paciente.name}}</td>
-                  <td>{{paciente.email}}</td>
-                  <td>{{paciente.role}}</td> 
-                  <td><button type="button" class="btn btn-link" (click)="abrir()"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
+        <tbody *ngIf="usuarios.length > 0; else empty">
+              <tr *ngFor="let usuario of usuarios" class="text-center">
+                  <td>{{usuario.name}}</td>
+                  <td>{{usuario.email}}</td>
+                  <td>{{usuario.role}}</td> 
+                  <td><button type="button" class="btn btn-link" (click)="editNavigate(usuario.id)"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
                  width="30" height="30"></button></td>
                 </tr>
         </tbody>
@@ -31,7 +31,7 @@
       </ng-template>
       </table>
       <div>
-        <button type="button" class="btn btn-primary btn-lg mb-3" width='50' (click)="navegate()">Adicionar</button>
+        <button type="button" class="btn btn-primary btn-lg mb-3" width='50' (click)="registerNavigate()">Adicionar</button>
     </div>
   </div>
 </div>

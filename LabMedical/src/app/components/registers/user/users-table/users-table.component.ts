@@ -10,7 +10,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./users-table.component.css']
 })
 export class UsersTableComponent implements OnInit {
-  pacientes: UserModel[] =[]
+  usuarios: UserModel[] =[]
   constructor(private userService: UserService, private router: Router){
     
   }
@@ -22,7 +22,7 @@ export class UsersTableComponent implements OnInit {
 	onLoad() {
 		this.fetchUser().subscribe({
 			next: (response: any) => {
-				this.pacientes = response.body
+				this.usuarios = response.body
 			},
 			error: (err) => {
 				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
@@ -43,9 +43,13 @@ export class UsersTableComponent implements OnInit {
 
   }
   
-  navegate(){
-    this.router.navigateByUrl("usuarios/cadastrar")
+  editNavigate(id: number){
+      this.router.navigateByUrl(`usuarios/buscar/${id}`)
   }
+
+  registerNavigate(){
+    this.router.navigateByUrl(`usuarios/cadastrar`)
+}
 
   
 }

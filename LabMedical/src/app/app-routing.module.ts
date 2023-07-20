@@ -39,6 +39,10 @@ const routes: Routes = [
       {
         path: 'cadastrar',
         component: UserRegisterFormComponent
+      },
+      {
+        path: 'buscar/:id',
+        component: UserRegisterFormComponent
       }
     ]
   },
