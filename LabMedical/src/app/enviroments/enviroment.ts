@@ -12,6 +12,8 @@ const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
 const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
+
+const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const ROUTES: RouteModel[] = [
   {
     url: "home",
@@ -51,7 +53,8 @@ export const environment = {
   URL_POST_USER_BY_EMAIL: URL_POST_USER_BY_EMAIL,
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
-  ROUTES: ROUTES
+  ROUTES: ROUTES,
+  URL_LOGOUT: URL_LOGOUT
 };
 
 /*
