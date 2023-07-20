@@ -9,6 +9,7 @@ import {TesteComponent} from "./pages/teste/teste.component";
 import {RolesEnum} from "./shared/enums/roles.enum";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {Teste2Component} from "./pages/teste/teste2/teste2.component";
+import {LogPanelComponent} from "./pages/log-panel/log-panel.component";
 
 const routes: Routes = [
   {
@@ -19,6 +20,20 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
+      }
+    ]
+  },
+  {
+    path: 'log/panel',
+    canActivate: [AuthGuard, RoleGuard],
+    title: 'Painel Log',
+    data: {
+      requiredRoles: [RolesEnum.ROLE_ADMIN]
+    },
+    component: FullLayoutComponent, children: [
+      {
+        path: '',
+        component: LogPanelComponent
       }
     ]
   },

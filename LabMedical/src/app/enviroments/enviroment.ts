@@ -12,6 +12,7 @@ const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
 const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
+const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
 const ROUTES: RouteModel[] = [
   {
     url: "home",
@@ -20,6 +21,15 @@ const ROUTES: RouteModel[] = [
     roles: [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN
+    ],
+    icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "log/panel",
+    category: "Sistema",
+    title: "Painel Log",
+    roles: [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
@@ -51,6 +61,7 @@ export const environment = {
   URL_POST_USER_BY_EMAIL: URL_POST_USER_BY_EMAIL,
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
+  URL_LISTAR_LOG: URL_LISTAR_LOG,
   ROUTES: ROUTES
 };
 
