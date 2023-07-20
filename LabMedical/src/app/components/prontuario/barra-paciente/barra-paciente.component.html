@@ -1,0 +1,83 @@
+<nav class="navbar navbar-dark bg-dark m-2 p-2" style="height: 10vh" data-bs-theme="dark">
+  <ng-container *ngIf="idPaciente==null">
+    <div class="d-flex justify-content-center align-items-center">
+      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#modalPaciente">Buscar
+        Paciente</button>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="idPaciente !=null">
+    <div class="d-flex justify-content-center align-items-start">
+      <img [src]="paciente.url?paciente.url:IMAGEM_PADRAO" class="img-fluid img-thumbnail rounded-circle ms-1"
+        width="50" height="50">
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Nome</label>
+        <h5 class="text-white form-label">{{paciente.nome}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Gênero</label>
+        <h5 class="text-white form-label">{{paciente.genero}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Idade</label>
+        <h5 class="text-white form-label">{{paciente.nasc}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Convênio</label>
+        <h5 class="text-white form-label">{{paciente.convenio}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Contato</label>
+        <h5 class="text-white form-label">{{paciente.email?paciente.email:paciente.tel}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Contato de Emergencia</label>
+        <h5 class="text-white form-label">{{paciente.contato}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <label class="text-white-50">Naturalidade</label>
+        <h5 class="text-white form-label">{{paciente.naturalidade}}</h5>
+      </div>
+      <div class="ms-5 d-flex flex-column">
+        <button type="button" class="btn btn-link" (click)="resetarPaciente()"><img src="../../../../assets/exchange.svg" class="img-fluid ms-1"
+          width="50" height="50"></button>
+      </div>
+    </div>
+  </ng-container>
+</nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modalPaciente" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Selecione um Paciente</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="height: 70vh; position:relative;">
+        <div style="max-height:100%; overflow-x: hidden; overflow-y:auto;">
+          <form #formBusca="ngForm">
+            <div class="mb-3">
+              <label class="form-label">Buscar Paciente</label>
+              <!--<input type="text" class="form-control" #busca="ngModel" ngModel name="busca" (keyup)="filtrar(busca.control.value)">-->
+            </div>
+          </form>
+          <table class="table table-bordered table-striped">
+            <thead class="table-primary">
+              <tr>
+                <th scope="col">Paciente</th>
+                <th> Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let paciente of pacientes">
+                <td scope="row">{{paciente.nome}}</td>
+                <td><button type="button" class="btn btn-link" data-bs-dismiss="modal"
+                    (click)="onSubmit(paciente.ID)">Selecionar</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

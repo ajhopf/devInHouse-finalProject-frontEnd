@@ -10,6 +10,7 @@ import {RolesEnum} from "./shared/enums/roles.enum";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {Teste2Component} from "./pages/teste/teste2/teste2.component";
 import {LogPanelComponent} from "./pages/log-panel/log-panel.component";
+import { ProntuarioEletronicoComponent } from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
 
 const routes: Routes = [
   {
@@ -38,16 +39,16 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'exemplo/router',
+    path: 'prontuario',
     canActivate: [AuthGuard, RoleGuard],
-    title: 'Exemplo Router',
+    title: 'Prontuário Eletrônico',
     data: {
-      requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR]
+      requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR, RolesEnum.ROLE_NURSE]
     },
     component: FullLayoutComponent, children: [
       {
         path:'',
-        component: TesteComponent
+        component: ProntuarioEletronicoComponent
       }
     ]
   },
