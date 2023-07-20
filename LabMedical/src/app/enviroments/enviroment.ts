@@ -10,10 +10,10 @@ const URL_PRINCIPAL = 'http://localhost:8080/api';
 const URL_POST_LOGIN: string = `${URL_PRINCIPAL}/usuarios/login`
 const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
 const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
-
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
-
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
+const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
+
 const ROUTES: RouteModel[] = [
   {
     url: "home",
@@ -22,6 +22,15 @@ const ROUTES: RouteModel[] = [
     roles: [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN
+    ],
+    icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "log/panel",
+    category: "Sistema",
+    title: "Painel Log",
+    roles: [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
@@ -54,7 +63,9 @@ export const environment = {
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
   ROUTES: ROUTES,
-  URL_LOGOUT: URL_LOGOUT
+  URL_LOGOUT: URL_LOGOUT,
+  URL_LISTAR_LOG: URL_LISTAR_LOG,
+  ROUTES: ROUTES
 };
 
 /*

@@ -24,7 +24,7 @@ export class AuthenticationService {
 
 		if (sessionString) {
 			const session = JSON.parse(sessionString);
-			return session.token;
+			return session.access_token;
 		}
 
 		return null;
