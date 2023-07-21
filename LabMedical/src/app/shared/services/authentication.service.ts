@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import {environment} from "../../enviroments/enviroment";
+import {HttpClient} from "@angular/common/http";
+
 
 @Injectable({
 	providedIn: 'root'
@@ -8,7 +11,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
 export class AuthenticationService {
 	private jwtHelper: JwtHelperService;
 
-	constructor(private router: Router) {
+	constructor(private router: Router, private http: HttpClient) {
 		this.jwtHelper = new JwtHelperService();
 	}
 
@@ -32,10 +35,18 @@ export class AuthenticationService {
 		return !this.jwtHelper.isTokenExpired(token);
 	}
 
-	logout() {
-		// TODO Enviar requisição para o back para desativar o token
-		localStorage.clear()
-		this.router.navigate(['/public/login']);
-	}
+  logout() {
+    this.http.get(
+      `${environment.URL_LOGOUT}`,
+      {
+        observe: 'response',
+        headers: {
+          'Authorization': `Bearer ${this.getToken()}`,
+        }
+      }
+    ).subscribe()
+    localStorage.clear()
+    this.router.navigate(['/public/login']);
+  }
 
 }

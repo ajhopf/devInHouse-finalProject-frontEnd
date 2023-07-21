@@ -11,10 +11,12 @@ import { Observable, tap } from 'rxjs';
   styleUrls: ['./user-register-form.component.css']
 })
 export class UserRegisterFormComponent implements OnInit{
+  @ViewChild('signIn') signInForm: NgForm;
   user: UserModel = {}
   OBRIGATORIO: string = '../../../assets/images/obrigatorio.png' 
-  @ViewChild('signIn') signInForm: NgForm;
   formValid: boolean = false;
+  readOnly: boolean = false
+  canDelete: boolean = false
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
     
@@ -59,6 +61,8 @@ export class UserRegisterFormComponent implements OnInit{
     this.fetchUser(id).subscribe({
 			next: (response: any) => {
 				this.user = response.body
+        this.readOnly = true
+        this.canDelete = true
 			},
 			error: (err) => {
 				alert('Erro de solicitação de usuário')
@@ -71,8 +75,15 @@ export class UserRegisterFormComponent implements OnInit{
 		return this.userService.getUserById(id);
 	}
 
+  deleteUser(id: number){
+    this.userService.deleteUserById(id).pipe(
+      tap(res => alert(res))
+    ).subscribe()
+  }
+
   navigate() {
     this.router.navigateByUrl("usuarios/listar")
   }
+  
 }
 

@@ -27,7 +27,7 @@
           <label for="cpf" class="form-label">CPF</label>
           <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
           class="d-inline-block align-text-top">
-          <input type="text" class="form-control" name='cpf' #cpf='ngModel'[(ngModel)]="user.cpf" required pattern="[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2}"  (input)="validarFormulario()">
+          <input type="text" class="form-control" name='cpf' #cpf='ngModel'[(ngModel)]="user.cpf" [readOnly]="readOnly" required pattern="[0-9]{3}[\.][0-9]{3}[\.][0-9]{3}[-][0-9]{2}"  (input)="validarFormulario()">
           <div *ngIf="cpf.errors && cpf.touched" class="p-1 text-danger">
             {{cpf.errors['required']?'Preencha esse campo':'Campo fora do formato obrigatório 000.000.000-00'}}
           </div>
@@ -64,8 +64,8 @@
           <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
           class="d-inline-block align-text-top">
           <select class="form-select" aria-label="role" name="role" #genero='ngModel'[(ngModel)]="user.role" required (click)="validarFormulario()">
-            <option value="ROLE_DOCTOR">Médico</option>
             <option value="ROLE_NURSE">Enfermeiro</option>
+            <option value="ROLE_DOCTOR">Médico</option>
             <option value="ROLE_ADMIN">Administrador</option>
           </select>
           <div *ngIf="genero.errors && genero.touched" class="p-1 text-danger">
@@ -80,7 +80,7 @@
         <div class="col-md-3 d-flex justify-content-between">
             <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" [disabled]="!formValid" (click)="saveUser()"></app-button-forms>
             <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="navigate()"></app-button-forms>
-            <app-button-forms [label]="'Deletar'" [type]="'btn-danger'" [disabled]="true"></app-button-forms>
+            <app-button-forms [label]="'Deletar'" [type]="'btn-danger'" [disabled]="!canDelete" (click)="deleteUser(user.id)"></app-button-forms>
         </div>
       </form>
     </div>

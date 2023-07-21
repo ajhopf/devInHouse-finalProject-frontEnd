@@ -26,6 +26,7 @@ import { UserComponent } from './pages/user/user.component';
 import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
 import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
 import { ButtonFormsComponent } from './components/button-forms/button-forms.component';
+import { LogPanelComponent } from './pages/log-panel/log-panel.component';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { ButtonFormsComponent } from './components/button-forms/button-forms.com
     UserComponent,
     UsersTableComponent,
     UserRegisterFormComponent,
-    ButtonFormsComponent
+    ButtonFormsComponent,
+    LogPanelComponent
   ],
     imports: [
         BrowserModule,

@@ -29,7 +29,6 @@ export class UserService {
 	}
 
   getUser() : UserModel {
-    console.log()
     return this._user;
   }
 
@@ -54,24 +53,48 @@ export class UserService {
 	}
 
 	getUsersList(): Observable<any> {
+		let user = this.getUser()
 		return this.http.get(
 			`${ environment.URL_GET_ALL_USERS } `,
-			{observe: 'response'}
+			{
+				observe: 'response',
+				headers: {'Authorization': `Bearer ${user.access_token}`}
+			}
 		)
 	}
 
 	getUserById(id: number): Observable<any> {
-		console.log(`${ environment.URL_GET_USER_BY_ID}/${id} `)
+		let user = this.getUser()
 		return this.http.get(
 			`${ environment.URL_GET_USER_BY_ID}/${id}`,
-			{observe: 'response'}
+			{
+				observe: 'response',
+				headers: {'Authorization': `Bearer ${user.access_token}`}
+			}
 		)
 	}
 
 	saveUser(user: UserModel){
-		return this.http.post(`${environment.URL_POST_REGISTER_USERS}`,
+		let userOn = this.getUser()
+		console.log(userOn.access_token)
+		return this.http.post(environment.URL_POST_REGISTER_USERS,
 		user,
-		{observe: 'response'}
+			{
+				observe: 'response',
+				params: {role: userOn.role},
+				headers: {'Authorization': `Bearer ${userOn.access_token}`}
+			}
+		)
+	}
+
+	deleteUserById(id: number): Observable<any> {
+		let user = this.getUser()
+		return this.http.get(
+			`${ environment.URL_DEL_USER_BY_ID}/${id}`,
+			{
+				observe: 'response',
+				headers: {'Authorization': `Bearer ${user.access_token}`}
+			}
 		)
 	}
 
