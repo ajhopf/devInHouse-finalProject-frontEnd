@@ -36,12 +36,13 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/inicio.png"
   },
   {
-    url: "exemplo/router",
-    category: "Exemplo Categoria",
-    title: "Exemplo Router",
+    url: "prontuario",
+    category: "Sistema",
+    title: "Prontuário Eletrônico",
     roles: [
       RolesEnum.ROLE_DOCTOR,
-      RolesEnum.ROLE_ADMIN
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
     ],
     icon: "./assets/images/inicio.png"
   },
@@ -64,8 +65,7 @@ export const environment = {
   URL_POST_LOG: URL_POST_LOG,
   ROUTES: ROUTES,
   URL_LOGOUT: URL_LOGOUT,
-  URL_LISTAR_LOG: URL_LISTAR_LOG,
-  ROUTES: ROUTES
+  URL_LISTAR_LOG: URL_LISTAR_LOG
 };
 
 /*

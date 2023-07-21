@@ -23,6 +23,15 @@ import {NgOptimizedImage} from "@angular/common";
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
 import { LogPanelComponent } from './pages/log-panel/log-panel.component';
+import { ProntuarioEletronicoComponent } from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
+import { MainProntuarioComponent } from './components/prontuario/main-prontuario/main-prontuario.component';
+import { BarraPacienteComponent } from './components/prontuario/barra-paciente/barra-paciente.component';
+import { MenuProntuarioComponent } from './components/prontuario/menu-prontuario/menu-prontuario.component';
+import { MainExamesComponent } from './components/prontuario/main-exames/main-exames.component';
+import { MainConsultasComponent } from './components/prontuario/main-consultas/main-consultas.component';
+import { MainMedicacaoComponent } from './components/prontuario/main-medicacao/main-medicacao.component';
+import { MainDietasComponent } from './components/prontuario/main-dietas/main-dietas.component';
+import { MainExerciciosComponent } from './components/prontuario/main-exercicios/main-exercicios.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +50,16 @@ import { LogPanelComponent } from './pages/log-panel/log-panel.component';
     SimpleModalComponent,
     ResetPasswordComponent,
     ResetPasswordFormComponent,
-    LogPanelComponent
+    LogPanelComponent,
+    ProntuarioEletronicoComponent,
+    MainProntuarioComponent,
+    BarraPacienteComponent,
+    MenuProntuarioComponent,
+    MainExamesComponent,
+    MainConsultasComponent,
+    MainMedicacaoComponent,
+    MainDietasComponent,
+    MainExerciciosComponent
   ],
     imports: [
         BrowserModule,
