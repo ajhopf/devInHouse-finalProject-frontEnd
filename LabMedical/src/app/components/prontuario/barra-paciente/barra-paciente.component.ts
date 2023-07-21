@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { PatientService } from 'src/app/shared/services/patient.service';
 
 @Component({
   selector: 'app-barra-paciente',
@@ -14,23 +15,29 @@ export class BarraPacienteComponent {
   pacientes:any
   paciente:any
 
-  //constructor(private cadPacienteService:CadastroPacienteService){}
-  
-  /*ngOnInit(){
-    this.setPacientes()
-  }
+  constructor(private patientService:PatientService){}
 
-  setPacientes(){
-    let pacientesJSON = this.cadPacienteService.getPacientes()
-    if(pacientesJSON){
-      this.pacientes = JSON.parse(pacientesJSON)
-    }
-  }*/
+  getPacientes(){
+    this.patientService.getPatientes().subscribe({
+			next: (response) => {
+        console.log(response.body)
+				this.pacientes = response.body
+			},
+			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				console.error({status: err.status, message: err.error})
+			}
+		})
+  }
 
   onSubmit(idPaciente:string){
     this.idPaciente = idPaciente
     this.idPacienteOutput.emit(this.idPaciente)
-    //this.paciente = this.cadPacienteService.getPaciente(this.idPaciente)
+    for(var patient of this.pacientes){
+      if(patient.id==idPaciente){
+        this.paciente = patient
+      }
+    }
   }
 
   resetarPaciente(){
@@ -38,8 +45,10 @@ export class BarraPacienteComponent {
     this.idPacienteOutput.emit(this.idPaciente)
   }
 
-  /*filtrar(busca:string){
-    this.setPacientes()
-    this.pacientes = this.pacientes.filter((paciente:any) =>paciente.nome.toUpperCase().includes(busca.toUpperCase())||paciente.ID == busca)
-  }*/
+  filtrar(busca:string){
+    if(busca==''){
+      this.getPacientes()
+    }
+    this.pacientes = this.pacientes.filter((paciente:any) =>paciente.name.toUpperCase().includes(busca.toUpperCase()))
+  }
 }

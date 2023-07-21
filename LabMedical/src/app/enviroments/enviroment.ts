@@ -13,6 +13,7 @@ const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
+const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 
 const ROUTES: RouteModel[] = [
   {
@@ -65,7 +66,8 @@ export const environment = {
   URL_POST_LOG: URL_POST_LOG,
   ROUTES: ROUTES,
   URL_LOGOUT: URL_LOGOUT,
-  URL_LISTAR_LOG: URL_LISTAR_LOG
+  URL_LISTAR_LOG: URL_LISTAR_LOG,
+  URL_PATIENTS: URL_PATIENTS
 };
 
 /*
