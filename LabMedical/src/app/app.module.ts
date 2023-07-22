@@ -22,7 +22,12 @@ import {NgOptimizedImage} from "@angular/common";
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
+import { UserComponent } from './pages/user/user.component';
+import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
+import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
+import { ButtonFormsComponent } from './components/button-forms/button-forms.component';
 import { LogPanelComponent } from './pages/log-panel/log-panel.component';
+import { RolesEnumPipe } from './shared/pipes/roles-enum.pipe';
 import { ProntuarioEletronicoComponent } from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
 import { MainProntuarioComponent } from './components/prontuario/main-prontuario/main-prontuario.component';
 import { BarraPacienteComponent } from './components/prontuario/barra-paciente/barra-paciente.component';
@@ -51,6 +56,12 @@ import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
     SimpleModalComponent,
     ResetPasswordComponent,
     ResetPasswordFormComponent,
+    UserComponent,
+    UsersTableComponent,
+    UserRegisterFormComponent,
+    ButtonFormsComponent,
+    LogPanelComponent,
+    RolesEnumPipe,
     LogPanelComponent,
     ProntuarioEletronicoComponent,
     MainProntuarioComponent,

@@ -9,6 +9,8 @@ import {TesteComponent} from "./pages/teste/teste.component";
 import {RolesEnum} from "./shared/enums/roles.enum";
 import {RoleGuard} from "./shared/guards/role.guard";
 import {Teste2Component} from "./pages/teste/teste2/teste2.component";
+import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
+import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
 import {LogPanelComponent} from "./pages/log-panel/log-panel.component";
 import { ProntuarioEletronicoComponent } from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
 
@@ -25,8 +27,33 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'log/panel',
+    path: 'usuarios',
     canActivate: [AuthGuard, RoleGuard],
+    title: 'usuarios',
+    data: {
+      requiredRoles: [RolesEnum.ROLE_ADMIN]
+    },
+    component: FullLayoutComponent, children: [
+      {
+        path:'', redirectTo: 'listar', pathMatch: 'full'
+      },
+      {
+        path: 'listar',
+        component: UsersTableComponent
+      },
+      {
+        path: 'cadastrar',
+        component: UserRegisterFormComponent
+      },
+      {
+        path: 'buscar/:id',
+        component: UserRegisterFormComponent
+      }
+    ]
+    },
+    {
+     path: 'log/panel',
+     canActivate: [AuthGuard, RoleGuard],
     title: 'Painel Log',
     data: {
       requiredRoles: [RolesEnum.ROLE_ADMIN]
