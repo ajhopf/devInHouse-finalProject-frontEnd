@@ -28,6 +28,16 @@ import { UserRegisterFormComponent } from './components/registers/user/user-regi
 import { ButtonFormsComponent } from './components/button-forms/button-forms.component';
 import { LogPanelComponent } from './pages/log-panel/log-panel.component';
 import { RolesEnumPipe } from './shared/pipes/roles-enum.pipe';
+import { ProntuarioEletronicoComponent } from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
+import { MainProntuarioComponent } from './components/prontuario/main-prontuario/main-prontuario.component';
+import { BarraPacienteComponent } from './components/prontuario/barra-paciente/barra-paciente.component';
+import { MenuProntuarioComponent } from './components/prontuario/menu-prontuario/menu-prontuario.component';
+import { MainExamesComponent } from './components/prontuario/main-exames/main-exames.component';
+import { MainConsultasComponent } from './components/prontuario/main-consultas/main-consultas.component';
+import { MainMedicacaoComponent } from './components/prontuario/main-medicacao/main-medicacao.component';
+import { MainDietasComponent } from './components/prontuario/main-dietas/main-dietas.component';
+import { MainExerciciosComponent } from './components/prontuario/main-exercicios/main-exercicios.component';
+import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
 
 @NgModule({
   declarations: [
@@ -51,8 +61,19 @@ import { RolesEnumPipe } from './shared/pipes/roles-enum.pipe';
     UserRegisterFormComponent,
     ButtonFormsComponent,
     LogPanelComponent,
-    RolesEnumPipe
-    ],
+    RolesEnumPipe,
+    LogPanelComponent,
+    ProntuarioEletronicoComponent,
+    MainProntuarioComponent,
+    BarraPacienteComponent,
+    MenuProntuarioComponent,
+    MainExamesComponent,
+    MainConsultasComponent,
+    MainMedicacaoComponent,
+    MainDietasComponent,
+    MainExerciciosComponent,
+    CalculoIdadePipe
+  ],
     imports: [
         BrowserModule,
         AppRoutingModule,

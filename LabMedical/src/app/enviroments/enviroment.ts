@@ -19,6 +19,7 @@ const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
+const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 
 const ROUTES: RouteModel[] = [
   {
@@ -42,12 +43,13 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/inicio.png"
   },
   {
-    url: "exemplo/router",
-    category: "Exemplo Categoria",
-    title: "Exemplo Router",
+    url: "prontuario",
+    category: "Sistema",
+    title: "Prontuário Eletrônico",
     roles: [
       RolesEnum.ROLE_DOCTOR,
-      RolesEnum.ROLE_ADMIN
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
     ],
     icon: "./assets/images/inicio.png"
   },
@@ -76,14 +78,18 @@ export const environment = {
   URL_POST_LOGIN: URL_POST_LOGIN,
   URL_POST_USER_BY_EMAIL: URL_POST_USER_BY_EMAIL,
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
+
   URL_POST_LOG: URL_POST_LOG,
+
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,
   URL_GET_USER_BY_ID: URL_GET_USER_BY_ID,
   URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
+  
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
+  URL_PATIENTS: URL_PATIENTS,
   ROUTES: ROUTES
 };
 
