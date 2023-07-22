@@ -54,15 +54,6 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/inicio.png"
   },
   {
-    url: "exemplo/router2",
-    category: "Exemplo Categoria",
-    title: "Exemplo Router2",
-    roles: [
-      RolesEnum.ROLE_ADMIN
-    ],
-    icon: "./assets/images/inicio.png"
-  },
-  {
     url: "usuarios",
     category: "Sistema",
     title: "Usuarios",
@@ -70,7 +61,16 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
-  }
+  },
+  {
+    url: "costumizacao",
+    category: "Exemplo Categoria",
+    title: "Costumização do sistema",
+    roles: [
+      RolesEnum.ROLE_ADMIN
+    ],
+    icon: "./assets/images/inicio.png"
+  },
 
 ]
 export const environment = {
@@ -86,7 +86,7 @@ export const environment = {
   URL_GET_USER_BY_ID: URL_GET_USER_BY_ID,
   URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
-  
+
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_PATIENTS: URL_PATIENTS,

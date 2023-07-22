@@ -38,6 +38,7 @@ import { MainMedicacaoComponent } from './components/prontuario/main-medicacao/m
 import { MainDietasComponent } from './components/prontuario/main-dietas/main-dietas.component';
 import { MainExerciciosComponent } from './components/prontuario/main-exercicios/main-exercicios.component';
 import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
+import { SystemCustomizationComponent } from './pages/system-customization/system-customization.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
     MainMedicacaoComponent,
     MainDietasComponent,
     MainExerciciosComponent,
-    CalculoIdadePipe
+    CalculoIdadePipe,
+    SystemCustomizationComponent
   ],
     imports: [
         BrowserModule,
