@@ -27,6 +27,7 @@ import { UsersTableComponent } from './components/registers/user/users-table/use
 import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
 import { ButtonFormsComponent } from './components/button-forms/button-forms.component';
 import { LogPanelComponent } from './pages/log-panel/log-panel.component';
+import { RolesEnumPipe } from './shared/pipes/roles-enum.pipe';
 
 @NgModule({
   declarations: [
@@ -49,8 +50,9 @@ import { LogPanelComponent } from './pages/log-panel/log-panel.component';
     UsersTableComponent,
     UserRegisterFormComponent,
     ButtonFormsComponent,
-    LogPanelComponent
-  ],
+    LogPanelComponent,
+    RolesEnumPipe
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,

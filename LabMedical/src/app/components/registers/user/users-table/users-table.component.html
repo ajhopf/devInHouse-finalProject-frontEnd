@@ -19,7 +19,7 @@
               <tr *ngFor="let user of users" class="text-center">
                   <td>{{user.name}}</td>
                   <td>{{user.email}}</td>
-                  <td>{{user.role}}</td> 
+                  <td>{{user.role | rolesEnum}}</td> 
                   <td><button type="button" class="btn btn-link" (click)="editNavigate(user.id)"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
                  width="30" height="30"></button></td>
                 </tr>

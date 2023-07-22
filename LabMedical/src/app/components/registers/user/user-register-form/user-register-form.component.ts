@@ -4,6 +4,7 @@ import { UserModel } from 'src/app/shared/models/user.model';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { Observable, tap } from 'rxjs';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-register-form',
@@ -17,6 +18,7 @@ export class UserRegisterFormComponent implements OnInit{
   formValid: boolean = false;
   readOnly: boolean = false
   canDelete: boolean = false
+  isEditing: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
     
@@ -25,6 +27,7 @@ export class UserRegisterFormComponent implements OnInit{
   ngOnInit(): void {
     if (this.route.snapshot.params['id']) {
       this.getUserByID(this.route.snapshot.params['id']);
+      this.isEditing = true;
     } else {
       this.user = {};
     }
@@ -32,23 +35,45 @@ export class UserRegisterFormComponent implements OnInit{
 
   saveUser() {
     if(this.formValid){
-      this.userService.saveUser(this.user).subscribe(({
-        next:() =>{
-          alert("Usuário salvo com sucesso!");
-          this.cleanForm();
-          this.formValid = false;
-        },
-        error: (err) => {
-          alert(`Erro ao realizar cadastro. ${err.error}`);
-          console.error({status: err.status, message: err.error});
+      if(this.isEditing){
+        const newUser = {
+          name: this.user.name,
+          gender: this.user.gender,
+          cpf: this.user.cpf,
+          telephone: this.user.telephone,
+          email: this.user.email,
+          password: this.user.password,
+          photoUrl: this.user.photoUrl,
+          role: this.user.role,
         }
-      }));
+        this.userService.updateUser(this.user.id, newUser).subscribe(({
+          next: (response:string) => {
+            alert(response);
+            this.navigate()
+          },
+          error: (err: HttpErrorResponse) => {
+              alert(`${err.error}`);
+          }        
+        }));
+      }else{
+        this.userService.saveUser(this.user).subscribe(({
+          next:() =>{
+            alert("Usuário salvo com sucesso!");
+            this.cleanForm();
+            this.formValid = false;
+          },
+          error: (err) => {
+            alert(`Erro ao realizar cadastro. ${err.error}`);
+            console.error({status: err.status, message: err.error});
+          }
+        }));
+      }
     }else{
       alert('O formulário não é válido, campos obrigatórios devem ser preenchidos. Não será realizado o salvamento do usuário.');
     };
   }
 
-  validarFormulario() {
+  validForm() {
     this.formValid = this.signInForm.valid;
   }
 
@@ -76,9 +101,15 @@ export class UserRegisterFormComponent implements OnInit{
 	}
 
   deleteUser(id: number){
-    this.userService.deleteUserById(id).pipe(
-      tap(res => alert(res))
-    ).subscribe()
+    this.userService.deleteUserById(id).subscribe(({
+      next: (response: string) =>{
+        alert(response)
+        this.navigate()
+      },
+      error: (err) =>{
+        alert(err)
+      }
+    }))
   }
 
   navigate() {
@@ -86,4 +117,3 @@ export class UserRegisterFormComponent implements OnInit{
   }
   
 }
-

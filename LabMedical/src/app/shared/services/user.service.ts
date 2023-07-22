@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient, HttpResponse } from "@angular/common/http";
+import { Observable, map } from "rxjs";
 
 import { UserModel } from "../models/user.model";
 import { environment } from "../../enviroments/enviroment";
@@ -53,7 +53,7 @@ export class UserService {
 	}
 
 	getUsersList(): Observable<any> {
-		let user = this.getUser()
+		let user = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
 		return this.http.get(
 			`${ environment.URL_GET_ALL_USERS } `,
 			{
@@ -64,7 +64,7 @@ export class UserService {
 	}
 
 	getUserById(id: number): Observable<any> {
-		let user = this.getUser()
+		let user = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
 		return this.http.get(
 			`${ environment.URL_GET_USER_BY_ID}/${id}`,
 			{
@@ -74,27 +74,50 @@ export class UserService {
 		)
 	}
 
-	saveUser(user: UserModel){
-		let userOn = this.getUser()
-		console.log(userOn.access_token)
+	saveUser(user: UserModel): Observable<any> {
+		let userAdmin = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
 		return this.http.post(environment.URL_POST_REGISTER_USERS,
 		user,
 			{
 				observe: 'response',
-				params: {role: userOn.role},
-				headers: {'Authorization': `Bearer ${userOn.access_token}`}
+				params: {role: userAdmin.role},
+				headers: {'Authorization': `Bearer ${userAdmin.access_token}`}
 			}
 		)
 	}
 
-	deleteUserById(id: number): Observable<any> {
-		let user = this.getUser()
-		return this.http.get(
+	updateUser(id:number, user: UserModel): Observable<string> {
+		let userAdmin = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
+		return this.http.put(
+			`${environment.URL_PUT_UPDATE_USER}/${id}`,
+			user,
+			{
+				observe: 'response',
+				headers: {
+					'Authorization': `Bearer ${userAdmin.access_token}`,
+					'Content-Type': 'application/json'
+				},
+				responseType: 'text',
+			}
+		).pipe(
+			map((response: HttpResponse<string>) => response.body)
+		)
+	}
+
+	deleteUserById(id: number): Observable<string> {
+		let userAdmin = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
+		return this.http.delete(
 			`${ environment.URL_DEL_USER_BY_ID}/${id}`,
 			{
 				observe: 'response',
-				headers: {'Authorization': `Bearer ${user.access_token}`}
+				headers: {
+					'Authorization': `Bearer ${userAdmin.access_token}`,
+					'Content-Type': 'application/json'
+				},
+				responseType: 'text'
 			}
+		).pipe(
+			map((response: HttpResponse<string>) => response.body)
 		)
 	}
 

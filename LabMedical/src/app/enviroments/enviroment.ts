@@ -13,6 +13,7 @@ const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
 const URL_GET_ALL_USERS: string = `${URL_PRINCIPAL}/usuarios/listar`
 const URL_POST_REGISTER_USERS: string = `${URL_PRINCIPAL}/usuarios/cadastrar`
 const URL_GET_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/buscar`
+const URL_PUT_UPDATE_USER: string = `${URL_PRINCIPAL}/usuarios/atualizar`
 const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
 //Log controle endpoints
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
@@ -79,6 +80,7 @@ export const environment = {
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,
   URL_GET_USER_BY_ID: URL_GET_USER_BY_ID,
+  URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
@@ -92,4 +94,3 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-
