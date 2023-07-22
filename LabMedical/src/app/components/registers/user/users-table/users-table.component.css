@@ -2,10 +2,6 @@
     font-size: 1.5rem;
     font-weight: bold;
 }
-.parent-container{
-    background-color: grey;
-     height: 100vh;
-}
 
 .child-container{
     background-color: white;

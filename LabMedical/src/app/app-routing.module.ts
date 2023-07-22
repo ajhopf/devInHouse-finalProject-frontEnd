@@ -29,7 +29,7 @@ const routes: Routes = [
   {
     path: 'usuarios',
     canActivate: [AuthGuard, RoleGuard],
-    title: 'usuarios',
+    title: 'Cadastro de Usuários',
     data: {
       requiredRoles: [RolesEnum.ROLE_ADMIN]
     },
