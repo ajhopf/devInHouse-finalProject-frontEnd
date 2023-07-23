@@ -39,7 +39,9 @@ import { MainDietasComponent } from './components/prontuario/main-dietas/main-di
 import { MainExerciciosComponent } from './components/prontuario/main-exercicios/main-exercicios.component';
 import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
 import { SystemCustomizationComponent } from './pages/system-customization/system-customization.component';
-import {ToastrModule} from "ngx-toastr";
+import {provideToastr, ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-browser/animations";
+import { ModalComponent } from './components/modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +76,8 @@ import {ToastrModule} from "ngx-toastr";
     MainDietasComponent,
     MainExerciciosComponent,
     CalculoIdadePipe,
-    SystemCustomizationComponent
+    SystemCustomizationComponent,
+    ModalComponent
   ],
     imports: [
         BrowserModule,
@@ -84,9 +87,13 @@ import {ToastrModule} from "ngx-toastr";
         HttpClientModule,
         NgOptimizedImage,
         ReactiveFormsModule,
+        BrowserAnimationsModule,
         ToastrModule.forRoot()
     ],
-  providers: [],
+  providers: [
+    provideAnimations(), // required animations providers
+    provideToastr(),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

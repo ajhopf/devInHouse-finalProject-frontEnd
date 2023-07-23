@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ConfigService} from "../../shared/services/config.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {SystemConfigModel} from "../../shared/models/system-config.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-system-customization',
@@ -12,17 +13,11 @@ import {SystemConfigModel} from "../../shared/models/system-config.model";
 export class SystemCustomizationComponent implements OnInit {
   systemConfigForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private systemConfigService: ConfigService) {}
+  constructor(private formBuilder: FormBuilder, private systemConfigService: ConfigService,
+              private toastr: ToastrService) {}
 
   ngOnInit(): void {
     this.inicializeForm();
-  }
-
-  onSubmit(): void {
-    if (this.systemConfigForm.valid) {
-      console.log(this.systemConfigForm.value);
-    }
-    console.log(this.systemConfigForm.value);
   }
 
   returnValidationClassForInput(inputName: string): string {
@@ -41,6 +36,7 @@ export class SystemCustomizationComponent implements OnInit {
         this.systemConfigForm.setValue(systemConfigModel)
       },
       error: (err: any) => {
+        this.toastr.error("Erro ao buscar informações do sistema, por favor tente novamente ou entre em contato com o suporte", "Erro")
         console.log(err)
       }
     })
@@ -51,6 +47,23 @@ export class SystemCustomizationComponent implements OnInit {
       secondaryColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
       fontColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
     });
+  }
+  onSubmit(): void {
+    if (this.systemConfigForm.valid) {
+      this.systemConfigService.saveSystemConfig(this.systemConfigForm.value).subscribe({
+        next: (): void => {
+          this.toastr.success("Alterações salvas com sucesso", "Sucesso")
+          this.inicializeForm()
+        },
+        error: (err: any) => {
+          this.toastr.error("Erro ao salvar informações do sistema, por favor tente novamente ou entre em contato com o suporte", "Erro")
+        }
+      })
+    }
+  }
+
+  restoreDefaults(): void {
+
   }
 
 }
