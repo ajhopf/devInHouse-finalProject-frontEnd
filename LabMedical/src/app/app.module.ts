@@ -63,7 +63,6 @@ import { SystemCustomizationComponent } from './pages/system-customization/syste
     ButtonFormsComponent,
     LogPanelComponent,
     RolesEnumPipe,
-    LogPanelComponent,
     ProntuarioEletronicoComponent,
     MainProntuarioComponent,
     BarraPacienteComponent,

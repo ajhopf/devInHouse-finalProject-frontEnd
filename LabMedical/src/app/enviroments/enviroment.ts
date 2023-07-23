@@ -15,11 +15,15 @@ const URL_POST_REGISTER_USERS: string = `${URL_PRINCIPAL}/usuarios/cadastrar`
 const URL_GET_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/buscar`
 const URL_PUT_UPDATE_USER: string = `${URL_PRINCIPAL}/usuarios/atualizar`
 const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
-//Log controle endpoints
+//Log controller endpoints
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
+
 const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
+
+//Config controller endpoints
+const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
 
 const ROUTES: RouteModel[] = [
   {
@@ -90,6 +94,7 @@ export const environment = {
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_PATIENTS: URL_PATIENTS,
+  URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
   ROUTES: ROUTES
 };
 
