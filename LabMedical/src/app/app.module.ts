@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
@@ -22,6 +22,9 @@ import {NgOptimizedImage} from "@angular/common";
 
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { ResetPasswordFormComponent } from './components/reset-password/reset-password-form/reset-password-form.component';
+import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
+import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
+import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
 
 @NgModule({
   declarations: [
@@ -39,16 +42,20 @@ import { ResetPasswordFormComponent } from './components/reset-password/reset-pa
     Teste2Component,
     SimpleModalComponent,
     ResetPasswordComponent,
-    ResetPasswordFormComponent
+    ResetPasswordFormComponent,
+    PacientFormComponent,
+    ValidDobDirective,
+    TesteListagemPacientesComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        NgbModule,
-        HttpClientModule,
-        NgOptimizedImage
-    ],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		FormsModule,
+		NgbModule,
+		HttpClientModule,
+		NgOptimizedImage,
+		ReactiveFormsModule
+	],
   providers: [],
   bootstrap: [AppComponent]
 })

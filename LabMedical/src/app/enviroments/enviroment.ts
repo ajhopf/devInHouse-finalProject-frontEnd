@@ -2,8 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {RolesEnum} from "../shared/enums/roles.enum";
-import {RouteModel} from "../shared/models/route.model";
+import { RolesEnum } from "../shared/enums/roles.enum";
+import { RouteModel } from "../shared/models/route.model";
 
 const URL_PRINCIPAL = 'http://localhost:8080/api';
 //User controller endpoints
@@ -42,8 +42,29 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "home/pacient-form",
+    category: "Cadastros",
+    title: "Cadastro de Paciente",
+    roles: [
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
+    ],
+    icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "home/listagem-paciente-teste",
+    category: "Listagem de Pacientes Teste",
+    title: "Listagem de Pacientes",
+    roles: [
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
+    ],
+    icon: "./assets/images/inicio.png"
   }
-
 ]
 export const environment = {
   production: false,
