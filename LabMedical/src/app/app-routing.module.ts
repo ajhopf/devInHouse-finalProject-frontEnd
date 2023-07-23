@@ -11,6 +11,8 @@ import {RoleGuard} from "./shared/guards/role.guard";
 import {Teste2Component} from "./pages/teste/teste2/teste2.component";
 import {UsersTableComponent} from './components/registers/user/users-table/users-table.component';
 import {UserRegisterFormComponent} from './components/registers/user/user-register-form/user-register-form.component';
+import { PacientFormComponent } from "./pages/pacient-form/pacient-form.component";
+import { TesteListagemPacientesComponent } from "./pages/teste-listagem-pacientes/teste-listagem-pacientes.component";
 import {LogPanelComponent} from "./pages/log-panel/log-panel.component";
 import {ProntuarioEletronicoComponent} from './pages/prontuario/prontuario-eletronico/prontuario-eletronico.component';
 import {SystemCustomizationComponent} from "./pages/system-customization/system-customization.component";
@@ -24,6 +26,30 @@ const routes: Routes = [
       {
         path: '',
         component: HomeComponent
+      }, {
+        path: 'pacient-form',
+        component: PacientFormComponent,
+        title: 'Formulário de Paciente',
+        canActivate: [RoleGuard],
+        data: {
+          requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR ]
+        }
+      }, {
+        path: 'pacient-form/:id',
+        component: PacientFormComponent,
+        title: 'Atualizar Formulário de Paciente',
+        canActivate: [RoleGuard],
+        data: {
+          requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR ]
+        }
+      }, {
+        path: 'listagem-paciente-teste',
+        component: TesteListagemPacientesComponent,
+        title: 'Lista de Pacientes Teste',
+        canActivate: [RoleGuard],
+        data: {
+          requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR ]
+        }
       }
     ]
   },
@@ -57,7 +83,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, RoleGuard],
     title: 'Painel Log',
     data: {
-      requiredRoles: [RolesEnum.ROLE_ADMIN]
+      requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR]
     },
     component: FullLayoutComponent, children: [
       {
