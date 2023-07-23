@@ -122,16 +122,28 @@ export class PacientFormComponent implements OnInit {
 
 	onCreatePacient() {
 		this.pacientService.createPacient(this.pacient).subscribe({
-				next: response => console.log(response),
-				error: err => console.error(err)
+				next: response => {
+					console.log(response)
+					alert('Paciente cadastrado com sucesso')
+				},
+				error: err => {
+					console.error(err.error)
+					alert('Paciente não cadastrado. Erro: ' + err.error)
+				}
 			}
 		)
 	}
 
 	onEditRegistration() {
 		this.pacientService.editPacient(this.pacient).subscribe({
-			next: response => console.log(response),
-			error: err => console.log(err)
+			next: response => {
+				console.log(response)
+				alert('Paciente atualizado com sucesso')
+			},
+			error: err => {
+				console.log(err)
+				alert('Paciente não atualizado. Erro: ' + err.error)
+			}
 		})
 	}
 
