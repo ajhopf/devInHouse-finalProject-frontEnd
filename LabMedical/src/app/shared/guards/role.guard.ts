@@ -13,7 +13,6 @@ export class RoleGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const requiredRoles = route.data['requiredRoles'];
-    console.log(requiredRoles)
     if(requiredRoles.find((role: RolesEnum ): boolean => role === this.userService.getUser().role))
       return true
     this.router.navigate(['/home']);

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
@@ -82,7 +82,8 @@ import { SystemCustomizationComponent } from './pages/system-customization/syste
         FormsModule,
         NgbModule,
         HttpClientModule,
-        NgOptimizedImage
+        NgOptimizedImage,
+        ReactiveFormsModule
     ],
   providers: [],
   bootstrap: [AppComponent]
