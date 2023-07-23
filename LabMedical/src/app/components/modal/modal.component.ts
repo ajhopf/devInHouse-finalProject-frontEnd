@@ -1,4 +1,5 @@
-import {Component, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {NgbActiveModal, NgbModalRef} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-modal',
@@ -6,10 +7,12 @@ import {Component, EventEmitter} from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  @Output() confirmed: EventEmitter<boolean> = new EventEmitter<void>();
+  @Input() modalTitle: any;
+  @Input() modalDescription: any;
 
-  confirm(boolean: boolean): void {
-    this.confirmed.emit(boolean);
-    $('#confirmationModal').modal('hide'); // Hide the modal after confirmation
+  constructor(public activeModal: NgbActiveModal) {}
+
+  confirm(answer: boolean): void {
+    this.activeModal.close(answer);
   }
 }
