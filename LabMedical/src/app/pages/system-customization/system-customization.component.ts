@@ -25,4 +25,14 @@ export class SystemCustomizationComponent {
     }
     console.log(this.systemConfigForm.value);
   }
+
+  returnValidationClassForInput(inputName: string): string {
+    if(this.checkIfInputIsUsed(inputName))
+      return this.systemConfigForm.controls[inputName].invalid ? 'is-invalid' : 'is-valid'
+    return ''
+  }
+
+  checkIfInputIsUsed(inputName: string): boolean {
+    return this.systemConfigForm.controls[inputName].dirty || this.systemConfigForm.controls[inputName].touched
+  }
 }
