@@ -4,6 +4,7 @@
 }
 .content {
   overflow: auto;
+  background-color: rgb(190,190,190);
 }
 .grid-container {
   display: grid;
