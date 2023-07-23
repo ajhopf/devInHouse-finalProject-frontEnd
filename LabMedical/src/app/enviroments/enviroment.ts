@@ -2,8 +2,8 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-import {RolesEnum} from "../shared/enums/roles.enum";
-import {RouteModel} from "../shared/models/route.model";
+import { RolesEnum } from "../shared/enums/roles.enum";
+import { RouteModel } from "../shared/models/route.model";
 
 const URL_PRINCIPAL = 'http://localhost:8080/api';
 //User controller endpoints
@@ -16,6 +16,13 @@ const URL_GET_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/buscar`
 const URL_PUT_UPDATE_USER: string = `${URL_PRINCIPAL}/usuarios/atualizar`
 const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
 //Log controle endpoints
+//Pacient controller endpoints
+const URL_PACIENTS: string = `${URL_PRINCIPAL}/pacientes`
+//Appointments controller endpoints
+const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
+const URL_PACIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
+const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
+
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
@@ -70,8 +77,29 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "home/pacient-form",
+    category: "Cadastros",
+    title: "Cadastro de Paciente",
+    roles: [
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
+    ],
+    icon: "./assets/images/inicio.png"
+  },
+  {
+    url: "home/listagem-paciente-teste",
+    category: "Listagem de Pacientes Teste",
+    title: "Listagem de Pacientes",
+    roles: [
+      RolesEnum.ROLE_DOCTOR,
+      RolesEnum.ROLE_ADMIN,
+      RolesEnum.ROLE_NURSE
+    ],
+    icon: "./assets/images/inicio.png"
   }
-
 ]
 export const environment = {
   production: false,
@@ -80,13 +108,17 @@ export const environment = {
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
 
   URL_POST_LOG: URL_POST_LOG,
+  URL_PACIENTS: URL_PACIENTS,
+  URL_APPOINTMENTS: URL_APPOINTMENTS,
+  URL_PACIENT_APPOINTMENTS: URL_PACIENT_APPOINTMENTS,
+  URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
 
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,
   URL_GET_USER_BY_ID: URL_GET_USER_BY_ID,
   URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
-  
+
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_PATIENTS: URL_PATIENTS,
