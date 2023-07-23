@@ -1,1 +1,48 @@
-<p>system-customization works!</p>
+<form  class="row g-3" [formGroup]="systemConfigForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-4">
+    <label for="companyName" class="form-label">Nome da Empresa</label>
+    <input type="text" class="form-control" [ngClass]="systemConfigForm.controls['companyName'].invalid ? 'is-invalid' : 'is-valid'" id="companyName" formControlName="companyName">
+    <div ngClass="invalid-feedback" *ngIf="systemConfigForm.controls['companyName'].invalid && (systemConfigForm.controls['companyName'].dirty || systemConfigForm.controls['companyName'].touched)">
+      <div *ngIf="systemConfigForm.controls['companyName'].errors['required']">Nome da Empresa é obrigatório.</div>
+      <div *ngIf="systemConfigForm.controls['companyName'].errors['minlength'] || systemConfigForm.controls['companyName'].errors['maxlength']">Nome da Empresa deve ter entre 4 e 20 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="logoUrl" class="form-label">URL do Logo</label>
+    <input type="text" class="form-control" id="logoUrl" formControlName="logoUrl">
+    <div *ngIf="systemConfigForm.controls['logoUrl'].invalid && (systemConfigForm.controls['logoUrl'].dirty || systemConfigForm.controls['logoUrl'].touched)">
+      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['required']">URL do Logo é obrigatória.</div>
+      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['pattern']">URL do Logo deve ser uma URL válida.</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="primaryColor" class="form-label">Cor Primária</label>
+    <input type="text" class="form-control" id="primaryColor" formControlName="primaryColor">
+    <div *ngIf="systemConfigForm.controls['primaryColor'].invalid && (systemConfigForm.controls['primaryColor'].dirty || systemConfigForm.controls['primaryColor'].touched)">
+      <div *ngIf="systemConfigForm.controls['primaryColor'].errors['required']">Cor Primária é obrigatória.</div>
+      <div *ngIf="systemConfigForm.controls['primaryColor'].errors['pattern']">Cor Primária deve estar no formato hexadecimal.</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="secondaryColor" class="form-label">Cor Secundária</label>
+    <input type="text" class="form-control" id="secondaryColor" formControlName="secondaryColor">
+    <div *ngIf="systemConfigForm.controls['secondaryColor'].invalid && (systemConfigForm.controls['secondaryColor'].dirty || systemConfigForm.controls['secondaryColor'].touched)">
+      <div *ngIf="systemConfigForm.controls['secondaryColor'].errors['required']">Cor Secundária é obrigatória.</div>
+      <div *ngIf="systemConfigForm.controls['secondaryColor'].errors['pattern']">Cor Secundária deve estar no formato hexadecimal.</div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <label for="fontColor" class="form-label">Cor da Fonte</label>
+    <input type="text" class="form-control" id="fontColor" formControlName="fontColor">
+    <div *ngIf="systemConfigForm.controls['fontColor'].invalid && (systemConfigForm.controls['fontColor'].dirty || systemConfigForm.controls['fontColor'].touched)">
+      <div *ngIf="systemConfigForm.controls['fontColor'].errors['required']">Cor da Fonte é obrigatória.</div>
+      <div *ngIf="systemConfigForm.controls['fontColor'].errors['pattern']">Cor da Fonte deve estar no formato hexadecimal.</div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="systemConfigForm.invalid">Enviar</button>
+</form>

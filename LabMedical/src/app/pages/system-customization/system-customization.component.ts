@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-system-customization',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./system-customization.component.css']
 })
 export class SystemCustomizationComponent {
+  systemConfigForm: FormGroup;
 
+  constructor(private formBuilder: FormBuilder) {
+    this.systemConfigForm = this.formBuilder.group({
+      companyName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
+      logoUrl: ['', [Validators.required, Validators.pattern('(https?|data):[^\\s/$.?#].[^\\s]*')]],
+      primaryColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
+      secondaryColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
+      fontColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
+    });
+  }
+
+  onSubmit(): void {
+    if (this.systemConfigForm.valid) {
+      console.log(this.systemConfigForm.value);
+    }
+    console.log(this.systemConfigForm.value);
+  }
 }
