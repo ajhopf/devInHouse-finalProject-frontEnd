@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PacientService } from "../../shared/services/pacient.service";
 import { Pacient } from "../../shared/models/pacient.model";
 import { ViacepService } from "../../shared/services/viacep.service";
@@ -6,20 +6,22 @@ import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { RolesEnum } from "../../shared/enums/roles.enum";
 import { CivilStatusEnum } from "../../shared/enums/civil-status.enum";
+import { AppointmentsService } from "../../shared/services/appointments.service";
 
 @Component({
 	selector: 'app-pacient-form',
 	templateUrl: './pacient-form.component.html',
 	styleUrls: ['./pacient-form.component.css']
 })
-export class PacientFormComponent {
+export class PacientFormComponent implements OnInit {
 	@ViewChild('newPacient') newPacientForm: NgForm | undefined
+	MANDATORY: string = "../../../assets/images/obrigatorio.png"
 	pacientId: string = ''
 	hasRecords: boolean = false
 	civilStatusEnum = CivilStatusEnum;
-	hasAlergies: boolean = false
+	hasAlergies: boolean = true
 	allergy: string = ''
-	hasSpecialCare: boolean = false
+	hasSpecialCare: boolean = true
 	specialCare: string = ''
 	pacient: Pacient = {
 		name: '',
@@ -55,41 +57,45 @@ export class PacientFormComponent {
 		private viacep: ViacepService,
 		private pacientService: PacientService,
 		private route: ActivatedRoute,
-		// private appointmentsDB: AppointmentsDbService,
+		private appointmentsService: AppointmentsService
 		// private examsDB: ExamsDbService,
 	) {}
 
-	ngOnInit():void {
+	ngOnInit(): void {
 		this.pacientId = this.route.snapshot.params['id']
 
 		if (this.pacientId) {
-			this.pacientService.getPacient(+this.pacientId).subscribe((pacient: Pacient) => {
-				this.pacient = pacient
-			})}
+			this.pacientService.getPacient(+this.pacientId).subscribe({
+				next: (pacient: Pacient) => {
+					this.pacient = pacient
+					this.pacient.alergies?.length && this.pacient.alergies.length > 0 ? this.hasAlergies = true : ''
+					this.pacient.specialCare?.length && this.pacient.specialCare.length > 0 ? this.hasSpecialCare = true : ''
+				},
+				error: err => console.log(err)
+			})
 
-			// this.appointmentsDB.getAppointmentsByUserId(this.userId).subscribe(
-			//   (appointments: Appointment[]) => {
-			//     if (appointments.length > 0) {
-			//       this.hasRecords = true
-			//     }
-			//   }
-			// )
-			//
-			// this.examsDB.getExamsByPacientId(this.userId).subscribe(
-			//   (exams: Exam[] ) => {
-			//     if (exams.length > 0) {
-			//       this.hasRecords = true
-			//     }
-			//   }
-			// )
+			this.appointmentsService.getAppointmentsByPacientId(+this.pacientId).subscribe(
+				(appointments: any[]) => {
+					if (appointments.length > 0) {
+						this.hasRecords = true
+					}
+				}
+			)
 		}
 
-	onChangeHasAlergies(e: any){
-		if (e.target.value == "yes") {
-			this.hasAlergies = true
-		} else {
-			this.hasAlergies = false
-		}
+
+		//
+		// this.examsDB.getExamsByPacientId(this.userId).subscribe(
+		//   (exams: Exam[] ) => {
+		//     if (exams.length > 0) {
+		//       this.hasRecords = true
+		//     }
+		//   }
+		// )
+	}
+
+	onChangeHasAlergies(e: any) {
+		this.hasAlergies = e.target.value == "yes";
 	}
 
 	onAddAllergy(allergy: string) {
@@ -102,11 +108,7 @@ export class PacientFormComponent {
 	}
 
 	onChangeHasSpecialCare(e: any) {
-		if (e.target.value == "yes") {
-			this.hasSpecialCare = true
-		} else {
-			this.hasSpecialCare = false
-		}
+		this.hasSpecialCare = e.target.value == "yes";
 	}
 
 	onAddSpecialCare(specialCare: string) {
@@ -119,17 +121,18 @@ export class PacientFormComponent {
 	}
 
 	onCreatePacient() {
-		console.log(this.pacient)
-
 		this.pacientService.createPacient(this.pacient).subscribe({
-			next: response => console.log(response),
-			error: err => console.error(err)
+				next: response => console.log(response),
+				error: err => console.error(err)
 			}
 		)
 	}
 
 	onEditRegistration() {
-		console.log('editou')
+		this.pacientService.editPacient(this.pacient).subscribe({
+			next: response => console.log(response),
+			error: err => console.log(err)
+		})
 	}
 
 	onDeleteRegistration() {
@@ -149,7 +152,7 @@ export class PacientFormComponent {
 		let pacientCep = this.pacient.address.cep
 
 		if (!pacientCep.includes('-')) {
-			this.pacient.address.cep = pacientCep.substring(0,5) + '-' + pacientCep.substring(5)
+			this.pacient.address.cep = pacientCep.substring(0, 5) + '-' + pacientCep.substring(5)
 		}
 	}
 

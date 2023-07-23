@@ -41,7 +41,11 @@ export class PacientService {
 
 
 	editPacient(pacient: Pacient): Observable<any> {
-		return this.http.put(`${environment.URL_PACIENTS}/${ pacient.id }`, pacient)
+		return this.http.put(
+			`${environment.URL_PACIENTS}/${ pacient.id }`,
+			pacient,
+			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
+		)
 	}
 
 	deletePacient(pacientId: string): Observable<any> {

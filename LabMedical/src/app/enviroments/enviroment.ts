@@ -10,7 +10,12 @@ const URL_PRINCIPAL = 'http://localhost:8080/api';
 const URL_POST_LOGIN: string = `${URL_PRINCIPAL}/usuarios/login`
 const URL_POST_USER_BY_EMAIL: string = `${URL_PRINCIPAL}/usuarios/`
 const URL_POST_RESET_PASSWORD: string = `${URL_PRINCIPAL}/usuarios/resetarsenha`
+//Pacient controller endpoints
 const URL_PACIENTS: string = `${URL_PRINCIPAL}/pacientes`
+//Appointments controller endpoints
+const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
+const URL_PACIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
+const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const ROUTES: RouteModel[] = [
@@ -74,6 +79,9 @@ export const environment = {
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
   URL_POST_LOG: URL_POST_LOG,
   URL_PACIENTS: URL_PACIENTS,
+  URL_APPOINTMENTS: URL_APPOINTMENTS,
+  URL_PACIENT_APPOINTMENTS: URL_PACIENT_APPOINTMENTS,
+  URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
   ROUTES: ROUTES
 };
 
