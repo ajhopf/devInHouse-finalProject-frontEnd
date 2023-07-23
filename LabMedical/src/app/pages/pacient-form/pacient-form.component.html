@@ -294,7 +294,8 @@
 			<label class="form-label" for="allergy">Alergia</label>
 			<input class="form-control mb-3" type="text" id="allergy" [(ngModel)]="allergy" name="allergy">
 			<button type="button" class="btn btn-secondary w-100" (click)="onAddAllergy(allergy)">Adicionar
-			  alergia</button>
+			  alergia
+			</button>
 		  </div>
 		  <div class="col">
 			<p class="mb-2">Lista de alergias:</p>
@@ -542,13 +543,17 @@
 	  </div>
 	</div>
 	<div class="col-12 col-md d-flex py-2 justify-content-center justify-content-lg-end me-2">
-	  <button
-		type="button"
-		class="btn btn-warning mx-1"
-		[disabled]="!pacientId || !newPacient.valid" (click)="onEditRegistration()">
-		Editar Cadastro
-	  </button>
 	  <div
+		[ngbTooltip]="newPacient.invalid && pacientId ? 'Todos campos com marcação devem ser preenchidos' : ''">
+		<button
+		  type="button"
+		  class="btn btn-warning mx-1"
+		  [disabled]="!pacientId || !newPacient.valid" (click)="onEditRegistration()">
+		  Editar Cadastro
+		</button>
+	  </div>
+	  <div
+		[ngbTooltip]="hasRecords ? 'Não é possível deletar o paciente pois este possui registros vinculados' : ''"
 		class="d-flex">
 		<button
 		  type="button"
@@ -560,10 +565,13 @@
 		</button>
 	  </div>
 	  <div
-		class="d-flex">
+		class="d-flex"
+		placement="top-right"
+		[ngbTooltip]="newPacient.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
+	  >
 		<button
+		  [disabled]="newPacient.invalid || pacientId"
 		  class="btn btn-success mx-1"
-		  [disabled]="newPacient.invalid"
 		  type="submit"
 		>
 		  Cadastrar
