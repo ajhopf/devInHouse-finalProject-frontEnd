@@ -26,7 +26,11 @@ const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
+
 const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
+
+//Config controller endpoints
+const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
 
 const ROUTES: RouteModel[] = [
   {
@@ -61,18 +65,18 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/inicio.png"
   },
   {
-    url: "exemplo/router2",
-    category: "Exemplo Categoria",
-    title: "Exemplo Router2",
+    url: "usuarios",
+    category: "Sistema",
+    title: "Usuarios",
     roles: [
       RolesEnum.ROLE_ADMIN
     ],
     icon: "./assets/images/inicio.png"
   },
   {
-    url: "usuarios",
+    url: "costumizacao",
     category: "Sistema",
-    title: "Usuarios",
+    title: "Costumização do sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
     ],
@@ -122,6 +126,7 @@ export const environment = {
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_PATIENTS: URL_PATIENTS,
+  URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
   ROUTES: ROUTES
 };
 

@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { FormLoginComponent } from './components/form-login/form-login.component';
 import { LoginComponent } from './pages/login/login.component';
 import { AppRoutingModule } from "./app-routing.module";
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from "@angular/common/http";
 import { HomeComponent } from './pages/home/home.component';
@@ -38,6 +38,10 @@ import { MainMedicacaoComponent } from './components/prontuario/main-medicacao/m
 import { MainDietasComponent } from './components/prontuario/main-dietas/main-dietas.component';
 import { MainExerciciosComponent } from './components/prontuario/main-exercicios/main-exercicios.component';
 import { CalculoIdadePipe } from './shared/pipes/calculo-idade.pipe';
+import { SystemCustomizationComponent } from './pages/system-customization/system-customization.component';
+import {provideToastr, ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-browser/animations";
+import { ModalComponent } from './components/modal/modal.component';
 import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
@@ -69,7 +73,6 @@ import { TesteListagemPacientesComponent } from './pages/teste-listagem-paciente
     ButtonFormsComponent,
     LogPanelComponent,
     RolesEnumPipe,
-    LogPanelComponent,
     ProntuarioEletronicoComponent,
     MainProntuarioComponent,
     BarraPacienteComponent,
@@ -79,18 +82,25 @@ import { TesteListagemPacientesComponent } from './pages/teste-listagem-paciente
     MainMedicacaoComponent,
     MainDietasComponent,
     MainExerciciosComponent,
-    CalculoIdadePipe
+    CalculoIdadePipe,
+    SystemCustomizationComponent,
+    ModalComponent
   ],
-	imports: [
-		BrowserModule,
-		AppRoutingModule,
-		FormsModule,
-		NgbModule,
-		HttpClientModule,
-		NgOptimizedImage,
-		ReactiveFormsModule
-	],
-  providers: [],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        NgbModule,
+        HttpClientModule,
+        NgOptimizedImage,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        ToastrModule.forRoot()
+    ],
+  providers: [
+    provideAnimations(), // required animations providers
+    provideToastr(),
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

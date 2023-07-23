@@ -17,7 +17,6 @@ export class UserService {
     email : '',
   }
 
-  private _user : any = JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
 	constructor(private http: HttpClient) { }
 
 	getUserByEmailAndPassword(email: string, password: string): Observable<any> {
@@ -29,7 +28,7 @@ export class UserService {
 	}
 
   getUser() : UserModel {
-    return this._user;
+    return JSON.parse(localStorage.getItem("session") || JSON.stringify(this.emptyUser))
   }
 
 	getUserByEmail(email: string): Observable<any> {
