@@ -42,6 +42,9 @@ import { SystemCustomizationComponent } from './pages/system-customization/syste
 import {provideToastr, ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-browser/animations";
 import { ModalComponent } from './components/modal/modal.component';
+import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
+import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
+import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +62,10 @@ import { ModalComponent } from './components/modal/modal.component';
     Teste2Component,
     SimpleModalComponent,
     ResetPasswordComponent,
+    ResetPasswordFormComponent,
+    PacientFormComponent,
+    ValidDobDirective,
+    TesteListagemPacientesComponent,
     ResetPasswordFormComponent,
     UserComponent,
     UsersTableComponent,
