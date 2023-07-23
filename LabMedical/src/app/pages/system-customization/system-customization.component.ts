@@ -4,6 +4,7 @@ import {ConfigService} from "../../shared/services/config.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {SystemConfigModel} from "../../shared/models/system-config.model";
 import {ToastrService} from "ngx-toastr";
+import {ModalService} from "../../shared/services/modal.service";
 
 @Component({
   selector: 'app-system-customization',
@@ -14,14 +15,15 @@ export class SystemCustomizationComponent implements OnInit {
   systemConfigForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private systemConfigService: ConfigService,
-              private toastr: ToastrService) {}
+              private toastr: ToastrService, private modalService: ModalService) {
+  }
 
   ngOnInit(): void {
     this.inicializeForm();
   }
 
   returnValidationClassForInput(inputName: string): string {
-    if(this.checkIfInputIsUsed(inputName))
+    if (this.checkIfInputIsUsed(inputName))
       return this.systemConfigForm.controls[inputName].invalid ? 'is-invalid' : 'is-valid'
     return ''
   }
@@ -48,6 +50,7 @@ export class SystemCustomizationComponent implements OnInit {
       fontColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
     });
   }
+
   onSubmit(): void {
     if (this.systemConfigForm.valid) {
       this.systemConfigService.saveSystemConfig(this.systemConfigForm.value).subscribe({
@@ -63,7 +66,24 @@ export class SystemCustomizationComponent implements OnInit {
   }
 
   restoreDefaults(): void {
-
+    this.modalService.createModal("Restaurar configurações padrão", "Deseja restaurar as configurações padrão?")
+      .subscribe({
+        next: (resposta: boolean): void => {
+          if (resposta) {
+            this.systemConfigService.resetSystemConfig().subscribe({
+              next: (): void => {
+                this.inicializeForm()
+              },
+              error: (err: any) => {
+                console.log(err)
+              }
+            })
+          }
+        },
+        error: (err: any) => {
+          console.log(err)
+        }
+      })
   }
 
 }
