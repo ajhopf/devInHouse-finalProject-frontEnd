@@ -1,12 +1,26 @@
 .menu-retracted {
   width: 50px;
   visibility: hidden;
-  color: #212529 !important;
+
 }
 .menu-expanded {
   width: 250px;
 }
-.menu {
+#menu {
   margin-top: 0 !important;
   height: 100%;
+  background-color: var(--primary);
+}
+#menu-button {
+  background-color: var(--primary);
+}
+:host, a, .active{
+  color: var(--font-color)!important;
+}
+.active{
+  background-color: var(--secondary)!important;
+}
+#logo{
+  margin-left: 15px;
+  height: 40px;
 }
