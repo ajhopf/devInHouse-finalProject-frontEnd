@@ -15,6 +15,8 @@
 		  for="pacientName">
 		  Nome
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
           #pacientName="ngModel"
 		  type="text"
@@ -38,13 +40,15 @@
 		  class="form-label">
 		  Gênero
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<select
 		  id="pacientGender"
 		  name="pacientGender"
 		  class="form-select"
 		  required
 		  [(ngModel)]="pacient.gender">
-		  <option value="feminino" selected="true">Feminino</option>
+		  <option value="feminino" selected="selected">Feminino</option>
 		  <option value="masculino">Masculino</option>
 		  <option value="nao-binario">Não Binário</option>
 		</select>
@@ -54,6 +58,8 @@
 		<label for="dateOfBirth" class="form-label">
 		  Data de nascimento
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
 		  type="date"
 		  id="dateOfBirth"
@@ -79,6 +85,8 @@
 		<label for="pacientCpf" class="form-label">
 		  Cpf
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
           #cpf="ngModel"
 		  [ngClass]="cpf.invalid && cpf.touched ? 'form-control invalidInput' : 'form-control'"
@@ -105,6 +113,8 @@
 			  class="form-label">
 			  RG
 			</label>
+			<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+				 class="d-inline-block align-text-top ms-2">
 			<input
 			  type="text"
 			  id="pacientRg"
@@ -132,13 +142,15 @@
 		  class="form-label">
 		  Estado Civil
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<select
 		  id="civilStatus"
 		  name="civilStatus"
 		  class="form-select"
 		  required
 		  [(ngModel)]="pacient.civilStatus">
-		  <option value="{{ civilStatusEnum.CIVIL_STATUS_SINGLE }}" selected="true">Solteiro(a)</option>
+		  <option value="{{ civilStatusEnum.CIVIL_STATUS_SINGLE }}" selected="selected">Solteiro(a)</option>
 		  <option value="{{ civilStatusEnum.CIVIL_STATUS_MARRIED }}">Casado(a)</option>
 		  <option value="{{ civilStatusEnum.CIVIL_STATUS_DIVORCED }}">Divorciado(a)</option>
 		  <option value="{{ civilStatusEnum.CIVIL_STATUS_WIDOWED }}">Viúvo(a)</option>
@@ -154,6 +166,8 @@
 		  class="form-label">
 		  Naturalidade
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
           #nationality="ngModel"
 		  type="text"
@@ -175,6 +189,8 @@
 		<label for="email" class="form-label">
 		  Email
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
           #email="ngModel"
 		  type="text"
@@ -201,6 +217,8 @@
 		<label for="phoneNumber" class="form-label">
 		  Telefone
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
 		  type="text"
 		  id="phoneNumber"
@@ -221,6 +239,8 @@
 		<label for="emergencyContact" class="form-label">
 		  Contato de Emergência
 		</label>
+		<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			 class="d-inline-block align-text-top ms-2">
 		<input
 		  id="emergencyContact"
 		  type="text"
@@ -241,7 +261,7 @@
 	<!--Alergies-->
 	<div class="row mb-3">
 	  <div class="col-4">
-		<p for="allergy">Paciente possui alergias?</p>
+		<p>Paciente possui alergias?</p>
 		<div>
 		  <div class="form-check">
 			<input
@@ -250,6 +270,7 @@
 			  id="hasAlergy"
 			  name="allergy"
 			  value="yes"
+			  checked
 			  (change)="onChangeHasAlergies($event)"
 			>
 			<label class="form-check-label" for="hasAlergy">Sim</label>
@@ -293,7 +314,7 @@
 	<!--Special Care-->
 	<div class="row mb-3">
 	  <div class="col-4">
-		<p for="specialCare">Paciente necessita de cuidados especiais?</p>
+		<p>Paciente necessita de cuidados especiais?</p>
 		<div>
 		  <div class="form-check">
 			<input
@@ -302,6 +323,7 @@
 			  id="hasSpecialCare"
 			  name="specialCares"
 			  value="yes"
+			  checked
 			  (change)="onChangeHasSpecialCare($event)"
 			>
 			<label class="form-check-label" for="hasSpecialCare">Sim</label>
@@ -322,7 +344,7 @@
 	  <div *ngIf="hasSpecialCare" class="col">
 		<div class="row text-center">
 		  <div class="col justify-content-center">
-			<label class="form-label" for="allergy">Adicionar Cuidado Especial</label>
+			<label class="form-label" for="allergy">Cuidado Especial</label>
 			<input class="form-control mb-3" type="text" id="specialCare" [(ngModel)]="specialCare" name="specialCare">
 			<button type="button" class="btn btn-secondary w-100" (click)="onAddSpecialCare(specialCare)">Adicionar
 			  cuidado especial
@@ -395,10 +417,12 @@
 		  <label for="cep" class="form-label">
 			CEP
 		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
 		  <input
 			id="cep"
 			class="form-control"
-			type="text" ngModel name="cep" [(ngModel)]="pacient.address.cep" (change)="getAdress()" mask="99999-999">
+			type="text" ngModel name="cep" [(ngModel)]="pacient.address.cep" (change)="getAdress()">
 		</div>
 		<!--City-->
 		<div class="col-12 col-sm mb-3">
@@ -453,6 +477,8 @@
 		  <label for="houseNumber" class="form-label">
 			Número
 		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
 		  <input
             #houseNumber="ngModel"
 			type="text"
