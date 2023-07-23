@@ -1,5 +1,5 @@
-<form  class="row g-3" [formGroup]="systemConfigForm" (ngSubmit)="onSubmit()">
-  <div class="col-md-4">
+<form id="system-config-form" class="row g-3 bg-light bg-gradient p-3 rounded-1" [formGroup]="systemConfigForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-3">
     <label for="companyName" class="form-label">Nome da Empresa</label>
     <input type="text" class="form-control" [ngClass]="returnValidationClassForInput('companyName')" id="companyName" formControlName="companyName">
     <div ngClass="invalid-feedback" *ngIf="systemConfigForm.controls['companyName'].invalid && checkIfInputIsUsed('companyName')">
@@ -8,16 +8,7 @@
     </div>
   </div>
 
-  <div class="col-md-4">
-    <label for="logoUrl" class="form-label">URL do Logo</label>
-    <input type="text" class="form-control" id="logoUrl" formControlName="logoUrl" [ngClass]="returnValidationClassForInput('logoUrl')">
-    <div *ngIf="systemConfigForm.controls['logoUrl'].invalid && checkIfInputIsUsed('logoUrl')">
-      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['required']">URL do Logo é obrigatória.</div>
-      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['pattern']">URL do Logo deve ser uma URL válida.</div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="primaryColor" class="form-label">Cor Primária</label>
     <input type="text" class="form-control" id="primaryColor" formControlName="primaryColor" [ngClass]="returnValidationClassForInput('primaryColor')">
     <div *ngIf="systemConfigForm.controls['primaryColor'].invalid && checkIfInputIsUsed('primaryColor')">
@@ -26,7 +17,7 @@
     </div>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="secondaryColor" class="form-label">Cor Secundária</label>
     <input type="text" class="form-control" id="secondaryColor" formControlName="secondaryColor" [ngClass]="returnValidationClassForInput('secondaryColor')">
     <div *ngIf="systemConfigForm.controls['secondaryColor'].invalid &&  checkIfInputIsUsed('secondaryColor')">
@@ -35,7 +26,7 @@
     </div>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-3">
     <label for="fontColor" class="form-label">Cor da Fonte</label>
     <input type="text" class="form-control" id="fontColor" formControlName="fontColor" [ngClass]="returnValidationClassForInput('fontColor')">
     <div *ngIf="systemConfigForm.controls['fontColor'].invalid &&  checkIfInputIsUsed('fontColor')">
@@ -44,5 +35,15 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary" [disabled]="systemConfigForm.invalid">Enviar</button>
+  <div class="col-md-12">
+    <label for="logoUrl" class="form-label">URL do Logo</label>
+    <input type="text" class="form-control" id="logoUrl" formControlName="logoUrl" [ngClass]="returnValidationClassForInput('logoUrl')">
+    <div *ngIf="systemConfigForm.controls['logoUrl'].invalid && checkIfInputIsUsed('logoUrl')">
+      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['required']">URL do Logo é obrigatória.</div>
+      <div *ngIf="systemConfigForm.controls['logoUrl'].errors['pattern']">URL do Logo deve ser uma URL válida.</div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary col-md-1 ms-2" [disabled]="systemConfigForm.invalid">Enviar</button>
+  <button type="submit" class="btn btn-primary col-md-3 ms-2" [disabled]="systemConfigForm.invalid">Restaurar para o padrão</button>
 </form>
