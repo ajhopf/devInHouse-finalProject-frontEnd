@@ -68,7 +68,7 @@ const ROUTES: RouteModel[] = [
   },
   {
     url: "costumizacao",
-    category: "Exemplo Categoria",
+    category: "Sistema",
     title: "Costumização do sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
