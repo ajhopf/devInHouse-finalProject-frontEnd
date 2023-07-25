@@ -20,8 +20,8 @@ export class ExamTableComponent implements OnInit {
     laboratory: '',
     documentUrl: '',
     result: '',
-    status: '',
-    pacientId: ''
+    status: true,
+    pacientId: 0
   }
   constructor(private examService: ExamService){
   
@@ -30,8 +30,6 @@ export class ExamTableComponent implements OnInit {
   ngOnInit(): void {
        this.renderPage()
   }
-
-
 
   renderPage(){
     if(this.pacientId == null){
@@ -68,5 +66,24 @@ export class ExamTableComponent implements OnInit {
 
   validForm(){}
 
+  registerExam(){
+    const newExam : ExamModel = {
+      ...this.exam,
+      time: this.exam.time + ":00",
+      pacientId: this.pacientId
+    }
+    this.examService.postNewExam(newExam).subscribe((
+      {
+        next:(response) =>{
+          console.log(response)
+          alert("Exame cadastrado com sucesso")
+        },
+        error: (err) =>{
+          alert(err.message)
+        }
+      }
+    
+    ))
+  }
 
 }

@@ -27,7 +27,7 @@
             </div>
         </ng-template>
         </table>
-        <div>
+        <div *ngIf="pacientId">
           <button type="button" class="btn btn-primary btn-lg " width='50' (click)="openForm()">Adicionar</button>
         </div>
     </div>
@@ -55,7 +55,7 @@
                 Preencha esse campo
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="horario" class="form-label">Horário</label>
             <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
             class="d-inline-block align-text-top">
@@ -64,7 +64,7 @@
                 Preencha esse campo
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="Tipo" class="form-label">Tipo</label>
             <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
             class="d-inline-block align-text-top">
@@ -73,7 +73,7 @@
               {{Tipo.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
             </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-4">
             <label for="laboratorio" class="form-label">Laboratório</label>
             <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
             class="d-inline-block align-text-top">
@@ -82,28 +82,16 @@
               {{laboratorio.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
           </div>
           </div>
-          <div class="col-md-3">
+          <div class="col-md-12">
               <label for="resultado" class="form-label">Resultado</label>
               <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
               class="d-inline-block align-text-top">
-              <input type="resultado" minlength="6" class="form-control" name='resultado' [(ngModel)]="exam.result" #resultado="ngModel" required minlength="16" maxlength="1024" (input)="validForm()">
+              <textarea class="form-control" name='resultado' [(ngModel)]="exam.result" #resultado="ngModel" required minlength="16" maxlength="1024" (input)="validForm()"></textarea>
               <div *ngIf="resultado.errors && resultado.touched" class="p-1 text-danger">
                   {{resultado.errors['required']?'Preencha esse campo':'Minímo de 16 e máximo de 1024 caracteres'}}
               </div>
           </div>
-          <div class="col-md-4">
-            <label for="status" class="form-label">Status</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <select class="form-select" aria-label="status" name="status" #status='ngModel'[(ngModel)]="exam.status" required (click)="validForm()">
-              <option value="0">Ativo</option>
-              <option value="1">Inativo</option>
-            </select>
-            <div *ngIf="status.errors && status.touched" class="p-1 text-danger">
-              Preencha esse campo
-            </div>
-          </div>
-    
+   
           <div class="col-md-8">
             <label for="url" class="form-label">URL do documento</label>
             <input type="text" class="form-control" name='url' [(ngModel)]="exam.documentUrl">
@@ -112,7 +100,7 @@
               <!-- <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" [disabled]="!formValid" (click)="saveUser()"></app-button-forms>
               <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="navigate()"></app-button-forms>
               <app-button-forms [label]="'Deletar'" [type]="'btn-danger'" [disabled]="!canDelete" (click)="deleteUser(user.id)"></app-button-forms> -->
-              <app-button-forms [label]="'Salvar'" [type]="'btn-primary'"></app-button-forms>
+              <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" (click)="registerExam()"></app-button-forms>
               <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="openForm()"></app-button-forms>
               <app-button-forms [label]="'Deletar'" [type]="'btn-danger'"></app-button-forms>
           </div>

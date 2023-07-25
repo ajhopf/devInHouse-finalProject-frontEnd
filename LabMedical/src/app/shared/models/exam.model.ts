@@ -7,6 +7,6 @@ export interface ExamModel{
     laboratory: string,
     documentUrl?: string,
     result: string,
-    status: string,
-    pacientId: string
+    status: boolean,
+    pacientId: number
 }
