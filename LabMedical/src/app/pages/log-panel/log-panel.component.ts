@@ -23,7 +23,6 @@ export class LogPanelComponent implements OnInit{
   getLogs(): void {
     this.logService.getAll(this.selectedPage - 1, this.selectedLogsPerPage).subscribe({
       next: (response) => {
-        console.log(response.body)
         this.logs = response.body.content
         this.pageList = []
         for (let i: number = 1; i < response.body.totalPages; i++) {
