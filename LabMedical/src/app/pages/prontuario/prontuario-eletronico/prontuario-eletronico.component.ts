@@ -1,4 +1,4 @@
-import { Component, Input,Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-prontuario-eletronico',
@@ -6,7 +6,6 @@ import { Component, Input,Output, EventEmitter } from '@angular/core';
   styleUrls: ['./prontuario-eletronico.component.css']
 })
 export class ProntuarioEletronicoComponent {
-  idPaciente: string | null = null
   pageProntuario = 'prontuario'
   exame: any
   consulta: any
@@ -19,7 +18,4 @@ export class ProntuarioEletronicoComponent {
     this.acao = acao
   }
 
-  setIdPaciente(idPaciente: string | null) {
-    this.idPaciente = idPaciente
-  }
 }

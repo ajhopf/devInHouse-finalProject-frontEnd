@@ -8,6 +8,13 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class MenuProntuarioComponent {
   @Output() menuProntuario:EventEmitter<string> = new EventEmitter()
 
+  userRole:any
+
+  ngOnInit(): void {
+    this.userRole = JSON.parse(localStorage.getItem('session')).role
+  }
+
+  
   changePage(page:string){
     this.menuProntuario.emit(page)
   }

@@ -4,6 +4,7 @@ import {environment} from "../../../../enviroments/enviroment";
 import {UserService} from "../../../services/user.service";
 import {Router} from "@angular/router";
 import {RolesEnum} from "../../../enums/roles.enum";
+import {ConfigService} from "../../../services/config.service";
 
 @Component({
   selector: 'app-menu',
@@ -11,7 +12,7 @@ import {RolesEnum} from "../../../enums/roles.enum";
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, public configService: ConfigService) {}
   isMenuExpanded = true;
   // @ts-ignore
   menuItems: [{ [key: string]: RouteModel[] }] = [];

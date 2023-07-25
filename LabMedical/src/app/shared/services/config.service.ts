@@ -11,7 +11,8 @@ import {UserModel} from "../models/user.model";
 })
 export class ConfigService {
   constructor(private http: HttpClient, private userService: UserService) { }
-
+  private companyName: string = 'LABMedical'
+  private logoUrl: string = ''
   getSystemConfig(): Observable<SystemConfigModel> {
     return this.http.get<SystemConfigModel>(`${environment.URL_SYSTEM_CONFIG}`);
   }
@@ -32,5 +33,25 @@ export class ConfigService {
         'Authorization': `Bearer ${user.access_token}`
       }
     });
+  }
+
+  applySystemConfig(): void {
+    this.getSystemConfig().subscribe({
+      next: (response: SystemConfigModel): void => {
+        var root: any = document.querySelector(':root');
+        root.style.setProperty('--primary', response.primaryColor)
+        root.style.setProperty('--secondary', response.secondaryColor)
+        root.style.setProperty('--font-color', response.fontColor)
+        this.companyName = response.companyName
+        this.logoUrl = response.logoUrl
+      }
+    })
+  }
+
+  getCompanyName(): string {
+    return this.companyName
+  }
+  getLogoUrl(): string {
+    return this.logoUrl
   }
 }

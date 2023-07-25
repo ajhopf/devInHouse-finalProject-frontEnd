@@ -14,7 +14,7 @@ import {ModalService} from "../../shared/services/modal.service";
 export class SystemCustomizationComponent implements OnInit {
   systemConfigForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private systemConfigService: ConfigService,
+  constructor(private formBuilder: FormBuilder, private configService: ConfigService,
               private toastr: ToastrService, private modalService: ModalService) {
   }
 
@@ -33,7 +33,7 @@ export class SystemCustomizationComponent implements OnInit {
   }
 
   private inicializeForm() {
-    this.systemConfigService.getSystemConfig().subscribe({
+    this.configService.getSystemConfig().subscribe({
       next: (systemConfigModel: SystemConfigModel): void => {
         this.systemConfigForm.setValue(systemConfigModel)
       },
@@ -53,8 +53,9 @@ export class SystemCustomizationComponent implements OnInit {
 
   onSubmit(): void {
     if (this.systemConfigForm.valid) {
-      this.systemConfigService.saveSystemConfig(this.systemConfigForm.value).subscribe({
+      this.configService.saveSystemConfig(this.systemConfigForm.value).subscribe({
         next: (): void => {
+          this.configService.applySystemConfig()
           this.toastr.success("Alterações salvas com sucesso", "Sucesso")
           this.inicializeForm()
         },
@@ -70,8 +71,9 @@ export class SystemCustomizationComponent implements OnInit {
       .subscribe({
         next: (resposta: boolean): void => {
           if (resposta) {
-            this.systemConfigService.resetSystemConfig().subscribe({
+            this.configService.resetSystemConfig().subscribe({
               next: (): void => {
+                this.configService.applySystemConfig()
                 this.inicializeForm()
               },
               error: (err: any) => {
