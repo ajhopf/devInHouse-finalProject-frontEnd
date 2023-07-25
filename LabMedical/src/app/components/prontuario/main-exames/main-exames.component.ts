@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-main-exames',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-exames.component.css']
 })
 export class MainExamesComponent {
+  @Input() id: any;
 
 }

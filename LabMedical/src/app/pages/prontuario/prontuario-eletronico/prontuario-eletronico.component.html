@@ -8,7 +8,7 @@
                 <app-main-prontuario class="flex-grow-1 m-2"></app-main-prontuario>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='exames'">
-                <app-main-exames class="flex-grow-1 m-2"></app-main-exames>
+                <app-main-exames class="flex-grow-1 m-2" [id]="idPaciente"></app-main-exames>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='consultas'">
                 <app-main-consultas class="flex-grow-1 m-2"></app-main-consultas>
