@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
 
 @Component({
@@ -8,8 +8,6 @@ import { PatientService } from 'src/app/shared/services/patient.service';
 })
 export class BarraPacienteComponent {
   IMAGEM_PADRAO = '../../../../../assets/user.png'
-
-  @Output() idPacienteOutput:EventEmitter<string|null> = new EventEmitter()
 
   idPaciente:string|null = null
   pacientes:any
@@ -32,7 +30,7 @@ export class BarraPacienteComponent {
 
   onSubmit(idPaciente:string){
     this.idPaciente = idPaciente
-    this.idPacienteOutput.emit(this.idPaciente)
+    localStorage.setItem('patientId',this.idPaciente)
     for(var patient of this.pacientes){
       if(patient.id==idPaciente){
         this.paciente = patient
@@ -42,7 +40,7 @@ export class BarraPacienteComponent {
 
   resetarPaciente(){
     this.idPaciente = null
-    this.idPacienteOutput.emit(this.idPaciente)
+    localStorage.setItem('patientId',null)
   }
 
   filtrar(busca:string){
