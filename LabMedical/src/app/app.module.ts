@@ -86,7 +86,7 @@ import { ExamTableComponent } from './components/registers/exam/exam-table/exam-
     CalculoIdadePipe,
     SystemCustomizationComponent,
     ModalComponent,
-    ExamTableComponent
+    ExamTableComponent,
   ],
     imports: [
         BrowserModule,

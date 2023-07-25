@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { ExamModel } from 'src/app/shared/models/exam.model';
 import { ExamService } from 'src/app/shared/services/exam.service';
 
 @Component({
@@ -7,18 +8,41 @@ import { ExamService } from 'src/app/shared/services/exam.service';
   styleUrls: ['./exam-table.component.css']
 })
 export class ExamTableComponent implements OnInit {
-  @Input() id: number;
-  examList: any[] = [];
+  @Input() pacientId: number;
+  examList: ExamModel[] = [];
+  OBRIGATORIO: string = '../../../assets/images/obrigatorio.png' 
+  openFormRegister = false;
+  exam: ExamModel = {
+    name: '',
+    date: '',
+    time: '',
+    type: '',
+    laboratory: '',
+    documentUrl: '',
+    result: '',
+    status: '',
+    pacientId: ''
+  }
   constructor(private examService: ExamService){
   
   }
 
   ngOnInit(): void {
-    this.onLoad()
+       this.renderPage()
+  }
+
+
+
+  renderPage(){
+    if(this.pacientId == null){
+      this.allExams()
+    }else{
+      this.onLoad()
+    }
   }
 
   onLoad(){
-    this.examService.getExamListById(this.id).subscribe((
+    this.examService.getExamListById(this.pacientId).subscribe((
       {
         next: (response) =>{
           console.log(response.body)
@@ -27,4 +51,22 @@ export class ExamTableComponent implements OnInit {
       }
     ))
   }
+
+  allExams(){
+    this.examService.getAllExams().subscribe((
+      {
+        next: (response) =>{
+          this.examList = response.body
+        }
+      }
+    ))
+  }
+
+  openForm(){
+    this.openFormRegister = !this.openFormRegister
+  }
+
+  validForm(){}
+
+
 }

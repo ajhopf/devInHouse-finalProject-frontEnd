@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { ExamService } from 'src/app/shared/services/exam.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-exames',
@@ -7,5 +8,8 @@ import { Component, Input } from '@angular/core';
 })
 export class MainExamesComponent {
   @Input() id: any;
+  constructor(private examService: ExamService ){
 
+  }
+  
 }
