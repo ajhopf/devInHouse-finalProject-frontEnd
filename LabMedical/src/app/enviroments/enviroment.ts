@@ -23,6 +23,9 @@ const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
 const URL_PACIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
+//Medicine Controller endpoints
+const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
+
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
@@ -116,6 +119,8 @@ export const environment = {
   URL_APPOINTMENTS: URL_APPOINTMENTS,
   URL_PACIENT_APPOINTMENTS: URL_PACIENT_APPOINTMENTS,
   URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
+
+  URL_MEDICINES: URL_MEDICINES,
 
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,
