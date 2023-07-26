@@ -16,7 +16,7 @@ export class AppointmentsService {
 
   getAppointmentsByPacientId(pacientId: number): Observable<any> {
     return this.http.get(
-      `${environment.URL_PACIENT_APPOINTMENTS}${pacientId}`,
+      `${environment.URL_PATIENT_APPOINTMENTS}${pacientId}`,
       {headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
     )
   }

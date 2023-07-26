@@ -17,17 +17,16 @@ const URL_PUT_UPDATE_USER: string = `${URL_PRINCIPAL}/usuarios/atualizar`
 const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
 //Log controle endpoints
 //Pacient controller endpoints
-const URL_PACIENTS: string = `${URL_PRINCIPAL}/pacientes`
+const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 //Appointments controller endpoints
 const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
-const URL_PACIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
+const URL_PATIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
 
-const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 
 //Config controller endpoints
 const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
@@ -112,9 +111,9 @@ export const environment = {
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
 
   URL_POST_LOG: URL_POST_LOG,
-  URL_PACIENTS: URL_PACIENTS,
+  URL_PATIENTS: URL_PATIENTS,
   URL_APPOINTMENTS: URL_APPOINTMENTS,
-  URL_PACIENT_APPOINTMENTS: URL_PACIENT_APPOINTMENTS,
+  URL_PATIENT_APPOINTMENTS: URL_PATIENT_APPOINTMENTS,
   URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
 
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
@@ -125,7 +124,6 @@ export const environment = {
 
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
-  URL_PATIENTS: URL_PATIENTS,
   URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
   ROUTES: ROUTES
 };
