@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PacientService } from "../../shared/services/pacient.service";
-import { Pacient } from "../../shared/models/pacient.model";
+import { Patient } from "../../shared/models/patient.model";
 import { ViacepService } from "../../shared/services/viacep.service";
 import { ActivatedRoute } from "@angular/router";
 import { NgForm } from "@angular/forms";
@@ -23,7 +23,7 @@ export class PacientFormComponent implements OnInit {
 	allergy: string = ''
 	hasSpecialCare: boolean = true
 	specialCare: string = ''
-	pacient: Pacient = {
+	pacient: Patient = {
 		name: '',
 		gender: 'feminino',
 		dob: new Date().toISOString().slice(0, 10),
@@ -65,8 +65,8 @@ export class PacientFormComponent implements OnInit {
 		this.pacientId = this.route.snapshot.params['id']
 
 		if (this.pacientId) {
-			this.pacientService.getPacient(+this.pacientId).subscribe({
-				next: (pacient: Pacient) => {
+			this.pacientService.getPatient(+this.pacientId).subscribe({
+				next: (pacient: Patient) => {
 					this.pacient = pacient
 					this.pacient.alergies?.length && this.pacient.alergies.length > 0 ? this.hasAlergies = true : ''
 					this.pacient.specialCare?.length && this.pacient.specialCare.length > 0 ? this.hasSpecialCare = true : ''
@@ -121,7 +121,7 @@ export class PacientFormComponent implements OnInit {
 	}
 
 	onCreatePacient() {
-		this.pacientService.createPacient(this.pacient).subscribe({
+		this.pacientService.createPatient(this.pacient).subscribe({
 				next: response => {
 					console.log(response)
 					alert('Paciente cadastrado com sucesso')
@@ -135,7 +135,7 @@ export class PacientFormComponent implements OnInit {
 	}
 
 	onEditRegistration() {
-		this.pacientService.editPacient(this.pacient).subscribe({
+		this.pacientService.editPatient(this.pacient).subscribe({
 			next: response => {
 				console.log(response)
 				alert('Paciente atualizado com sucesso')

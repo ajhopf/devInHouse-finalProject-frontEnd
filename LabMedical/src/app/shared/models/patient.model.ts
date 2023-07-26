@@ -1,6 +1,6 @@
 import { CivilStatusEnum } from "../enums/civil-status.enum";
 
-export interface Pacient {
+export interface Patient {
 	id?: number;
 	name: string;
 	gender: string;

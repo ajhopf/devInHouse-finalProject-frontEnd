@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
-import { Pacient } from "../models/pacient.model";
+import { Patient } from "../models/patient.model";
 import { Observable } from "rxjs";
 import { AuthenticationService } from "./authentication.service";
 import { environment } from "../../enviroments/enviroment";
@@ -15,40 +15,40 @@ export class PacientService {
 	) {
 	}
 
-	createPacient(newPacient: Pacient): Observable<any> {
+	createPatient(newPatient: Patient): Observable<any> {
 		return this.http.post(
-			environment.URL_PACIENTS,
-			newPacient,
+			environment.URL_PATIENTS,
+			newPatient,
 			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}})
 	}
 
-	getPacients(): Observable<any> {
-		return this.http.get(environment.URL_PACIENTS, {
+	getPatients(): Observable<any> {
+		return this.http.get(environment.URL_PATIENTS, {
 			headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}
 		})
 	}
 
-	getPacient(pacientId: number): Observable<any> {
+	getPatient(pacientId: number): Observable<any> {
 		return this.http.get(
-			`${environment.URL_PACIENTS}/${pacientId}`,
+			`${environment.URL_PATIENTS}/${pacientId}`,
 			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
 		)
 	}
 
-	getPacientByName(pacient: Pacient): Observable<any> {
-		return this.http.get(`${environment.URL_PACIENTS}?identification.pacientName=${ pacient.name }`)
+	getPatientByName(pacient: Patient): Observable<any> {
+		return this.http.get(`${environment.URL_PATIENTS}?identification.pacientName=${ pacient.name }`)
 	}
 
 
-	editPacient(pacient: Pacient): Observable<any> {
+	editPatient(patient: Patient): Observable<any> {
 		return this.http.put(
-			`${environment.URL_PACIENTS}/${ pacient.id }`,
-			pacient,
+			`${environment.URL_PATIENTS}/${ patient.id }`,
+			patient,
 			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
 		)
 	}
 
-	deletePacient(pacientId: string): Observable<any> {
-		return this.http.delete(`${environment.URL_PACIENTS}/${ pacientId }`)
+	deletePatient(patientId: string): Observable<any> {
+		return this.http.delete(`${environment.URL_PATIENTS}/${ patientId }`)
 	}
 }
