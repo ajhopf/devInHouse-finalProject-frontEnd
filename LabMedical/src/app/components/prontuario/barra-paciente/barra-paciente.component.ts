@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { PatientService } from 'src/app/shared/services/patient.service';
   templateUrl: './barra-paciente.component.html',
   styleUrls: ['./barra-paciente.component.css']
 })
-export class BarraPacienteComponent {
+export class BarraPacienteComponent implements OnDestroy {
   IMAGEM_PADRAO = '../../../../../assets/user.png'
 
   idPaciente:string|null = null
@@ -15,7 +15,11 @@ export class BarraPacienteComponent {
 
   constructor(private patientService:PatientService){}
 
-  getPacientes(){
+	ngOnDestroy() {
+		localStorage.removeItem('patientId');
+	}
+
+	getPacientes(){
     this.patientService.getPatientes().subscribe({
 			next: (response) => {
         console.log(response.body)
