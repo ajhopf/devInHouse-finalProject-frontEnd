@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Appointment } from "../../shared/models/appointment.model";
+import { Appointment } from "../../../../shared/models/appointment.model";
 import { NgForm } from "@angular/forms";
-import { MedicationsService } from "../../shared/services/medications.service";
-import { ModalService } from "../../shared/services/modal.service";
-import { AppointmentsService } from "../../shared/services/appointments.service";
+import { MedicationsService } from "../../../../shared/services/medications.service";
+import { ModalService } from "../../../../shared/services/modal.service";
+import { AppointmentsService } from "../../../../shared/services/appointments.service";
+import { MedicineService } from "../../../../shared/services/medicine.service";
 
 @Component({
 	selector: 'app-appointment-form',
@@ -28,15 +29,15 @@ export class AppointmentFormComponent implements OnInit {
 	}
 
 	constructor(
-		private medicationsService: MedicationsService,
+		private medicineService: MedicineService,
 		private modalService: ModalService,
 		private appointmentsService: AppointmentsService) {}
 
 	ngOnInit() {
 		this.appointment.pacientId = this.patientId
 
-		this.medicationsService.getMedicationsByPatientId(this.patientId).subscribe({
-			next: medications => this.patientMedications = medications,
+		this.medicineService.getMedicines(this.patientId).subscribe({
+			next: medications => this.patientMedications = medications.body,
 			error: err => console.log(err)
 		})
 	}

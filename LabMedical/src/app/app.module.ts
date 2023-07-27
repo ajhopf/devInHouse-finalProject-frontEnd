@@ -47,7 +47,8 @@ import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.d
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
 import { TableMedicacaoComponent } from './components/prontuario/medicacao/table-medicacao/table-medicacao.component';
 import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-medicacao/form-medicacao.component';
-import { AppointmentFormComponent } from './pages/appointment-form/appointment-form.component';
+import { AppointmentFormComponent } from './components/prontuario/main-consultas/appointment-form/appointment-form.component';
+import { AppointmentTableComponent } from './components/prontuario/main-consultas/appointment-table/appointment-table.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { AppointmentFormComponent } from './pages/appointment-form/appointment-f
     TableMedicacaoComponent,
     FormMedicacaoComponent,
     ModalComponent,
-    AppointmentFormComponent
+    AppointmentFormComponent,
+    AppointmentTableComponent
   ],
     imports: [
         BrowserModule,
