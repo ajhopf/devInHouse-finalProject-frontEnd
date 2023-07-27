@@ -7,7 +7,8 @@
               <th scope="col">Nome Exame</th>
               <th scope="col">Data</th>
               <th scope="col">Hora</th>
-              <th scope="col">Paciente</th>
+              <th scope="col">Status</th>
+              <th scope="col">Anexo</th>
               <th scope="col">Opções</th>
             </tr>
           </thead>
@@ -16,11 +17,22 @@
                     <td>{{exam.name}}</td>
                     <td>{{exam.date}}</td>
                     <td>{{exam.time}}</td>
-                    <td>{{exam.id}}</td>
-                    <td><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
-                   width="30" height="30"></button></td>
+                    <td>{{exam.status}}</td>
+                   <td *ngIf="exam.documentUrl; else noAnex">
+                    <a [href]="exam.documentUrl" target="_blank">
+                      <img class="img-fluid ms-1"
+                      width="30" height="30" [src]="ANEXO" alt="anexo">
+                    </a>
+                   </td>
+                   <td><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
+                    width="30" height="30" (click)="examUpdate(exam.id)"></button></td>
                   </tr>
           </tbody>
+          <ng-template #noAnex>
+            <td>
+              -
+            </td>
+          </ng-template>
           <ng-template #empty class="container">
             <div class="text-center">
                  <p>Não existem exames cadastrados para o paciente</p>
@@ -28,83 +40,8 @@
         </ng-template>
         </table>
         <div *ngIf="pacientId">
-          <button type="button" class="btn btn-primary btn-lg " width='50' (click)="openForm()">Adicionar</button>
+          <button type="button" class="btn btn-primary btn-lg " width='50' (click)="openForm(true)">Adicionar</button>
         </div>
     </div>
   </div>
-  <div *ngIf="openFormRegister">
-    <div style="min-height: 50vh; position:relative;" class="m-5 bgWhite">
-      <div style="max-height:100%; overflow-x: hidden; overflow-y:scroll;">
-        <form class="row g-3 p-5" #signIn="ngForm">
-          <h5>Cadastro de Exame</h5>
-          <div class="col-md-8">
-            <label for="nome" class="form-label">Nome do Exame</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name="nome" #nome='ngModel'[(ngModel)]="exam.name" required minlength="8" maxlength="64"  (input)="validForm()">
-            <div *ngIf="nome.errors && nome.touched" class="p-1 text-danger">
-              {{nome.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 64 caracteres'}}
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="data" class="form-label">Data</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="date" class="form-control" name='data' #data='ngModel' [(ngModel)]="exam.date" required>
-            <div *ngIf="data.errors && data.touched" class="p-1 text-danger">
-                Preencha esse campo
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="horario" class="form-label">Horário</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="time" class="form-control" name='horario' #horario='ngModel' [(ngModel)]="exam.time" required>
-            <div *ngIf="horario.errors && horario.touched" class="p-1 text-danger">
-                Preencha esse campo
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="Tipo" class="form-label">Tipo</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name='Tipo' [(ngModel)]="exam.type" #Tipo="ngModel" required minlength="4" maxlength="34"  (input)="validForm()">
-            <div *ngIf="Tipo.errors && Tipo.touched" class="p-1 text-danger">
-              {{Tipo.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="laboratorio" class="form-label">Laboratório</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name='laboratorio' [(ngModel)]="exam.laboratory" #laboratorio="ngModel" required minlength="4" maxlength="34" (input)="validForm()">
-            <div *ngIf="laboratorio.errors && laboratorio.touched" class="p-1 text-danger">
-              {{laboratorio.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
-          </div>
-          </div>
-          <div class="col-md-12">
-              <label for="resultado" class="form-label">Resultado</label>
-              <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-              class="d-inline-block align-text-top">
-              <textarea class="form-control" name='resultado' [(ngModel)]="exam.result" #resultado="ngModel" required minlength="16" maxlength="1024" (input)="validForm()"></textarea>
-              <div *ngIf="resultado.errors && resultado.touched" class="p-1 text-danger">
-                  {{resultado.errors['required']?'Preencha esse campo':'Minímo de 16 e máximo de 1024 caracteres'}}
-              </div>
-          </div>
-   
-          <div class="col-md-8">
-            <label for="url" class="form-label">URL do documento</label>
-            <input type="text" class="form-control" name='url' [(ngModel)]="exam.documentUrl">
-          </div>       
-          <div class="col-md-6 d-flex justify-content-start">
-              <!-- <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" [disabled]="!formValid" (click)="saveUser()"></app-button-forms>
-              <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="navigate()"></app-button-forms>
-              <app-button-forms [label]="'Deletar'" [type]="'btn-danger'" [disabled]="!canDelete" (click)="deleteUser(user.id)"></app-button-forms> -->
-              <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" (click)="registerExam()"></app-button-forms>
-              <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="openForm()"></app-button-forms>
-              <app-button-forms [label]="'Deletar'" [type]="'btn-danger'"></app-button-forms>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+ <app-exam-form *ngIf="openFormRegister" [ExamIdUpdate]="examIdUpdate" (closeModal)="openForm($event)"></app-exam-form>

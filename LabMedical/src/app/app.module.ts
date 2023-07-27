@@ -46,6 +46,7 @@ import { PacientFormComponent } from './pages/pacient-form/pacient-form.componen
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
+import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ import { ExamTableComponent } from './components/registers/exam/exam-table/exam-
     SystemCustomizationComponent,
     ModalComponent,
     ExamTableComponent,
+    ExamFormComponent,
   ],
     imports: [
         BrowserModule,

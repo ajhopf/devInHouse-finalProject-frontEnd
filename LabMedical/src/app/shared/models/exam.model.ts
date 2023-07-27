@@ -8,5 +8,5 @@ export interface ExamModel{
     documentUrl?: string,
     result: string,
     status: boolean,
-    pacientId: number
+    pacientId?: number
 }

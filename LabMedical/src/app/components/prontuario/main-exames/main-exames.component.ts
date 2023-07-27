@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./main-exames.component.css']
 })
 export class MainExamesComponent {
-  @Input() id: any;
   constructor(private examService: ExamService ){
 
   }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { ExamModel } from 'src/app/shared/models/exam.model';
 import { ExamService } from 'src/app/shared/services/exam.service';
 
@@ -7,32 +7,34 @@ import { ExamService } from 'src/app/shared/services/exam.service';
   templateUrl: './exam-table.component.html',
   styleUrls: ['./exam-table.component.css']
 })
-export class ExamTableComponent implements OnInit {
-  @Input() pacientId: number;
+export class ExamTableComponent implements OnInit, OnChanges {
+  pacientId: number =  parseInt(localStorage.getItem('patientId'))
   examList: ExamModel[] = [];
-  OBRIGATORIO: string = '../../../assets/images/obrigatorio.png' 
+  ANEXO: string = '../../../assets/images/document.png'
+  examIdUpdate: number = null
   openFormRegister = false;
-  exam: ExamModel = {
-    name: '',
-    date: '',
-    time: '',
-    type: '',
-    laboratory: '',
-    documentUrl: '',
-    result: '',
-    status: true,
-    pacientId: 0
-  }
+
+ 
   constructor(private examService: ExamService){
   
   }
+  
 
   ngOnInit(): void {
        this.renderPage()
   }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes)
+  }
+
+  examUpdate(id: number){
+    this.examIdUpdate = id
+    this.openForm(true)
+  }
 
   renderPage(){
-    if(this.pacientId == null){
+    if(this.pacientId == null || this.pacientId == undefined){
       this.allExams()
     }else{
       this.onLoad()
@@ -43,7 +45,6 @@ export class ExamTableComponent implements OnInit {
     this.examService.getExamListById(this.pacientId).subscribe((
       {
         next: (response) =>{
-          console.log(response.body)
           this.examList = response.body
         }
       }
@@ -54,36 +55,19 @@ export class ExamTableComponent implements OnInit {
     this.examService.getAllExams().subscribe((
       {
         next: (response) =>{
-          this.examList = response.body
+          this.examList = response.
+          this.examService.examListUpdated.emit(this.examList)
         }
       }
     ))
   }
 
-  openForm(){
-    this.openFormRegister = !this.openFormRegister
+  openForm(open: boolean){
+    this.openFormRegister = open
+    this.renderPage()
   }
 
-  validForm(){}
 
-  registerExam(){
-    const newExam : ExamModel = {
-      ...this.exam,
-      time: this.exam.time + ":00",
-      pacientId: this.pacientId
-    }
-    this.examService.postNewExam(newExam).subscribe((
-      {
-        next:(response) =>{
-          console.log(response)
-          alert("Exame cadastrado com sucesso")
-        },
-        error: (err) =>{
-          alert(err.message)
-        }
-      }
-    
-    ))
-  }
 
+ 
 }
