@@ -4,7 +4,7 @@
   </ng-container>
 
   <ng-container *ngIf="patientId != undefined">
-	<div *ngIf="showPatientAppointments">
+	<div *ngIf="showPatientAppointments && !appointmentForEdition">
 	  <div class="row">
 		<h2 class="col-10">Consultas de {{ patientName }}</h2>
 		<div class="col">
@@ -13,68 +13,32 @@
 	  </div>
 	  <hr>
 
-	  <app-appointment-table [patientsAppointments]="patientsAppointments"></app-appointment-table>
+	  <app-appointment-table
+		[patientsAppointments]="patientsAppointments"
+		(editAppointment)="onEditAppointmentId($event)">
+	  </app-appointment-table>
 	</div>
 
-	<div *ngIf="!showPatientAppointments">
+	<div *ngIf="!showPatientAppointments || appointmentForEdition">
 	  <div class="row">
 		<h2 class="col-8">Nova Consulta</h2>
 		<div class="col d-flex justify-content-end">
-		  <button class="btn btn-secondary" (click)="onAddNewAppointment()">
+		  <button class="btn btn-secondary" (click)="onReturn()">
 			Cancelar
 		  </button>
 		</div>
 	  </div>
 	  <hr>
 	  <div>
-		<app-appointment-form [patientId]="+patientId"></app-appointment-form>
+		<app-appointment-form
+		  [patientId]="+patientId"
+		  [appointmentForEdition]="appointmentForEdition"
+		  (appointmentAdded)="fetchAppointments()"
+		  >
+		</app-appointment-form>
 	  </div>
 	</div>
-
   </ng-container>
-
-  <!--  <ng-container *ngIf="patientId != undefined">-->
-  <!--	<div *ngIf="showPatientAppointments">-->
-  <!--	  <div class="row">-->
-  <!--		<h2 class="col-10">Consultas de {{ patientName }}</h2>-->
-  <!--		<div class="col">-->
-  <!--		  <button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar consulta</button>-->
-  <!--		</div>-->
-  <!--	  </div>-->
-  <!--	  <hr>-->
-  <!--	  <div class="appointmentsList">-->
-  <!--		<div *ngFor="let appointment of patientsAppointments; let i = index">-->
-  <!--		  <div class="d-flex align-items-center">-->
-  <!--			<p class="border border-3 text-center px-4 py-3 m-0">{{ i + 1 }}</p>-->
-  <!--			<h3 class="ms-3 my-0">Consulta</h3>-->
-  <!--		  </div>-->
-  <!--		  <div class="border-start border-4 record-container p-2">-->
-  <!--			<div class="ms-2 p-2 record-details-container">-->
-  <!--			  <div class="row mx-0 my-2">-->
-  <!--				<h4 class="col p-0 m-0 align-self-center">Motivo da Consulta: {{ appointment.appointmentReason }}</h4>-->
-  <!--				<button-->
-  <!--				  class="col-12 col-sm-3 btn btn-outline-light"-->
-  <!--				  (click)="onAppointmentEdit(appointment.id)">-->
-  <!--				  <i class="pi pi-file-edit"></i>-->
-  <!--				  Editar-->
-  <!--				</button>-->
-  <!--			  </div>-->
-  <!--			  <hr class="mt-0">-->
-  <!--			  <h5>Data: {{ appointment.appointmentDate }}</h5>-->
-  <!--			  <h5>Horário da consulta: {{ appointment.time }}</h5>-->
-  <!--			  <p *ngIf="appointment.medicineId != null">Medicação: {{ appointment.medicineId || "Sem medicação" }}</p>-->
-  <!--			  <p>Dosagem e precauções: {{ appointment.dosageAndPrecautions }}</p>-->
-  <!--			</div>-->
-  <!--		  </div>-->
-  <!--		</div>-->
-  <!--	  </div>-->
-
-  <!--	</div>-->
-
-
-  <!--  </ng-container>-->
-
-
 </section>
 
 

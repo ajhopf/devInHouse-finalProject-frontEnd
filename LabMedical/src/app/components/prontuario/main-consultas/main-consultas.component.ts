@@ -12,9 +12,9 @@ import { Patient } from "../../../shared/models/patient.model";
 export class MainConsultasComponent implements OnChanges {
   @Input('patientId') patientId: string;
   showPatientAppointments: boolean = true;
-  // patientId: number;
   patientName: string;
   patientsAppointments: Appointment[];
+  appointmentForEdition: Appointment;
 
   constructor(
     private appointmentsService: AppointmentsService,
@@ -31,21 +31,30 @@ export class MainConsultasComponent implements OnChanges {
         error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
 
-      this.appointmentsService.getAppointmentsByPacientId(+this.patientId).subscribe({
-        next: (value: Appointment[]) => {
-          this.patientsAppointments = value;
-        },
-        error: err => console.log(err)
-      })
+     this.fetchAppointments();
     }
   }
 
   onAddNewAppointment() {
-    this.showPatientAppointments = !this.showPatientAppointments;
+    this.showPatientAppointments = false;
   }
 
-  onAppointmentEdit(appointmentId: number) {
-    console.log('edit')
+  onReturn() {
+    this.showPatientAppointments = true;
+    this.appointmentForEdition = undefined;
+  }
+
+  fetchAppointments() {
+    this.appointmentsService.getAppointmentsByPacientId(+this.patientId).subscribe({
+      next: (value: Appointment[]) => {
+        this.patientsAppointments = value;
+      },
+      error: err => console.log(err)
+    })
+  }
+
+  onEditAppointmentId(appointmentId: number) {
+    this.appointmentForEdition = this.patientsAppointments.find(appointment => appointment.id == appointmentId)
   }
 
 }

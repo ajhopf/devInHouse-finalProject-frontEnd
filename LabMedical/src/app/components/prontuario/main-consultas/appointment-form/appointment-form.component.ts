@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Appointment } from "../../../../shared/models/appointment.model";
 import { NgForm } from "@angular/forms";
 import { MedicationsService } from "../../../../shared/services/medications.service";
@@ -11,10 +11,12 @@ import { MedicineService } from "../../../../shared/services/medicine.service";
 	templateUrl: './appointment-form.component.html',
 	styleUrls: ['./appointment-form.component.css']
 })
-export class AppointmentFormComponent implements OnInit {
+export class AppointmentFormComponent implements OnInit{
 	@ViewChild('appointmentForm') appointmentForm: NgForm | undefined;
+	@Output('appointmentAdded') appointmentAdded = new EventEmitter<any>();
 	@Input() patientId: number;
-	MANDATORY: string = "../../../assets/images/obrigatorio.png";
+	@Input() appointmentForEdition: Appointment | undefined;
+ 	MANDATORY: string = "../../../assets/images/obrigatorio.png";
 	appointmentId: number;
 	patientMedications: any[]
 	appointment: Appointment = {
@@ -40,27 +42,43 @@ export class AppointmentFormComponent implements OnInit {
 			next: medications => this.patientMedications = medications.body,
 			error: err => console.log(err)
 		})
+
+		if(this.appointmentForEdition) {
+			this.appointment = this.appointmentForEdition;
+		}
 	}
 
 	onAddAppointment() {
-		console.log(this.appointment)
-
-
-		this.appointmentsService.saveAppointment(this.appointment).subscribe({
+		this.appointmentsService.addAppointment(this.appointment).subscribe({
 			next: response => {
-				console.log(response)
+				this.appointmentAdded.emit();
+				this.appointmentForm.reset();
+				this.modalService.createModal("Operação Realizada", `Consulta cadastrada com sucesso. Id da consulta: ${JSON.stringify(response.id)}`)
+			},
+			error: err => console.log(err)
+		})
 
-				this.modalService.createModal("Consulta cadastrada com sucesso", `Id da consulta: ${response}` )
+	}
+
+	onSaveAppointment() {
+		this.appointmentsService.updateAppointment(this.appointmentForEdition.id, this.appointment).subscribe({
+			next: response => {
+				this.appointmentAdded.emit();
+				this.appointmentForm.reset();
+				this.modalService.createModal("Operação Realizada", `Consulta editada com sucesso`)
 			},
 			error: err => console.log(err)
 		})
 	}
 
-	onSaveAppointment() {
-		console.log('editou')
-	}
-
 	onDeleteAppointment() {
-		console.log('deletou')
+		this.appointmentsService.deleteAppointment(this.appointmentForEdition.id).subscribe({
+			next: response => {
+				this.appointmentAdded.emit();
+				this.appointmentForm.reset();
+				this.modalService.createModal("Operação Realizada", `Consulta deletada com sucesso`)
+			},
+			error: err => console.log(err)
+		})
 	}
 }

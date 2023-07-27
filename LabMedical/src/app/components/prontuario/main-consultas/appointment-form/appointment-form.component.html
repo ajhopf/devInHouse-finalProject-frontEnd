@@ -113,9 +113,11 @@
           Medicações Cadastradas Para o Paciente
         </label>
         <div *ngIf="patientMedications?.length > 0">
-          <select class="form-select" aria-label="Medications select">
+          <select class="form-select" aria-label="Medications select" name="medicationId" [(ngModel)]="appointment.medicineId">
             <option value=null >Não atribuir medicação</option>
-            <option *ngFor="let medication of patientMedications" value="{{ medication.id }}">
+            <option
+              *ngFor="let medication of patientMedications"
+              [value]="medication.id">
               {{ medication.medicineName }}
             </option>
           </select>
@@ -156,7 +158,7 @@
         <button
           type="button"
           class="btn btn-warning mx-1"
-          [disabled]="!appointmentId || !appointmentForm.valid" (click)="onSaveAppointment()">
+          [disabled]="!appointmentForEdition || !appointmentForm.valid" (click)="onSaveAppointment()">
           Salvar
         </button>
       </div>
@@ -165,7 +167,7 @@
         <button
           type="button"
           class="btn btn-danger mx-1"
-          [disabled]="!appointmentId"
+          [disabled]="!appointmentForEdition"
           (click)="onDeleteAppointment()"
         >
           Excluir
@@ -177,7 +179,7 @@
         [ngbTooltip]="appointmentForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
       >
         <button
-          [disabled]="appointmentForm.invalid"
+          [disabled]="appointmentForm.invalid || appointmentForEdition"
           class="btn btn-success mx-1"
           type="submit"
         >
