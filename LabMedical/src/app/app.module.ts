@@ -45,6 +45,8 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
+import { TableMedicacaoComponent } from './components/prontuario/medicacao/table-medicacao/table-medicacao.component';
+import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-medicacao/form-medicacao.component';
 import { AppointmentFormComponent } from './pages/appointment-form/appointment-form.component';
 
 @NgModule({
@@ -85,6 +87,9 @@ import { AppointmentFormComponent } from './pages/appointment-form/appointment-f
     MainExerciciosComponent,
     CalculoIdadePipe,
     SystemCustomizationComponent,
+    ModalComponent,
+    TableMedicacaoComponent,
+    FormMedicacaoComponent,
     ModalComponent,
     AppointmentFormComponent
   ],
