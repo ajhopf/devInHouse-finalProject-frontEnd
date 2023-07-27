@@ -1,10 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Appointment } from "../../../../shared/models/appointment.model";
 import { NgForm } from "@angular/forms";
-import { MedicationsService } from "../../../../shared/services/medications.service";
 import { ModalService } from "../../../../shared/services/modal.service";
 import { AppointmentsService } from "../../../../shared/services/appointments.service";
 import { MedicineService } from "../../../../shared/services/medicine.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
 	selector: 'app-appointment-form',
@@ -33,6 +33,7 @@ export class AppointmentFormComponent implements OnInit{
 	constructor(
 		private medicineService: MedicineService,
 		private modalService: ModalService,
+		private toastr: ToastrService,
 		private appointmentsService: AppointmentsService) {}
 
 	ngOnInit() {
@@ -50,37 +51,37 @@ export class AppointmentFormComponent implements OnInit{
 
 	onAddAppointment() {
 		this.appointmentsService.addAppointment(this.appointment).subscribe({
-			next: response => {
+			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
-				this.modalService.createModal("Operação Realizada", `Consulta cadastrada com sucesso. Id da consulta: ${JSON.stringify(response.id)}`)
+				this.toastr.success("Consulta cadastrada com sucesso.", "Operação Realizada")
 			},
-			error: err => console.log(err)
+			error: err => this.toastr.error("Consulta não cadastrada. Erro: " + err.message, "Operação não realizada")
 		})
 
 	}
 
 	onSaveAppointment() {
 		this.appointmentsService.updateAppointment(this.appointmentForEdition.id, this.appointment).subscribe({
-			next: response => {
+			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
 				this.appointmentForEdition = undefined;
-				this.modalService.createModal("Operação Realizada", `Consulta editada com sucesso`)
+				this.toastr.success("Consulta editada com sucesso.", "Operação Realizada")
 			},
-			error: err => console.log(err)
+			error: err => this.toastr.error("Consulta não atualizada. Erro: " + err.message, "Operação não realizada")
 		})
 	}
 
 	onDeleteAppointment() {
 		this.appointmentsService.deleteAppointment(this.appointmentForEdition.id).subscribe({
-			next: response => {
+			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
 				this.appointmentForEdition = undefined;
-				this.modalService.createModal("Operação Realizada", `Consulta deletada com sucesso`)
+				this.toastr.success("Consulta deletada com sucesso.", "Operação Realizada")
 			},
-			error: err => console.log(err)
+			error: err => this.toastr.error("Consulta não deletada. Erro: " + err.message, "Operação não realizada")
 		})
 	}
 }
