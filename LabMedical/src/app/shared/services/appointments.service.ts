@@ -6,31 +6,48 @@ import { environment } from "../../enviroments/enviroment";
 import { Appointment } from "../models/appointment.model";
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class AppointmentsService {
 
-  constructor(
-    private http: HttpClient,
-    private authenticationService: AuthenticationService
-  ) { }
+	constructor(
+		private http: HttpClient,
+		private authenticationService: AuthenticationService
+	) { }
 
-  getAppointmentsByPacientId(patientId: number): Observable<any> {
-    return this.http.get(
-      `${environment.URL_PATIENT_APPOINTMENTS}${patientId}`,
-      {headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
-    )
-  }
+	getAppointmentsByPacientId(patientId: number): Observable<any> {
+		return this.http.get(
+			`${ environment.URL_PATIENT_APPOINTMENTS }${ patientId }`,
+			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
+		)
+	}
 
-  saveAppointment(appointment: Appointment): Observable<any> {
-    console.log(appointment)
+	addAppointment(appointment: Appointment): Observable<any> {
+		return this.http.post(
+			`${ environment.URL_POST_APPOINTMENTS }`,
+			appointment,
+			{
+				headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}
+			}
+		)
+	}
 
-    return this.http.post(
-      `${environment.URL_POST_APPOINTMENTS}`,
-      appointment,
-      {
-        headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}
-      }
-    )
-  }
+	updateAppointment(appointmentId: number, appointment: Appointment): Observable<any> {
+		return this.http.put(
+			`${ environment.URL_APPOINTMENTS }/${ appointmentId }`,
+			appointment,
+			{
+				headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}
+			}
+		);
+	}
+
+	deleteAppointment(appointmentId:number): Observable<any> {
+		return this.http.delete(
+			`${ environment.URL_APPOINTMENTS }/${ appointmentId }`,
+			{
+				headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}
+			}
+		);
+	}
 }
