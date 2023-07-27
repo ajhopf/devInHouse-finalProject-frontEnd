@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Appointment } from "../../../../shared/models/appointment.model";
-import { MedicineService } from "../../../../shared/services/medicine.service";
-import { Router } from "@angular/router";
+import { AppointmentsService } from "../../../../shared/services/appointments.service";
+import { ToastrService } from "ngx-toastr";
 
 @Component({
   selector: 'app-appointment-table',
@@ -12,12 +12,31 @@ export class AppointmentTableComponent {
   @Input() patientsAppointments: Appointment[];
   @Output('editAppointment') editAppointment = new EventEmitter<any>();
 
-  constructor(private router: Router) {  }
+  constructor(private appointmentService: AppointmentsService, private toastr: ToastrService) {  }
 
 
   onEditAppointment(appointmentId: number) {
     console.log(appointmentId)
     this.editAppointment.emit(appointmentId);
+  }
+
+  onDeactivateAppointment(appointment: Appointment) {
+    appointment.isActive = !appointment.isActive;
+
+    let toastrMessage: string;
+
+    if (appointment.isActive) {
+      toastrMessage = "Consulta reativada"
+    } else {
+      toastrMessage = "Consulta desativada"
+    }
+
+    this.appointmentService.updateAppointment(appointment.id, appointment).subscribe({
+      next: () => {
+        appointment.isActive ? this.toastr.success(toastrMessage) : this.toastr.warning(toastrMessage)
+      },
+      error: err => this.toastr.error(err.message)
+    })
   }
 
 }
