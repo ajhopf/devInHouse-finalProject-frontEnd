@@ -95,7 +95,7 @@ import { StatusPipe } from './shared/pipes/status.pipe';
     TableMedicacaoComponent,
     FormMedicacaoComponent,
     MeasurementUnitPipe,
-    MedicineTypePipe
+    MedicineTypePipe,
     ExamTableComponent,
     ExamFormComponent,
     StatusPipe
