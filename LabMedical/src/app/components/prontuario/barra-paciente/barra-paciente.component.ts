@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
+import { MedicineService } from 'src/app/shared/services/medicine.service';
 
 @Component({
   selector: 'app-barra-paciente',
@@ -13,7 +14,7 @@ export class BarraPacienteComponent {
   pacientes:any
   paciente:any
 
-  constructor(private patientService:PatientService){}
+  constructor(private patientService:PatientService, private medicineService:MedicineService){}
 
   getPacientes(){
     this.patientService.getPatientes().subscribe({

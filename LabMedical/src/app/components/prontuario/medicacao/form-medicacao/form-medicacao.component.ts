@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MedicineService } from 'src/app/shared/services/medicine.service';
+import { Medicine } from 'src/app/shared/models/medicine.model';
 
 @Component({
   selector: 'app-form-medicacao',
@@ -8,8 +10,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class FormMedicacaoComponent {
   OBRIGATORIO = '../../../../../assets/images/obrigatorio.png'
 
-  pacientId:any = null
-  @Input() consulta:any = ''
+  patientId:any = null
+  medicine:any = Medicine()
+  @Input() medicineId:any = ''
   @Input() acao:string = ''
   @Output() pageChangeOutput:EventEmitter<string> = new EventEmitter()
   disabledAdd = false
@@ -24,16 +27,34 @@ export class FormMedicacaoComponent {
   hora = new Date().getHours()
   horaAtual = `${this.hora.toString().length==1?'0'+this.hora:this.hora}:${this.minutoAtual.toString().length==1?'0'+this.minutoAtual:this.minutoAtual}`
 
-  constructor(){}
+  constructor(private medicineService:MedicineService){}
 
   ngOnInit(): void {
-    this.consulta?this.dataAtual = this.consulta.data:''
-    this.consulta?this.horaAtual = this.consulta.hora:''
+    this.patientId = localStorage.getItem('patientId')
+    if(this.medicineId !='' && this.medicineId!='-1'){
+      this.setMedicine()
+    }
     if(this.acao == 'edit'){
       this.disabledAdd = true
       this.disabledDelete = false
       this.disabledSave = false
     }
+  }
+
+  setMedicine(){
+    let medicines:any
+    this.medicineService.getMedicines(this.patientId).subscribe({
+      next: (response) => {
+        medicines = response.body
+        this.medicine = medicines.filter((med:any) => med.id==this.medicineId)[0]
+        this.dataAtual = `${this.medicine.medicineDate.slice(6,10)}-${this.medicine.medicineDate.slice(3,5)}-${this.medicine.medicineDate.slice(0,2)}`
+        this.horaAtual = this.medicine.time
+			},
+			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				console.error({status: err.status, message: err.error})
+			}
+		})
   }
 
   cadastrar(form:any,idSubmit:any){
@@ -44,10 +65,10 @@ export class FormMedicacaoComponent {
           this.adicionar(campos)
           break
         case 'edit':
-          this.salvar(campos,this.consulta.ID)
+          this.salvar(campos,this.medicineId)
           break
         case 'delete':
-          this.deletar(campos,this.consulta.ID)
+          this.deletar(this.medicineId)
           break
       }
       this.voltar()
@@ -57,21 +78,40 @@ export class FormMedicacaoComponent {
   }
 
   adicionar(campos:any){
-    /*let newConsulta = consultaFactory(campos,0,this.idPaciente)
-    this.cadConsultaService.cadastrarConsulta(newConsulta)*/
-    alert('Consulta Cadastrada!')
+    this.medicineService.saveMedicine(campos,true).subscribe({
+      next: () => {
+        this.medicineService.getMedicines(this.patientId)
+        alert('Consulta Cadastrada!')
+			},
+			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				console.error({status: err.status, message: err.error})
+			}
+    })
   }
 
-  salvar(campos:any,idConsulta:number){
-    /*let newConsulta = consultaFactory(campos,idConsulta,this.idPaciente)
-    this.cadConsultaService.editarConsulta(newConsulta)*/
-    alert('Consulta Salva!')
+  salvar(campos:any,medicineId:number){
+    this.medicineService.updateMedicine(medicineId,campos, true).subscribe({
+      next: () => {
+        alert('Consulta Salva!')
+			},
+			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				console.error({status: err.status, message: err.error})
+			}
+    })
   }
 
-  deletar(campos:any,idConsulta:number){
-    /*let newConsulta = consultaFactory(campos,idConsulta, this.idPaciente)
-    this.cadConsultaService.deletarConsulta(newConsulta)*/
-    alert('Consulta Deletada!')
+  deletar(medicineId:number){
+    this.medicineService.deleteMedicineById(medicineId).subscribe({
+      next: () => {
+        alert('Consulta Deletada!')
+			},
+			error: (err) => {
+				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				console.error({status: err.status, message: err.error})
+			}
+    })
   }
 
   voltar(){

@@ -12,12 +12,17 @@
     <tbody>
         <tr *ngFor="let medicine of medicines">
             <td>{{medicine.medicineName}}</td>
-            <td>{{medicine.type}}</td>
+            <td>{{medicine.type|medicineType}}</td>
             <td>{{medicine.quantity}}</td>
-            <td>{{medicine.measurementUnit}}</td>
+            <td>{{medicine.measurementUnit|measurementUnit}}</td>
             <td>{{medicine.status?'Ativo':'Inativo'}}</td>
             <td><button type="button" class="btn btn-link" (click)="abrir(medicine.id)"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
-                width="30" height="30"></button></td>
+                width="30" height="30"></button>
+                <ng-container *ngIf="medicine.status ==true">
+                    <button type="button" class="btn btn-link" (click)="inativar(medicine.id)"><img src="../../../../../assets/images/inativar.png" class="img-fluid ms-1" 
+                    width="25" height="25"></button>
+                </ng-container>
+            </td>
         </tr>
     </tbody>
 </table>
