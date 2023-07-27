@@ -50,6 +50,9 @@ import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-m
 import { AppointmentFormComponent } from './components/prontuario/main-consultas/appointment-form/appointment-form.component';
 import { AppointmentTableComponent } from './components/prontuario/main-consultas/appointment-table/appointment-table.component';
 import { AppointmentSortingPipe } from './shared/pipes/appointment-sorting.pipe';
+import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
+import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
+import { StatusPipe } from './shared/pipes/status.pipe';
 
 @NgModule({
   declarations: [
@@ -95,7 +98,11 @@ import { AppointmentSortingPipe } from './shared/pipes/appointment-sorting.pipe'
     ModalComponent,
     AppointmentFormComponent,
     AppointmentTableComponent,
-    AppointmentSortingPipe
+    AppointmentSortingPipe,
+    ModalComponent,
+    ExamTableComponent,
+    ExamFormComponent,
+    StatusPipe
   ],
     imports: [
         BrowserModule,
