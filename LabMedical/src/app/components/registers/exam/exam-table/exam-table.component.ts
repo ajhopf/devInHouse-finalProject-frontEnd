@@ -34,7 +34,7 @@ export class ExamTableComponent implements OnInit, OnChanges {
   }
 
   renderPage(){
-    if(this.pacientId == null || this.pacientId == undefined){
+    if(!this.pacientId){
       this.allExams()
     }else{
       this.onLoad()
@@ -55,8 +55,7 @@ export class ExamTableComponent implements OnInit, OnChanges {
     this.examService.getAllExams().subscribe((
       {
         next: (response) =>{
-          this.examList = response.
-          this.examService.examListUpdated.emit(this.examList)
+          this.examList = response.body
         }
       }
     ))

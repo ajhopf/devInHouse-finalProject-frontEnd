@@ -9,7 +9,7 @@
               <th scope="col">Hora</th>
               <th scope="col">Status</th>
               <th scope="col">Anexo</th>
-              <th scope="col">Opções</th>
+              <th scope="col" *ngIf="pacientId">Opções</th>
             </tr>
           </thead>
           <tbody *ngIf="examList.length > 0; else empty">
@@ -17,14 +17,14 @@
                     <td>{{exam.name}}</td>
                     <td>{{exam.date}}</td>
                     <td>{{exam.time}}</td>
-                    <td>{{exam.status}}</td>
+                    <td>{{exam.status | statusName}}</td>
                    <td *ngIf="exam.documentUrl; else noAnex">
                     <a [href]="exam.documentUrl" target="_blank">
                       <img class="img-fluid ms-1"
                       width="30" height="30" [src]="ANEXO" alt="anexo">
                     </a>
                    </td>
-                   <td><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
+                   <td *ngIf="pacientId"><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
                     width="30" height="30" (click)="examUpdate(exam.id)"></button></td>
                   </tr>
           </tbody>
