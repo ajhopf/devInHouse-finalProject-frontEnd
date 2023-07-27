@@ -1,0 +1,25 @@
+<table class="table table-striped table-bordered">
+  <thead class="table-primary">
+  <tr>
+	<th scope="col">Motivo da Consulta</th>
+	<th scope="col">Data</th>
+	<th scope="col">Horário</th>
+	<th scope="col">Dosagem e Precauções</th>
+	<th scope="col">Status</th>
+	<th scope="col">Medicamento</th>
+	<th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let appointment of patientsAppointments; let i = index">
+	<td>{{appointment.appointmentReason}}</td>
+	<td>{{appointment.appointmentDate}}</td>
+	<td>{{appointment.time}}</td>
+	<td>{{appointment.dosageAndPrecautions}}</td>
+	<td>{{appointment.isActive?'Ativo':'Inativo'}}</td>
+	<td>{{appointment.medicineId ? appointment.medicineId : 'Medicamento não receitado'}}</td>
+	<td><button type="button" class="btn btn-link" ><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
+														 width="30" height="30"></button></td>
+  </tr>
+  </tbody>
+</table>
