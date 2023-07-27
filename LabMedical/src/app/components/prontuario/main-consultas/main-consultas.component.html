@@ -33,7 +33,7 @@
 		<app-appointment-form
 		  [patientId]="+patientId"
 		  [appointmentForEdition]="appointmentForEdition"
-		  (appointmentAdded)="fetchAppointments()"
+		  (appointmentAddedSavedOrDeleted)="onAppointmentAddedSavedOrDeleted()"
 		  >
 		</app-appointment-form>
 	  </div>

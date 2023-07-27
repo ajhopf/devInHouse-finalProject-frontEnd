@@ -13,7 +13,7 @@
   <tbody>
   <tr *ngFor="let appointment of patientsAppointments | appointmentSortingPipe; let i = index">
 	<td>{{appointment.appointmentReason}}</td>
-	<td>{{appointment.appointmentDate | date}}</td>
+	<td>{{appointment.appointmentDate | date:"dd/MM/yyyy" }}</td>
 	<td>{{appointment.time}}</td>
 	<td>{{appointment.dosageAndPrecautions}}</td>
 	<td>{{appointment.isActive?'Ativo':'Inativo'}}</td>

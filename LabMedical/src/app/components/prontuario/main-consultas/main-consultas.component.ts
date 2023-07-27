@@ -31,7 +31,7 @@ export class MainConsultasComponent implements OnChanges {
         error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
 
-     this.fetchAppointments();
+     this.onAppointmentAddedSavedOrDeleted();
     }
   }
 
@@ -44,7 +44,10 @@ export class MainConsultasComponent implements OnChanges {
     this.appointmentForEdition = undefined;
   }
 
-  fetchAppointments() {
+  onAppointmentAddedSavedOrDeleted() {
+    this.showPatientAppointments = true;
+    this.appointmentForEdition = undefined;
+
     this.appointmentsService.getAppointmentsByPacientId(+this.patientId).subscribe({
       next: (value: Appointment[]) => {
         this.patientsAppointments = value;

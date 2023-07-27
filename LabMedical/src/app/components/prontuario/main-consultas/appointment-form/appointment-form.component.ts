@@ -13,7 +13,7 @@ import { MedicineService } from "../../../../shared/services/medicine.service";
 })
 export class AppointmentFormComponent implements OnInit{
 	@ViewChild('appointmentForm') appointmentForm: NgForm | undefined;
-	@Output('appointmentAdded') appointmentAdded = new EventEmitter<any>();
+	@Output('appointmentAddedSavedOrDeleted') appointmentAddedSavedOrDeleted = new EventEmitter<any>();
 	@Input() patientId: number;
 	@Input() appointmentForEdition: Appointment | undefined;
  	MANDATORY: string = "../../../assets/images/obrigatorio.png";
@@ -51,7 +51,7 @@ export class AppointmentFormComponent implements OnInit{
 	onAddAppointment() {
 		this.appointmentsService.addAppointment(this.appointment).subscribe({
 			next: response => {
-				this.appointmentAdded.emit();
+				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
 				this.modalService.createModal("Operação Realizada", `Consulta cadastrada com sucesso. Id da consulta: ${JSON.stringify(response.id)}`)
 			},
@@ -63,8 +63,9 @@ export class AppointmentFormComponent implements OnInit{
 	onSaveAppointment() {
 		this.appointmentsService.updateAppointment(this.appointmentForEdition.id, this.appointment).subscribe({
 			next: response => {
-				this.appointmentAdded.emit();
+				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
+				this.appointmentForEdition = undefined;
 				this.modalService.createModal("Operação Realizada", `Consulta editada com sucesso`)
 			},
 			error: err => console.log(err)
@@ -74,8 +75,9 @@ export class AppointmentFormComponent implements OnInit{
 	onDeleteAppointment() {
 		this.appointmentsService.deleteAppointment(this.appointmentForEdition.id).subscribe({
 			next: response => {
-				this.appointmentAdded.emit();
+				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
+				this.appointmentForEdition = undefined;
 				this.modalService.createModal("Operação Realizada", `Consulta deletada com sucesso`)
 			},
 			error: err => console.log(err)
