@@ -16,7 +16,7 @@ export class TesteListagemPacientesComponent implements OnInit{
   ) {}
 
   ngOnInit() {
-    this.pacientService.getPacients().subscribe({
+    this.pacientService.getPatients().subscribe({
       next: response => {
         this.pacientList = response
       },

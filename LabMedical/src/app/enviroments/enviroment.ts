@@ -17,20 +17,25 @@ const URL_PUT_UPDATE_USER: string = `${URL_PRINCIPAL}/usuarios/atualizar`
 const URL_DEL_USER_BY_ID: string = `${URL_PRINCIPAL}/usuarios/deletar`
 //Log controle endpoints
 //Pacient controller endpoints
-const URL_PACIENTS: string = `${URL_PRINCIPAL}/pacientes`
+const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 //Appointments controller endpoints
 const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
-const URL_PACIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
+const URL_PATIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
+
 
 //Medicine Controller endpoints
 const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
+
+//Exam controller endpoints
+const URL_EXAMS: string = `${URL_PRINCIPAL}/exames`
+const URL_EXAMS_UPDATE: string = `${URL_PRINCIPAL}/exames/atualizar`
+const URL_EXAMS_REGISTER: string = `${URL_PRINCIPAL}/exames/cadastrar`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
 
-const URL_PATIENTS: string = `${URL_PRINCIPAL}/pacientes`
 
 //Config controller endpoints
 const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
@@ -115,9 +120,9 @@ export const environment = {
   URL_POST_RESET_PASSWORD: URL_POST_RESET_PASSWORD,
 
   URL_POST_LOG: URL_POST_LOG,
-  URL_PACIENTS: URL_PACIENTS,
+  URL_PATIENTS: URL_PATIENTS,
   URL_APPOINTMENTS: URL_APPOINTMENTS,
-  URL_PACIENT_APPOINTMENTS: URL_PACIENT_APPOINTMENTS,
+  URL_PATIENT_APPOINTMENTS: URL_PATIENT_APPOINTMENTS,
   URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
 
   URL_MEDICINES: URL_MEDICINES,
@@ -128,9 +133,12 @@ export const environment = {
   URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
 
+  URL_EXAMS: URL_EXAMS,
+  URL_EXAMS_UPDATE: URL_EXAMS_UPDATE,
+  URL_EXAMS_REGISTER: URL_EXAMS_REGISTER,
+
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
-  URL_PATIENTS: URL_PATIENTS,
   URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
   ROUTES: ROUTES
 };
