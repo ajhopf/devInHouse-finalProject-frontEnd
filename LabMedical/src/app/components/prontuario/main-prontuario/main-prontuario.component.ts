@@ -15,6 +15,7 @@ import { MedicineService } from "../../../shared/services/medicine.service";
 })
 export class MainProntuarioComponent implements OnInit {
 	@Input('patientId') patientId: string;
+	ANEXO: string = '../../../assets/images/document.png'
 	patient: Patient;
 	patientAppointments: Appointment[];
 	emptyAppointments: boolean = false;
