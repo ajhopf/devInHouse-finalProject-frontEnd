@@ -51,7 +51,7 @@ import { AppointmentFormComponent } from './components/prontuario/main-consultas
 import { AppointmentTableComponent } from './components/prontuario/main-consultas/appointment-table/appointment-table.component';
 import { AppointmentSortingPipe } from './shared/pipes/appointment-sorting.pipe';
 import { MeasurementUnitPipe } from './shared/pipes/measurement-unit.pipe';
-import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe;
+import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe';
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
 import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 import { StatusPipe } from './shared/pipes/status.pipe';
