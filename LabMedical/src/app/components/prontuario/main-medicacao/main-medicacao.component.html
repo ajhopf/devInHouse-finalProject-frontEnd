@@ -3,23 +3,13 @@
         <h1>Selecione um Paciente!</h1>
     </div>
 </ng-container>
-<ng-container *ngIf="patientId!= 'null' && template=='new'">
-    <div class="d-flex  flex-column justify-content-center align-items-center mt-4">
-    <h1 class="m-5">Medicação</h1>
-    <button type="button" class="btn btn-primary btn-lg" (click)="changeTemplate('form','-1','')">Adicionar</button>
-    </div>
-</ng-container>
 <ng-container *ngIf="patientId!= 'null' && template=='form'">
-    <app-form-medicacao (pageChangeOutput)="changeTemplate('table','-1','')"></app-form-medicacao>
-    <!--<app-form-consulta [acao]="acao" [idPaciente]="idPaciente" [consulta]="consulta?consulta:''"
-        (pageChangeOutput)="changeTemplate('table','-1','')"></app-form-consulta>-->
+    <app-form-medicacao (pageChangeOutput)="changeTemplate('table','-1','')" [medicineId]="medicineId?medicineId:''" [acao]="acao"></app-form-medicacao>
 </ng-container>
 <ng-container *ngIf="patientId!= 'null' && template=='table'">
     <div style="height: 70vh; position:relative;">
         <div style="max-height:100%; overflow-x: hidden; overflow-y:auto;">
             <app-table-medicacao (pageOutput)="changeTemplate('form',$event,'edit')"></app-table-medicacao>
-            <!--<app-table-consultas [idPaciente]="idPaciente"
-                (pageOutput)="changeTemplate('form',$event,'edit')"></app-table-consultas>-->
             <button type="button" class="btn btn-primary btn-lg"
                 (click)="changeTemplate('form','-1','add')">Adicionar</button>
         </div>

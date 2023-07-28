@@ -23,14 +23,14 @@ const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
 const URL_PATIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
+
+//Medicine Controller endpoints
+const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
+
 //Exam controller endpoints
 const URL_EXAMS: string = `${URL_PRINCIPAL}/exames`
 const URL_EXAMS_UPDATE: string = `${URL_PRINCIPAL}/exames/atualizar`
 const URL_EXAMS_REGISTER: string = `${URL_PRINCIPAL}/exames/cadastrar`
-
-
-//Medicine Controller endpoints
-const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`

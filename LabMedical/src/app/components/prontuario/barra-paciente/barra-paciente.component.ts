@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
+import { MedicineService } from 'src/app/shared/services/medicine.service';
 
 @Component({
   selector: 'app-barra-paciente',
@@ -15,7 +16,7 @@ export class BarraPacienteComponent implements OnDestroy {
   pacientes:any
   paciente:any
 
-  constructor(private patientService:PatientService){}
+  constructor(private patientService:PatientService, private medicineService:MedicineService){}
 
 	ngOnDestroy() {
 		localStorage.removeItem('patientId');

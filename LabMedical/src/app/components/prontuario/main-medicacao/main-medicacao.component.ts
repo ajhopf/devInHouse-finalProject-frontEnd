@@ -8,18 +8,17 @@ import { Component, Input } from '@angular/core';
 export class MainMedicacaoComponent {
 
   patientId:any = 'null'
-  @Input() template: string = 'new'
-  @Input() consulta: any
+  @Input() template: string = 'table'
+  @Input() medicineId: any
   @Input() acao: string = ''
 
   ngOnInit(){
     this.patientId = localStorage.getItem('patientId')
   }
 
-
-  changeTemplate(template: string, idConsulta: string, acao: string) {
+  changeTemplate(template: string, medicineId: string, acao: string) {
     this.template = template
-    //this.consulta = this.cadConsultaService.getConsulta(idConsulta)
+    this.medicineId = medicineId
     this.acao = acao?acao:this.acao
   }
 
