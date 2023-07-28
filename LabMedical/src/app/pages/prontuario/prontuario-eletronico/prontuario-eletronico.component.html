@@ -5,7 +5,7 @@
         <section class="d-flex justify-content-between align-items-between flex-grow-1">
             <app-menu-prontuario class="m-2" style="width:20%" (menuProntuario)="setPageProntuario($event,'','-1','')"></app-menu-prontuario>
             <ng-container *ngIf="pageProntuario=='prontuario'">
-                <app-main-prontuario class="flex-grow-1 m-2"></app-main-prontuario>
+                <app-main-prontuario [patientId]="patientId" class="flex-grow-1 m-2"></app-main-prontuario>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='exames'">
                 <app-main-exames class="flex-grow-1 m-2"></app-main-exames>

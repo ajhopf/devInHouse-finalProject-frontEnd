@@ -1,1 +1,10 @@
-<p>main-prontuario works!</p>
+<section>
+  <ng-container *ngIf="patientId == undefined">
+	<p>Selecione um paciente</p>
+  </ng-container>
+
+  <ng-container *ngIf="patientId != undefined">
+	<app-alergies-list [alergiesList]="patient.alergies"></app-alergies-list>
+	<app-special-care-list [specialCareList]="patient.specialCare"></app-special-care-list>
+  </ng-container>
+</section>
