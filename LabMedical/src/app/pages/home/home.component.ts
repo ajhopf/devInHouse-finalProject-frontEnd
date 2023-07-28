@@ -15,10 +15,12 @@ export class HomeComponent {
   qtMedicines:number
   qtDiets:number
   qtExercises:number
+  userRole:any
 
   constructor(private statsService:StatsService){}
 
   ngOnInit(){
+    this.userRole = JSON.parse(localStorage.getItem('session')).role 
     this.statsService.getStats().subscribe({
       next: (response) => {
         this.qtAppointments = response.body.qtAppointments

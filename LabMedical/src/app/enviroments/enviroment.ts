@@ -46,8 +46,8 @@ const URL_STATS:string = `${URL_PRINCIPAL}/estatisticas`
 const ROUTES: RouteModel[] = [
   {
     url: "home",
-    category: "Geral",
-    title: "home",
+    category: "Inicío",
+    title: "Estatísticas do Sistema",
     roles: [
       RolesEnum.ROLE_NURSE,
       RolesEnum.ROLE_DOCTOR,
@@ -57,41 +57,41 @@ const ROUTES: RouteModel[] = [
   },
   {
     url: "log/panel",
-    category: "Sistema",
-    title: "Painel Log",
+    category: "Cadastros",
+    title: "Logs do Sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/log.png"
   },
   {
     url: "prontuario",
-    category: "Sistema",
+    category: "Prontuário Eletrônico",
     title: "Prontuário Eletrônico",
     roles: [
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN,
       RolesEnum.ROLE_NURSE
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/prontuario.png"
   },
   {
     url: "usuarios",
-    category: "Sistema",
-    title: "Usuarios",
+    category: "Cadastros",
+    title: "Usuários",
     roles: [
       RolesEnum.ROLE_ADMIN
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/users.png"
   },
   {
     url: "costumizacao",
-    category: "Sistema",
-    title: "Costumização do sistema",
+    category: "Cadastros",
+    title: "Customização do Sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/custom.png"
   },
   {
     url: "home/pacient-form",
@@ -102,18 +102,18 @@ const ROUTES: RouteModel[] = [
       RolesEnum.ROLE_ADMIN,
       RolesEnum.ROLE_NURSE
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/paciente.png"
   },
   {
     url: "home/listagem-paciente-teste",
-    category: "Listagem de Pacientes Teste",
+    category: "Cadastros",
     title: "Listagem de Pacientes",
     roles: [
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN,
       RolesEnum.ROLE_NURSE
     ],
-    icon: "./assets/images/inicio.png"
+    icon: "./assets/images/paciente.png"
   }
 ]
 export const environment = {
