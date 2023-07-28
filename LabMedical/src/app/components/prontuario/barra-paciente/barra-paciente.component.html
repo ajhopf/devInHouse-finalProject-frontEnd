@@ -1,39 +1,39 @@
 <nav class="navbar navbar-dark bg-dark m-2 p-2" style="height: 10vh" data-bs-theme="dark">
-  <ng-container *ngIf="idPaciente==null">
+  <ng-container *ngIf="selectedPatient==null">
     <div class="d-flex justify-content-center align-items-center">
-      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#modalPaciente" (click)="getPacientes()">Buscar
+      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#modalPaciente" (click)="getPatients()">Buscar
         Paciente</button>
     </div>
   </ng-container>
-  <ng-container *ngIf="idPaciente !=null">
+  <ng-container *ngIf="selectedPatient !=null">
     <div class="d-flex justify-content-center align-items-start">
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Nome</label>
-        <h5 class="text-white form-label">{{paciente.name}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.name}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Gênero</label>
-        <h5 class="text-white form-label">{{paciente.gender}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.gender}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Idade</label>
-        <h5 class="text-white form-label">{{paciente.dob|calculoIdade}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.dob|calculoIdade}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Convênio</label>
-        <h5 class="text-white form-label">{{paciente.healthInsurance}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.healthInsurance}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Contato</label>
-        <h5 class="text-white form-label">{{paciente.email?paciente.email:paciente.phone}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.email?selectedPatient.email:selectedPatient.phone}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Contato de Emergencia</label>
-        <h5 class="text-white form-label">{{paciente.emergencyContact}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.emergencyContact}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <label class="text-white-50">Naturalidade</label>
-        <h5 class="text-white form-label">{{paciente.nationality}}</h5>
+        <h5 class="text-white form-label">{{selectedPatient.nationality}}</h5>
       </div>
       <div class="ms-5 d-flex flex-column">
         <button type="button" class="btn btn-link" (click)="resetarPaciente()"><img src="../../../../assets/images/exchange.svg" class="img-fluid ms-1"
@@ -67,10 +67,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let paciente of pacientes">
+              <tr *ngFor="let paciente of patients">
                 <td scope="row">{{paciente.name}}</td>
                 <td><button type="button" class="btn btn-link" data-bs-dismiss="modal"
-                    (click)="onSubmit(paciente.id)">Selecionar</button></td>
+                    (click)="onSelectPatient(paciente.id)">Selecionar</button></td>
               </tr>
             </tbody>
           </table>
