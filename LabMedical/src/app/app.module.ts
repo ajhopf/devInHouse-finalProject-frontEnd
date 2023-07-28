@@ -55,6 +55,8 @@ import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe';
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
 import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 import { StatusPipe } from './shared/pipes/status.pipe';
+import { SpecialCareListComponent } from './components/prontuario/main-prontuario/special-care-list/special-care-list.component';
+import { AlergiesListComponent } from "./components/prontuario/main-prontuario/alergies-list/alergies-list.component";
 
 @NgModule({
   declarations: [
@@ -106,7 +108,10 @@ import { StatusPipe } from './shared/pipes/status.pipe';
     MedicineTypePipe,
     ExamTableComponent,
     ExamFormComponent,
-    StatusPipe
+    StatusPipe,
+    AlergiesListComponent,
+    SpecialCareListComponent,
+    AlergiesListComponent
   ],
     imports: [
         BrowserModule,
