@@ -33,7 +33,7 @@ const routes: Routes = [
 	{
 		path: 'home',
 		canActivate: [AuthGuard],
-		title: 'Home',
+		title: 'Estatísticas do Sistema',
 		component: FullLayoutComponent, children: [
 			{
 				path: '',
@@ -93,7 +93,7 @@ const routes: Routes = [
 	{
 		path: 'log/panel',
 		canActivate: [AuthGuard, RoleGuard],
-		title: 'Painel Log',
+		title: 'Logs do Sistema',
 		data: {
 			requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR]
 		},
@@ -179,7 +179,7 @@ const routes: Routes = [
 	{
 		path: 'costumizacao',
 		canActivate: [AuthGuard, RoleGuard],
-		title: 'Costumização do sistema',
+		title: 'Customização do sistema',
 		data: {
 			requiredRoles: [RolesEnum.ROLE_ADMIN]
 		},
