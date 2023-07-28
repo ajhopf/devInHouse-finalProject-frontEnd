@@ -40,6 +40,9 @@ const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
 //Config controller endpoints
 const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
 
+//Stats endpoints
+const URL_STATS:string = `${URL_PRINCIPAL}/estatisticas`
+
 const ROUTES: RouteModel[] = [
   {
     url: "home",
@@ -140,6 +143,7 @@ export const environment = {
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
+  URL_STATS: URL_STATS,
   ROUTES: ROUTES
 };
 
