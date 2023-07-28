@@ -92,6 +92,7 @@ export class FormMedicacaoComponent {
   salvar(campos:any,medicineId:number){
     this.medicineService.updateMedicine(medicineId,campos, true).subscribe({
       next: () => {
+        this.medicineService.getMedicines(this.patientId)
         alert('Consulta Salva!')
 			},
 			error: (err) => {
@@ -104,6 +105,7 @@ export class FormMedicacaoComponent {
   deletar(medicineId:number){
     this.medicineService.deleteMedicineById(medicineId).subscribe({
       next: () => {
+        this.medicineService.getMedicines(this.patientId)
         alert('Consulta Deletada!')
 			},
 			error: (err) => {

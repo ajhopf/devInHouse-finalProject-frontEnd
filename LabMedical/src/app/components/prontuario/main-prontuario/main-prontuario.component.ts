@@ -79,7 +79,7 @@ export class MainProntuarioComponent implements OnInit {
 	}
 
 	accessMedication(medication: any) {
-		this.router.navigate([`${this.patientId}/prontuario/${medication.id}`])
+		this.router.navigate([`${this.patientId}/prontuario/medicacao/${medication.id}`])
 	}
 
 }
