@@ -22,9 +22,4 @@ export class ProntuarioEletronicoComponent {
   onPatientSelect(event: string): void {0
     this.patientId = event;
   }
-
-  accessAppointmentByProntuary(event: any) {
-    this.pageProntuario = 'consultas'
-
-  }
 }

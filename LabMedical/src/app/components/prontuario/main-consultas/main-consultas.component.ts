@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from "../../../shared/services/appointments.service";
 import { Appointment } from "../../../shared/models/appointment.model";
 import { PacientService } from "../../../shared/services/pacient.service";
@@ -11,12 +11,10 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./main-consultas.component.css']
 })
 export class MainConsultasComponent implements OnInit {
-  // @Input('patientId') patientId: string;
   patientId: string;
   showPatientAppointments: boolean = true;
   patientName: string;
   patientsAppointments: Appointment[];
-  appointmentForEdition: Appointment;
 
   constructor(
     private appointmentsService: AppointmentsService,
@@ -27,24 +25,29 @@ export class MainConsultasComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.router.url)
-
     let url = this.router.url;
     let indexOfSecondBar = url.split("/", 2).join("/").length;
     this.patientId = url.substring(1, indexOfSecondBar);
-
-    console.log(url.split("/", 2).join("/").length)
 
     if (this.patientId != undefined || this.patientId != null) {
       this.patientService.getPatient(+this.patientId).subscribe({
         next: (patient: Patient) => {
           this.patientName = patient.name;
         },
-        error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
+        error: () => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
-
       this.onAppointmentAddedSavedOrDeleted()
     }
+
+    this.activatedRoute.paramMap.subscribe({
+      next: params => {
+        let idConsulta = params.get('idConsulta');
+
+        if (idConsulta) {
+          this.showPatientAppointments = false;
+        }
+      }
+    })
   }
 
   onAddNewAppointment() {
@@ -52,13 +55,11 @@ export class MainConsultasComponent implements OnInit {
   }
 
   onReturn() {
-    this.showPatientAppointments = true;
-    this.appointmentForEdition = undefined;
+    this.router.navigate([`${this.patientId}/prontuario/consultas`])
   }
 
   onAppointmentAddedSavedOrDeleted() {
     this.showPatientAppointments = true;
-    this.appointmentForEdition = undefined;
 
     this.appointmentsService.getAppointmentsByPacientId(+this.patientId).subscribe({
       next: (value: Appointment[]) => {
@@ -67,9 +68,4 @@ export class MainConsultasComponent implements OnInit {
       error: err => console.log(err)
     })
   }
-
-  onEditAppointmentId(appointmentId: number) {
-    this.appointmentForEdition = this.patientsAppointments.find(appointment => appointment.id == appointmentId)
-  }
-
 }

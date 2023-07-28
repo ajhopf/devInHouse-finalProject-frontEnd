@@ -158,7 +158,7 @@
         <button
           type="button"
           class="btn btn-warning mx-1"
-          [disabled]="!appointmentForEdition || !appointmentForm.valid" (click)="onSaveAppointment()">
+          [disabled]="!appointmentId && !appointmentForm.valid" (click)="onSaveAppointment()">
           Salvar
         </button>
       </div>
@@ -167,7 +167,7 @@
         <button
           type="button"
           class="btn btn-danger mx-1"
-          [disabled]="!appointmentForEdition"
+          [disabled]="!appointmentId"
           (click)="onDeleteAppointment()"
         >
           Excluir
@@ -179,7 +179,7 @@
         [ngbTooltip]="appointmentForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
       >
         <button
-          [disabled]="appointmentForm.invalid || appointmentForEdition"
+          [disabled]="appointmentForm.invalid || appointmentId"
           class="btn btn-success mx-1"
           type="submit"
         >
