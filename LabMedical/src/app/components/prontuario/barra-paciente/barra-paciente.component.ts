@@ -1,33 +1,57 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
+import { ActivatedRoute, Router } from "@angular/router";
+import { PacientService } from "../../../shared/services/pacient.service";
+import { Patient } from "../../../shared/models/patient.model";
 
 @Component({
   selector: 'app-barra-paciente',
   templateUrl: './barra-paciente.component.html',
   styleUrls: ['./barra-paciente.component.css']
 })
-export class BarraPacienteComponent implements OnDestroy {
+export class BarraPacienteComponent implements OnInit, OnDestroy {
 	@Output('onPatientSelect') onPatientSelect = new EventEmitter<any>();
 
   IMAGEM_PADRAO = '../../../../../assets/user.png'
 
-  idPaciente:string|null = null
-  pacientes:any
-  paciente:any
+  idPaciente:number|null = null
+	selectedPatientId: number;
+  patients: Patient[];
+  selectedPatient: Patient;
 
-  constructor(private patientService:PatientService, private medicineService:MedicineService){}
+  constructor(
+		private patientService:PacientService,
+		private medicineService:MedicineService,
+		private router: Router,
+		private activatedRoute: ActivatedRoute){}
+
+
+	ngOnInit() {
+		this.activatedRoute.paramMap.subscribe(params => {
+			this.selectedPatientId = +params.get('patientId');
+			localStorage.setItem('patientId', this.selectedPatientId.toString())
+
+			if (this.selectedPatientId) {
+				this.patientService.getPatient(this.selectedPatientId).subscribe({
+					next: (patient: Patient) => {
+						this.selectedPatient = patient;
+					}
+				})
+			}
+		})
+	}
 
 	ngOnDestroy() {
 		localStorage.removeItem('patientId');
+		this.selectedPatientId = null;
 		this.onPatientSelect.emit(undefined)
 	}
 
-	getPacientes(){
-    this.patientService.getPatientes().subscribe({
+	getPatients(){
+    this.patientService.getPatients().subscribe({
 			next: (response) => {
-        console.log(response.body)
-				this.pacientes = response.body
+				this.patients = response
 			},
 			error: (err) => {
 				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
@@ -36,27 +60,29 @@ export class BarraPacienteComponent implements OnDestroy {
 		})
   }
 
-  onSubmit(idPaciente:string){
-    this.idPaciente = idPaciente
-    localStorage.setItem('patientId',this.idPaciente)
-    for(var patient of this.pacientes){
-      if(patient.id==idPaciente){
-        this.paciente = patient
-      }
-    }
-		this.onPatientSelect.emit(idPaciente);
+  onSelectPatient(idPaciente:number){
+    this.router.navigate([`${idPaciente}/prontuario`])
+
+	  this.patientService.getPatient(idPaciente).subscribe({
+		  next: (patient: Patient) => {
+				this.selectedPatient = patient;
+			  this.router.navigate([`${idPaciente}/prontuario`])
+		  }
+	  })
   }
 
   resetarPaciente(){
-    this.idPaciente = null
-    localStorage.setItem('patientId',null)
-	  this.onPatientSelect.emit(undefined)
+    this.selectedPatientId = null
+	  this.selectedPatient = null
+	  localStorage.removeItem('patientId')
+
+	  this.router.navigate(['/prontuario'])
   }
 
   filtrar(busca:string){
     if(busca==''){
-      this.getPacientes()
+      this.getPatients()
     }
-    this.pacientes = this.pacientes.filter((paciente:any) =>paciente.name.toUpperCase().includes(busca.toUpperCase()))
+    this.patients = this.patients.filter((paciente:any) =>paciente.name.toUpperCase().includes(busca.toUpperCase()))
   }
 }

@@ -2,11 +2,14 @@
     <div class="m-2">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                <button class="btn" style="text-decoration: none;" (click)="changePage('prontuario')">Visão Simplificada</button>
+                <button class="btn" style="text-decoration: none;" (click)="changePage('prontuario')">Visão
+                    Simplificada</button>
             </li>
             <ng-container *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'">
                 <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                    <button class="btn" style="text-decoration: none;" (click)="changePage('consultas')">Consultas</button>
+                    <button class="btn" style="text-decoration: none;" (click)="changePage('consultas')">Consultas
+                    </button>
+
                 </li>
             </ng-container>
             <ng-container *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'">

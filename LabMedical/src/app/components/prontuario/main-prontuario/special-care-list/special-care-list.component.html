@@ -1,0 +1,9 @@
+<div>
+  <h3>Lista de Cuidados Especiais</h3>
+  <ul *ngIf="specialCareList.length > 0">
+	<li *ngFor="let specialCare of specialCareList">
+	  {{ specialCare }}
+	</li>
+  </ul>
+  <p *ngIf="specialCareList.length == 0">Paciente não necessita cuidados especiais.</p>
+</div>
