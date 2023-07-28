@@ -8,16 +8,23 @@ import { MedicineService } from 'src/app/shared/services/medicine.service';
 })
 export class TableMedicacaoComponent {
   @Output() pageOutput: EventEmitter<string> = new EventEmitter()
-  patientId:any = null
+  @Input() patientId:any = null
   medicines: any
 
   constructor(private medicineService:MedicineService) { }
 
   ngOnInit() {
-    this.patientId = JSON.parse(localStorage.getItem('patientId'))
-    this.getMedicines()
+    if(this.patientId)
+      this.getMedicines()
     if (this.medicines)
       this.medicines.sort((a: any, b: any) => new Date(a.data).getTime() - new Date(b.data).getTime())
+  }
+
+  ngOnChanges(){
+    if(this.patientId)
+      this.getMedicines()
+    else
+      this.medicines = null
   }
 
   abrir(id: string) {

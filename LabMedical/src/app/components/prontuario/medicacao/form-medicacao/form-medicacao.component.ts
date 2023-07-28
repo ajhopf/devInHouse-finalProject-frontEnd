@@ -10,7 +10,7 @@ import { Medicine } from 'src/app/shared/models/medicine.model';
 export class FormMedicacaoComponent {
   OBRIGATORIO = '../../../../../assets/images/obrigatorio.png'
 
-  patientId:any = null
+  @Input() patientId:any = null
   medicine:any = Medicine()
   @Input() medicineId:any = ''
   @Input() acao:string = ''
@@ -30,7 +30,6 @@ export class FormMedicacaoComponent {
   constructor(private medicineService:MedicineService){}
 
   ngOnInit(): void {
-    this.patientId = localStorage.getItem('patientId')
     if(this.medicineId !='' && this.medicineId!='-1'){
       this.setMedicine()
     }
