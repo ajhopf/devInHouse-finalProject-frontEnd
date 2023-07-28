@@ -1,44 +1,35 @@
 <section>
-  <ng-container *ngIf="patientId == undefined">
-	<p>Selecione um paciente</p>
-  </ng-container>
-
-  <ng-container *ngIf="patientId != undefined">
-	<div *ngIf="showPatientAppointments && !appointmentForEdition">
-	  <div class="row">
-		<h2 class="col-10">Consultas de {{ patientName }}</h2>
-		<div class="col">
-		  <button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar consulta</button>
-		</div>
-	  </div>
-	  <hr>
-
-	  <app-appointment-table
-		[patientsAppointments]="patientsAppointments"
-		(editAppointment)="onEditAppointmentId($event)">
-	  </app-appointment-table>
-	</div>
-
-	<div *ngIf="!showPatientAppointments || appointmentForEdition">
-	  <div class="row">
-		<h2 class="col-8">Nova Consulta</h2>
-		<div class="col d-flex justify-content-end">
-		  <button class="btn btn-secondary" (click)="onReturn()">
-			Cancelar
-		  </button>
-		</div>
-	  </div>
-	  <hr>
-	  <div>
-		<app-appointment-form
-		  [patientId]="+patientId"
-		  [appointmentForEdition]="appointmentForEdition"
-		  (appointmentAddedSavedOrDeleted)="onAppointmentAddedSavedOrDeleted()"
-		  >
-		</app-appointment-form>
+  <div *ngIf="showPatientAppointments && !appointmentForEdition">
+	<div class="row">
+	  <h2 class="col-10">Consultas de {{ patientName }}</h2>
+	  <div class="col">
+		<button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar consulta</button>
 	  </div>
 	</div>
-  </ng-container>
+	<hr>
+
+	<app-appointment-table [patientsAppointments]="patientsAppointments"
+						   [patientId]="+patientId"></app-appointment-table>
+  </div>
+
+  <div *ngIf="!showPatientAppointments || appointmentForEdition">
+	<div class="row">
+	  <h2 class="col-8">Nova Consulta</h2>
+	  <div class="col d-flex justify-content-end">
+		<button class="btn btn-secondary" (click)="onReturn()">
+		  Cancelar
+		</button>
+	  </div>
+	</div>
+	<hr>
+	<div>
+	  <app-appointment-form
+		[patientId]="+patientId"
+		(appointmentAddedSavedOrDeleted)="onAppointmentAddedSavedOrDeleted()"
+	  >
+	  </app-appointment-form>
+	</div>
+  </div>
 </section>
 
 

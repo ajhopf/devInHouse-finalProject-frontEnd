@@ -5,6 +5,7 @@ import { ModalService } from "../../../../shared/services/modal.service";
 import { AppointmentsService } from "../../../../shared/services/appointments.service";
 import { MedicineService } from "../../../../shared/services/medicine.service";
 import { ToastrService } from "ngx-toastr";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
 	selector: 'app-appointment-form',
@@ -15,7 +16,6 @@ export class AppointmentFormComponent implements OnInit{
 	@ViewChild('appointmentForm') appointmentForm: NgForm | undefined;
 	@Output('appointmentAddedSavedOrDeleted') appointmentAddedSavedOrDeleted = new EventEmitter<any>();
 	@Input() patientId: number;
-	@Input() appointmentForEdition: Appointment | undefined;
  	MANDATORY: string = "../../../assets/images/obrigatorio.png";
 	appointmentId: number;
 	patientMedications: any[]
@@ -34,7 +34,8 @@ export class AppointmentFormComponent implements OnInit{
 		private medicineService: MedicineService,
 		private modalService: ModalService,
 		private toastr: ToastrService,
-		private appointmentsService: AppointmentsService) {}
+		private appointmentsService: AppointmentsService,
+		private activatedRoute: ActivatedRoute) {}
 
 	ngOnInit() {
 		this.appointment.pacientId = this.patientId
@@ -44,9 +45,21 @@ export class AppointmentFormComponent implements OnInit{
 			error: err => console.log(err)
 		})
 
-		if(this.appointmentForEdition) {
-			this.appointment = this.appointmentForEdition;
-		}
+		this.activatedRoute.paramMap.subscribe({
+			next: params => {
+				let appointmentIdFromParams = params.get('idConsulta')
+
+				if (appointmentIdFromParams) {
+					this.appointmentsService.getAppointmentsByPacientId(+this.patientId).subscribe({
+						next: (appointments: Appointment[]) => {
+							this.appointment = appointments.find(appointment => appointment.id == +appointmentIdFromParams)
+							this.appointmentId = +appointmentIdFromParams
+						},
+						error: err => console.log(err)
+					})
+				}
+			}
+		})
 	}
 
 	onAddAppointment() {
@@ -62,11 +75,10 @@ export class AppointmentFormComponent implements OnInit{
 	}
 
 	onSaveAppointment() {
-		this.appointmentsService.updateAppointment(this.appointmentForEdition.id, this.appointment).subscribe({
+		this.appointmentsService.updateAppointment(this.appointment.id, this.appointment).subscribe({
 			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
-				this.appointmentForEdition = undefined;
 				this.toastr.success("Consulta editada com sucesso.", "Operação Realizada")
 			},
 			error: err => this.toastr.error("Consulta não atualizada. Erro: " + err.message, "Operação não realizada")
@@ -74,11 +86,10 @@ export class AppointmentFormComponent implements OnInit{
 	}
 
 	onDeleteAppointment() {
-		this.appointmentsService.deleteAppointment(this.appointmentForEdition.id).subscribe({
+		this.appointmentsService.deleteAppointment(this.appointmentId).subscribe({
 			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
-				this.appointmentForEdition = undefined;
 				this.toastr.success("Consulta deletada com sucesso.", "Operação Realizada")
 			},
 			error: err => this.toastr.error("Consulta não deletada. Erro: " + err.message, "Operação não realizada")

@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Patient } from "../../../shared/models/patient.model";
 import { PacientService } from "../../../shared/services/pacient.service";
 import { AppointmentsService } from "../../../shared/services/appointments.service";
 import { Appointment } from "../../../shared/models/appointment.model";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-main-prontuario',
@@ -19,7 +19,8 @@ export class MainProntuarioComponent implements OnInit {
   constructor(
     private patientService: PacientService,
     private appointmentsService: AppointmentsService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
@@ -43,12 +44,10 @@ export class MainProntuarioComponent implements OnInit {
         })
       }
     })
-
-
-
   }
 
   accessAppointment(appointment: Appointment) {
+    this.router.navigate([`${this.patientId}/prontuario/consultas/${appointment.id}`])
     this.appointmentAccess.emit(appointment);
   }
 

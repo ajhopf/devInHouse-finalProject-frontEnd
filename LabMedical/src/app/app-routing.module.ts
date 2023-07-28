@@ -5,10 +5,8 @@ import { HomeComponent } from "./pages/home/home.component";
 import { AuthGuard } from "./shared/guards/auth.guard";
 import { NoneLayoutComponent } from "./shared/layouts/none-layout/none-layout.component";
 import { FullLayoutComponent } from "./shared/layouts/full-layout/full-layout.component";
-import { TesteComponent } from "./pages/teste/teste.component";
 import { RolesEnum } from "./shared/enums/roles.enum";
 import { RoleGuard } from "./shared/guards/role.guard";
-import { Teste2Component } from "./pages/teste/teste2/teste2.component";
 import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
 import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
 import { PacientFormComponent } from "./pages/pacient-form/pacient-form.component";
@@ -144,6 +142,9 @@ const routes: Routes = [
 							component: MainProntuarioComponent
 						}, {
 							path: 'consultas',
+							component: MainConsultasComponent
+						}, {
+							path: 'consultas/:idConsulta',
 							component: MainConsultasComponent
 						}, {
 							path: 'exames',
