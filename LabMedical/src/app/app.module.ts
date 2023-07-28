@@ -48,6 +48,7 @@ import { TesteListagemPacientesComponent } from './pages/teste-listagem-paciente
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
 import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 import { StatusPipe } from './shared/pipes/status.pipe';
+import { DietTableComponent } from './components/registers/diet/diet-table/diet-table.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { StatusPipe } from './shared/pipes/status.pipe';
     ModalComponent,
     ExamTableComponent,
     ExamFormComponent,
-    StatusPipe
+    StatusPipe,
+    DietTableComponent
   ],
     imports: [
         BrowserModule,

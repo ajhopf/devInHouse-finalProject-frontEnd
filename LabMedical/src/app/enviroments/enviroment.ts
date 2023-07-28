@@ -28,6 +28,9 @@ const URL_EXAMS: string = `${URL_PRINCIPAL}/exames`
 const URL_EXAMS_UPDATE: string = `${URL_PRINCIPAL}/exames/atualizar`
 const URL_EXAMS_REGISTER: string = `${URL_PRINCIPAL}/exames/cadastrar`
 
+const URL_DIETS = `${URL_PRINCIPAL}/dietas`
+
+const URL_DELETE_DIETS = `${URL_PRINCIPAL}/dietas`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
@@ -131,6 +134,8 @@ export const environment = {
   URL_EXAMS: URL_EXAMS,
   URL_EXAMS_UPDATE: URL_EXAMS_UPDATE,
   URL_EXAMS_REGISTER: URL_EXAMS_REGISTER,
+
+  URL_DIETS: URL_DIETS,
 
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
