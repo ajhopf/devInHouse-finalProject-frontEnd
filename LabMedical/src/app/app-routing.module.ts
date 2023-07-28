@@ -161,8 +161,14 @@ const routes: Routes = [
 						}, {
 							path: 'dietas',
 							component: MainDietasComponent
+						},{
+							path: 'dietas/:idDieta',
+							component: MainDietasComponent
 						}, {
 							path: 'exercicios',
+							component: MainExerciciosComponent
+						}, {
+							path: 'exercicios/:idExercicio',
 							component: MainExerciciosComponent
 						}]
 					}
