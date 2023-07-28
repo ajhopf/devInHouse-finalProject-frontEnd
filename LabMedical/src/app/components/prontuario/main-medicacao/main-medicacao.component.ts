@@ -16,7 +16,6 @@ export class MainMedicacaoComponent {
     this.patientId = localStorage.getItem('patientId')
   }
 
-
   changeTemplate(template: string, medicineId: string, acao: string) {
     this.template = template
     this.medicineId = medicineId

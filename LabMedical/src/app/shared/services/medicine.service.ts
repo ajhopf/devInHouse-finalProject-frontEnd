@@ -36,7 +36,6 @@ export class MedicineService {
       }
     })
   } 
-
   saveMedicine(campos:any, status:boolean): Observable<any> {
     	let medicine = newMedicine(campos,status)
 		let userAdmin = JSON.parse(localStorage.getItem("session"))
@@ -103,5 +102,4 @@ export class MedicineService {
 			map((response: HttpResponse<string>) => response.body)
 		)
 	}
-
 }

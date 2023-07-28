@@ -1,0 +1,191 @@
+<section>
+  <form #appointmentForm="ngForm" (ngSubmit)="onAddAppointment()">
+    <!--Appointment reason, date and time-->
+    <div class="row m-0 mb-3">
+      <!--reason-->
+      <div class="col-12 col-md px-0 pe-lg-4">
+        <label
+          for="reason"
+          class="form-label">Motivo da Consulta
+        </label>
+        <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+             class="d-inline-block align-text-top ms-2">
+        <input
+          #reason="ngModel"
+          id="reason"
+          name="reason"
+          class="form-control"
+          [ngClass]="(reason.invalid && reason.touched) ? 'invalidInput' : '' "
+          type="text"
+          [(ngModel)]="appointment.appointmentReason"
+          required
+          maxlength="64" minlength="8">
+        <span
+          *ngIf="reason.invalid && reason.touched"
+          class="text-danger">
+	  		O motivo da consulta deve conter ao menos 8 caracteres.
+		  </span>
+      </div>
+      <!--Date and time-->
+      <div class="col-12 p-0 col-lg mt-3 mt-lg-0">
+        <div class="row m-0">
+          <!--Date-->
+          <div class="col-12 col-sm px-0 pe-sm-2 mb-3 mb-sm-0">
+            <label for="appointmentDate" class="form-label">
+              Data da Consulta
+            </label>
+            <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+                 class="d-inline-block align-text-top ms-2">
+            <input
+              #date="ngModel"
+              type="date"
+              id="appointmentDate"
+              name="appointmentDate"
+              class="form-control"
+              [ngClass]="(date.invalid && date.touched) ? 'invalidInput' : '' "
+              required
+              [(ngModel)]="appointment.appointmentDate">
+            <span
+              *ngIf="date.invalid && date.touched"
+              class="text-danger">
+	  			Selecione uma data válida
+			  </span>
+          </div>
+          <!--Time-->
+          <div class="col-12 col-sm px-0 ps-sm-2">
+            <label for="appointmentTime" class="form-label">
+              Horário
+            </label>
+            <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+                 class="d-inline-block align-text-top ms-2">
+            <input
+              #time="ngModel"
+              type="time"
+              id="appointmentTime"
+              name="appointmentTime"
+              class="form-control"
+              [ngClass]="(time.invalid && time.touched) ? 'invalidInput' : '' "
+              required
+              [(ngModel)]="appointment.time"
+            >
+            <span
+              *ngIf="time.invalid && time.touched"
+              class="text-danger">
+	  			Selecione um horário válido.
+			  </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--Description-->
+    <div class="row m-0 mb-3">
+      <div class="col px-0">
+        <label
+          for="description"
+          class="form-label">
+          Descrição do Problema
+        </label>
+        <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+             class="d-inline-block align-text-top ms-2">
+        <textarea
+          #description="ngModel"
+          id="description"
+          name="description"
+          class="form-control"
+          [ngClass]="(description.invalid && description.touched) ? 'invalidInput' : '' "
+          required minlength="16" maxlength="1024"
+          rows="8"
+          [(ngModel)]="appointment.problemDescription" >
+        </textarea>
+
+        <span
+          *ngIf="description.invalid && description.touched"
+          class="text-danger">
+			A descrição deve conter ao menos 16 caracteres.
+		  </span>
+      </div>
+    </div>
+    <!--Medications-->
+    <div class="row m-0 mb-3">
+      <div class="col px-0">
+        <label
+          class="form-label">
+          Medicações Cadastradas Para o Paciente
+        </label>
+        <div *ngIf="patientMedications?.length > 0">
+          <select class="form-select" aria-label="Medications select" name="medicationId" [(ngModel)]="appointment.medicineId">
+            <option value=null >Não atribuir medicação</option>
+            <option
+              *ngFor="let medication of patientMedications"
+              [value]="medication.id">
+              {{ medication.medicineName }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <!--Dosage and Precautions-->
+    <div class="row m-0 mb-3">
+      <div class="col px-0">
+        <label
+          for="dosage"
+          class="form-label">
+          Dosagem e Precauções
+        </label>
+        <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+             class="d-inline-block align-text-top ms-2">
+        <input
+          #dosage="ngModel"
+          id="dosage"
+          name="dosage"
+          class="form-control"
+          [ngClass]="(dosage.invalid && dosage.touched) ? 'invalidInput' : '' "
+          required minlength="16" maxlength="256"
+          [(ngModel)]="appointment.dosageAndPrecautions" />
+
+        <span
+          *ngIf="dosage.invalid && dosage.touched"
+          class="text-danger">
+			Este campo deve conter ao menos 16 caracteres.
+		  </span>
+      </div>
+    </div>
+    <!--Submit-->
+    <div class="col-12 col-md d-flex py-2 justify-content-center justify-content-lg-end me-2">
+      <div
+        [ngbTooltip]="appointmentForm.invalid && appointmentId ? 'Todos campos com marcação devem ser preenchidos' :
+        ''">
+        <button
+          type="button"
+          class="btn btn-warning mx-1"
+          [disabled]="!appointmentForEdition || !appointmentForm.valid" (click)="onSaveAppointment()">
+          Salvar
+        </button>
+      </div>
+      <div
+        class="d-flex">
+        <button
+          type="button"
+          class="btn btn-danger mx-1"
+          [disabled]="!appointmentForEdition"
+          (click)="onDeleteAppointment()"
+        >
+          Excluir
+        </button>
+      </div>
+      <div
+        class="d-flex"
+        placement="top-right"
+        [ngbTooltip]="appointmentForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
+      >
+        <button
+          [disabled]="appointmentForm.invalid || appointmentForEdition"
+          class="btn btn-success mx-1"
+          type="submit"
+        >
+          Adicionar
+        </button>
+      </div>
+    </div>
+  </form>
+</section>

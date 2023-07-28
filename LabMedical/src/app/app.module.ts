@@ -47,8 +47,11 @@ import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.d
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
 import { TableMedicacaoComponent } from './components/prontuario/medicacao/table-medicacao/table-medicacao.component';
 import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-medicacao/form-medicacao.component';
+import { AppointmentFormComponent } from './components/prontuario/main-consultas/appointment-form/appointment-form.component';
+import { AppointmentTableComponent } from './components/prontuario/main-consultas/appointment-table/appointment-table.component';
+import { AppointmentSortingPipe } from './shared/pipes/appointment-sorting.pipe';
 import { MeasurementUnitPipe } from './shared/pipes/measurement-unit.pipe';
-import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe';
+import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe;
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
 import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 import { StatusPipe } from './shared/pipes/status.pipe';
@@ -94,6 +97,11 @@ import { StatusPipe } from './shared/pipes/status.pipe';
     ModalComponent,
     TableMedicacaoComponent,
     FormMedicacaoComponent,
+    ModalComponent,
+    AppointmentFormComponent,
+    AppointmentTableComponent,
+    AppointmentSortingPipe,
+    ModalComponent,
     MeasurementUnitPipe,
     MedicineTypePipe,
     ExamTableComponent,

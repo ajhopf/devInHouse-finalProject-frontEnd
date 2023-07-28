@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-center align-items-center mt-4">
     <main style="width:95%; height:86vh; background-color:white;"
         class='d-flex flex-column justify-content-between align-items-between mb-3'>
-        <app-barra-paciente></app-barra-paciente>
+        <app-barra-paciente (onPatientSelect)="onPatientSelect($event)"></app-barra-paciente>
         <section class="d-flex justify-content-between align-items-between flex-grow-1">
             <app-menu-prontuario class="m-2" style="width:20%" (menuProntuario)="setPageProntuario($event,'','-1','')"></app-menu-prontuario>
             <ng-container *ngIf="pageProntuario=='prontuario'">
@@ -11,7 +11,7 @@
                 <app-main-exames class="flex-grow-1 m-2"></app-main-exames>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='consultas'">
-                <app-main-consultas class="flex-grow-1 m-2"></app-main-consultas>
+                <app-main-consultas [patientId]="patientId" class="flex-grow-1 m-2"></app-main-consultas>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='medicacao'">
                 <app-main-medicacao class="flex-grow-1 m-2"></app-main-medicacao>

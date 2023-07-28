@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
 import { PatientService } from 'src/app/shared/services/patient.service';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
 
@@ -7,7 +7,9 @@ import { MedicineService } from 'src/app/shared/services/medicine.service';
   templateUrl: './barra-paciente.component.html',
   styleUrls: ['./barra-paciente.component.css']
 })
-export class BarraPacienteComponent {
+export class BarraPacienteComponent implements OnDestroy {
+	@Output('onPatientSelect') onPatientSelect = new EventEmitter<any>();
+
   IMAGEM_PADRAO = '../../../../../assets/user.png'
 
   idPaciente:string|null = null
@@ -16,7 +18,12 @@ export class BarraPacienteComponent {
 
   constructor(private patientService:PatientService, private medicineService:MedicineService){}
 
-  getPacientes(){
+	ngOnDestroy() {
+		localStorage.removeItem('patientId');
+		this.onPatientSelect.emit(undefined)
+	}
+
+	getPacientes(){
     this.patientService.getPatientes().subscribe({
 			next: (response) => {
         console.log(response.body)
@@ -37,11 +44,13 @@ export class BarraPacienteComponent {
         this.paciente = patient
       }
     }
+		this.onPatientSelect.emit(idPaciente);
   }
 
   resetarPaciente(){
     this.idPaciente = null
     localStorage.setItem('patientId',null)
+	  this.onPatientSelect.emit(undefined)
   }
 
   filtrar(busca:string){
