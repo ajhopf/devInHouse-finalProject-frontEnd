@@ -6,16 +6,16 @@
     <ng-container *ngIf="patientId != undefined">
       <div *ngIf="showPatientDiet && !dietForEdition">
         <div class="row">
-          <h2 class="col-10">Consultas de {{ patientName }}</h2>
+          <h2 class="col-10">Dietas de {{ patientName }}</h2>
           <div class="col">
-            <button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar consulta</button>
+            <button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar dieta</button>
           </div>
         </div>
         <hr>
   
         <app-diet-table
           [patientsDiets]="patientsDiets"
-          (editAppointment)="onEditAppointmentId($event)">
+          (editDiet)="onEditAppointmentId($event)">
         </app-diet-table>
       </div>
   

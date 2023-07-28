@@ -17,7 +17,7 @@
                 <app-main-medicacao class="flex-grow-1 m-2"></app-main-medicacao>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='dietas'">
-                <app-main-dietas class="flex-grow-1 m-2"></app-main-dietas>
+                <app-main-dietas [patientId]="patientId" class="flex-grow-1 m-2"></app-main-dietas>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='exercicios'">
                 <app-main-exercicios class="flex-grow-1 m-2"></app-main-exercicios>

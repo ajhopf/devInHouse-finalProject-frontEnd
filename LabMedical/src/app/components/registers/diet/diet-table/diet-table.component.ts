@@ -10,30 +10,30 @@ import { DietService } from 'src/app/shared/services/diet.service';
 })
 export class DietTableComponent {
   @Input() patientsDiets: DietModel[];
-  @Output('editAppointment') editAppointment = new EventEmitter<any>();
+  @Output('editDiet') editDiet = new EventEmitter<any>();
 
   constructor(private dietService: DietService, private toastr: ToastrService) {  }
 
 
-  onEditAppointment(appointmentId: number) {
-    console.log(appointmentId)
-    this.editAppointment.emit(appointmentId);
+  onEditdiet(dietId: number) {
+    console.log(dietId)
+    this.editDiet.emit(dietId);
   }
 
-  onDeactivateAppointment(appointment: DietModel) {
-    appointment.status = !appointment.status;
+  onDeactivateDiet(diet: DietModel) {
+    diet.status = !diet.status;
 
     let toastrMessage: string;
 
-    if (appointment.status) {
+    if (diet.status) {
       toastrMessage = "Consulta reativada"
     } else {
       toastrMessage = "Consulta desativada"
     }
 
-    // this.dietService.updateAppointment(appointment.id, appointment).subscribe({
+    // this.dietService.updatediet(diet.id, diet).subscribe({
     //   next: () => {
-    //     appointment.isActive ? this.toastr.success(toastrMessage) : this.toastr.warning(toastrMessage)
+    //     diet.isActive ? this.toastr.success(toastrMessage) : this.toastr.warning(toastrMessage)
     //   },
     //   error: (err: any) => this.toastr.error(err.message)
     // })
