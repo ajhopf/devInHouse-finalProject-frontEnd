@@ -20,7 +20,7 @@
                   class="flex-grow-1 m-2 overflow-y-auto overflow-x-hidden"  style="height: 70vh"></app-main-consultas>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='medicacao'">
-                <app-main-medicacao class="flex-grow-1 m-2"></app-main-medicacao>
+                <app-main-medicacao  [patientId]="patientId" class="flex-grow-1 m-2"></app-main-medicacao>
             </ng-container>
             <ng-container *ngIf="pageProntuario=='dietas'">
                 <app-main-dietas class="flex-grow-1 m-2"></app-main-dietas>

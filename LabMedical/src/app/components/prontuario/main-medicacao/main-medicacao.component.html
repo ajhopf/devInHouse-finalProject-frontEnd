@@ -4,13 +4,13 @@
     </div>
 </ng-container>
 <ng-container *ngIf="patientId!= 'null' && template=='form'">
-    <app-form-medicacao (pageChangeOutput)="changeTemplate('table','-1','')" [medicineId]="medicineId?medicineId:''" [acao]="acao"></app-form-medicacao>
+    <app-form-medicacao [patientId]="patientId" (pageChangeOutput)="changeTemplate('table','-1','')" [medicineId]="medicineId?medicineId:''" [acao]="acao"></app-form-medicacao>
 </ng-container>
 <ng-container *ngIf="patientId!= 'null' && template=='table'">
     <div style="height: 70vh; position:relative;">
         <div style="max-height:100%; overflow-x: hidden; overflow-y:auto;">
-            <app-table-medicacao (pageOutput)="changeTemplate('form',$event,'edit')"></app-table-medicacao>
-            <button type="button" class="btn btn-primary btn-lg"
+            <app-table-medicacao [patientId]="patientId" (pageOutput)="changeTemplate('form',$event,'edit')"></app-table-medicacao>
+            <button *ngIf="patientId!= 'null' && patientId" type="button" class="btn btn-primary btn-lg"
                 (click)="changeTemplate('form','-1','add')">Adicionar</button>
         </div>
     </div>

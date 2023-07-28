@@ -7,14 +7,10 @@ import { Component, Input } from '@angular/core';
 })
 export class MainMedicacaoComponent {
 
-  patientId:any = 'null'
+  @Input() patientId:any = 'null'
   @Input() template: string = 'table'
   @Input() medicineId: any
   @Input() acao: string = ''
-
-  ngOnInit(){
-    this.patientId = localStorage.getItem('patientId')
-  }
 
   changeTemplate(template: string, medicineId: string, acao: string) {
     this.template = template
