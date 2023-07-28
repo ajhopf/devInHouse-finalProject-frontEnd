@@ -12,10 +12,10 @@
     <tbody>
     <tr *ngFor="let diet of patientsDiets ; let i = index"
         [className]="diet.status ? '' : 'text-decoration-line-through'">
-      <td>{{diet.name}}</td>
-      <td>{{diet.date | date:"dd/MM/yyyy" }}</td>
+      <td>{{diet.dietName}}</td>
+      <td>{{diet.dietDate | date:"dd/MM/yyyy" }}</td>
       <td>{{diet.time}}</td>
-      <td>{{diet.type}}</td>
+      <td>{{diet.dietType}}</td>
       <td>{{diet.status | statusName}}</td>
       <td>
         <button

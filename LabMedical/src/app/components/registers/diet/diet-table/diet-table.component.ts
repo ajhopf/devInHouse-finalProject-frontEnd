@@ -26,9 +26,9 @@ export class DietTableComponent {
     let toastrMessage: string;
 
     if (diet.status) {
-      toastrMessage = "Consulta reativada"
+      toastrMessage = "dieta reativada"
     } else {
-      toastrMessage = "Consulta desativada"
+      toastrMessage = "dieta desativada"
     }
 
     // this.dietService.updatediet(diet.id, diet).subscribe({

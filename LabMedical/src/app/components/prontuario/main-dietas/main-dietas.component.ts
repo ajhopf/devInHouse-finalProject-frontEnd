@@ -32,7 +32,7 @@ export class MainDietasComponent {
         error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
 
-     this.onAppointmentAddedSavedOrDeleted();
+     this.onDietAddedSavedOrDeleted();
     }
   }
 
@@ -45,7 +45,7 @@ export class MainDietasComponent {
     this.dietForEdition = undefined;
   }
 
-  onAppointmentAddedSavedOrDeleted() {
+  onDietAddedSavedOrDeleted() {
     this.showPatientDiet = true;
     this.dietForEdition = undefined;
 
