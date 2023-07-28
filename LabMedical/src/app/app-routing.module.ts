@@ -150,7 +150,13 @@ const routes: Routes = [
 							path: 'exames',
 							component: MainExamesComponent
 						}, {
+							path: 'exames/:idExame',
+							component: MainExamesComponent
+						}, {
 							path: 'medicacao',
+							component: MainMedicacaoComponent
+						}, {
+							path: 'medicacao/:idMedicacao',
 							component: MainMedicacaoComponent
 						}, {
 							path: 'dietas',

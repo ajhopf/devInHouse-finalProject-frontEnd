@@ -1,5 +1,5 @@
 <section>
-  <div *ngIf="showPatientAppointments && !appointmentForEdition">
+  <div *ngIf="showPatientAppointments">
 	<div class="row">
 	  <h2 class="col-10">Consultas de {{ patientName }}</h2>
 	  <div class="col">
@@ -12,7 +12,7 @@
 						   [patientId]="+patientId"></app-appointment-table>
   </div>
 
-  <div *ngIf="!showPatientAppointments || appointmentForEdition">
+  <div *ngIf="!showPatientAppointments">
 	<div class="row">
 	  <h2 class="col-8">Nova Consulta</h2>
 	  <div class="col d-flex justify-content-end">

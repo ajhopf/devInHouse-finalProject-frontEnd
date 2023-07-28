@@ -11,12 +11,10 @@ import { ActivatedRoute, Router } from "@angular/router";
   styleUrls: ['./main-consultas.component.css']
 })
 export class MainConsultasComponent implements OnInit {
-  // @Input('patientId') patientId: string;
   patientId: string;
   showPatientAppointments: boolean = true;
   patientName: string;
   patientsAppointments: Appointment[];
-  appointmentForEdition: Appointment;
 
   constructor(
     private appointmentsService: AppointmentsService,

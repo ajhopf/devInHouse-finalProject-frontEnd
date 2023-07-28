@@ -1,4 +1,4 @@
-<section class="simplifiedView">
+<section style="height: 70vh">
   <ng-container *ngIf="patientId == undefined">
 	<p>Selecione um paciente</p>
   </ng-container>
@@ -12,17 +12,158 @@
 	</ng-container>
 
 
-	<hr>
-	<h3>Consultas</h3>
-	<hr>
-	<div *ngFor="let appointment of patientAppointments">
-	  <h4><span class="fw-bold">Motivo da Consulta: </span> {{ appointment.appointmentReason }}</h4>
-	  <p><span class="fw-bold">Data: </span>{{ appointment.appointmentDate | date: "dd/MM/yyyy"}}</p>
-	  <p><span class="fw-bold">Horário: </span>{{ appointment.time }}</p>
-	  <p><span class="fw-bold">Descrição do Problema: </span>{{ appointment.problemDescription }}</p>
-	  <p><span class="fw-bold">Dosagem e Precauções: </span>{{ appointment.dosageAndPrecautions }}</p>
-	  <button (click)="accessAppointment(appointment)">Acessar</button>
-	  <hr>
+	<div class="accordion accordion-flush" id="registersAccordion">
+	  <!--Consultas-->
+	  <div class="accordion-item" >
+		<h3 class="accordion-header">
+		  <button
+			class="accordion-button collapsed fs-3"
+			type="button" data-bs-toggle="collapse"
+			data-bs-target="#appointmentsAccordion"
+			aria-expanded="false"
+			aria-controls="appointmentsAccordion">
+			Consultas
+		  </button>
+		</h3>
+		<div
+		  id="appointmentsAccordion"
+		  class="accordion-collapse collapse"
+		  data-bs-parent="#registersAccordion">
+		  <div class="accordion-body">
+			<div *ngIf="!emptyAppointments">
+			  <div *ngFor="let appointment of patientAppointments | appointmentSortingPipe">
+				<h4><span class="fw-bold">Motivo da Consulta: </span> {{ appointment.appointmentReason }}</h4>
+				<p><span class="fw-bold">Data: </span>{{ appointment.appointmentDate | date: "dd/MM/yyyy"}}</p>
+				<p><span class="fw-bold">Horário: </span>{{ appointment.time }}</p>
+				<p><span class="fw-bold">Descrição do Problema: </span>{{ appointment.problemDescription }}</p>
+				<p><span class="fw-bold">Dosagem e Precauções: </span>{{ appointment.dosageAndPrecautions }}</p>
+				<button class="btn btn-secondary" (click)="accessAppointment(appointment)">Acessar</button>
+				<hr>
+			  </div>
+			</div>
+			<div *ngIf="emptyAppointments">
+			  <p>Paciente não possui consultas cadastradas.</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+		<!--Exames-->
+	  <div class="accordion-item" >
+		<h3 class="accordion-header">
+		  <button
+			class="accordion-button collapsed fs-3"
+			type="button" data-bs-toggle="collapse"
+			data-bs-target="#examsAccordion"
+			aria-expanded="false"
+			aria-controls="examsAccordion">
+			Exames
+		  </button>
+		</h3>
+		<div
+		  id="examsAccordion"
+		  class="accordion-collapse collapse"
+		  data-bs-parent="#registersAccordion">
+		  <div class="accordion-body">
+			<div *ngIf="emptyExams">
+			  <p>Paciente não possui exames cadastrados</p>
+			</div>
+			<div *ngIf="!emptyExams" >
+			  <div *ngFor="let exam of patientExams">
+				<h4><span class="fw-bold">Nome do Exame: </span> {{ exam.name }}</h4>
+				<p><span class="fw-bold">Data: </span>{{ exam.date }}</p>
+				<p><span class="fw-bold">Horário: </span>{{ exam.time }}</p>
+				<p><span class="fw-bold">Tipo do Exame: </span>{{ exam.type }}</p>
+				<p><span class="fw-bold">Dosagem e Precauções: </span>{{ exam.documentUrl }}</p>
+				<button class="btn btn-secondary" (click)="accessExam(exam)">Acessar</button>
+				<hr>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+		<!--Medications-->
+	  <div class="accordion-item" >
+		<h3 class="accordion-header">
+		  <button
+			class="accordion-button collapsed fs-3"
+			type="button" data-bs-toggle="collapse"
+			data-bs-target="#medicationAccordion"
+			aria-expanded="false"
+			aria-controls="medicationAccordion">
+			Medicamentos
+		  </button>
+		</h3>
+		<div
+		  id="medicationAccordion"
+		  class="accordion-collapse collapse"
+		  data-bs-parent="#registersAccordion">
+		  <div class="accordion-body">
+			<div *ngIf="emptyMedications">
+			  <p>Paciente não possui medicações cadastrados</p>
+			</div>
+			<div *ngIf="!emptyMedications" >
+			  <div *ngFor="let medication of patientMedications">
+				<h4><span class="fw-bold">Nome da Medicação: </span> {{ medication.medicineName  }}</h4>
+				<p><span class="fw-bold">Data: </span>{{ medication.medicineDate }}</p>
+				<p><span class="fw-bold">Horário: </span>{{ medication.time }}</p>
+				<p><span class="fw-bold">Tipo da Medicação: </span>{{ medication.type }}</p>
+				<p><span class="fw-bold">Quantidade: </span>{{ medication.quantity }}</p>
+				<p><span class="fw-bold">Unidade de Medida: </span>{{ medication.measurementUnit }}</p>
+				<p><span class="fw-bold">Comentários: </span>{{ medication.comments }}</p>
+				<button class="btn btn-secondary" (click)="accessMedication(medication)">Acessar</button>
+				<hr>
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  	<!--Diets-->
+	  <div class="accordion-item" >
+		<h3 class="accordion-header">
+		  <button
+			class="accordion-button collapsed fs-3"
+			type="button" data-bs-toggle="collapse"
+			data-bs-target="#dietsAccordion"
+			aria-expanded="false"
+			aria-controls="dietsAccordion">
+			Dietas
+		  </button>
+		</h3>
+		<div
+		  id="dietsAccordion"
+		  class="accordion-collapse collapse"
+		  data-bs-parent="#registersAccordion">
+		  <div class="accordion-body">
+			<div *ngIf="emptyDiets">
+			  <p>Paciente não possui dietas cadastradas</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  	<!--Exercícios-->
+	  <div class="accordion-item" >
+		<h3 class="accordion-header">
+		  <button
+			class="accordion-button collapsed fs-3"
+			type="button" data-bs-toggle="collapse"
+			data-bs-target="#exerciseAccordion"
+			aria-expanded="false"
+			aria-controls="exerciseAccordion">
+			Exercícios
+		  </button>
+		</h3>
+		<div
+		  id="exerciseAccordion"
+		  class="accordion-collapse collapse"
+		  data-bs-parent="#registersAccordion">
+		  <div class="accordion-body">
+			<div *ngIf="emptyExercises">
+			  <p>Paciente não possui exercícios cadastrados</p>
+			</div>
+		  </div>
+		</div>
+	  </div>
 	</div>
+
   </ng-container>
 </section>
