@@ -179,7 +179,7 @@ const routes: Routes = [
 	{
 		path: 'costumizacao',
 		canActivate: [AuthGuard, RoleGuard],
-		title: 'Customização do sistema',
+		title: 'Customização do Sistema',
 		data: {
 			requiredRoles: [RolesEnum.ROLE_ADMIN]
 		},
