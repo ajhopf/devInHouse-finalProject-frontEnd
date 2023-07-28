@@ -23,14 +23,16 @@ const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
 const URL_PATIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
+
+//Medicine Controller endpoints
+const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
+
 //Exam controller endpoints
 const URL_EXAMS: string = `${URL_PRINCIPAL}/exames`
 const URL_EXAMS_UPDATE: string = `${URL_PRINCIPAL}/exames/atualizar`
 const URL_EXAMS_REGISTER: string = `${URL_PRINCIPAL}/exames/cadastrar`
 
 const URL_DIETS = `${URL_PRINCIPAL}/dietas`
-
-const URL_DELETE_DIETS = `${URL_PRINCIPAL}/dietas`
 
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
@@ -124,6 +126,8 @@ export const environment = {
   URL_APPOINTMENTS: URL_APPOINTMENTS,
   URL_PATIENT_APPOINTMENTS: URL_PATIENT_APPOINTMENTS,
   URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
+
+  URL_MEDICINES: URL_MEDICINES,
 
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,

@@ -1,0 +1,80 @@
+<div style="height: 65vh; position:relative;" class="m-2">
+    <div style="max-height:100%; overflow-x: hidden; overflow-y:auto;">
+        <form class="row" #consultaForm="ngForm" (ngSubmit)="cadastrar(consultaForm,$event.submitter.id)">
+            <h5>Medicação</h5>
+            <div class="col-md-6 mt-2">
+                <label for="medicineName" class="form-label">Nome do Medicamento</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <input type="text" class="form-control" name="medicineName" #medicineName='ngModel' [(ngModel)]="medicine.medicineName" required minlength="5"
+                    maxlength="100">
+                <div *ngIf="medicineName.errors && medicineName.touched" class="p-1 text-danger">
+                    {{medicineName.errors['required']?'Preencha esse campo':'Campo fora do tamanho obrigatório'}}
+                </div>
+            </div>
+            <div class="col-md-2 mt-2">
+                <label for="nasc" class="form-label">Data da Medicação</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <input type="date" class="form-control" name='data' #data='ngModel' [(ngModel)]="dataAtual" required>
+                <div *ngIf="data.errors && data.touched" class="p-1 text-danger">
+                    Preencha esse campo
+                </div>
+            </div>
+            <div class="col-md-2 mt-2">
+                <label for="nasc" class="form-label">Horário</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <input type="time" class="form-control" name='hora' #hora='ngModel' [(ngModel)]="horaAtual" required>
+                <div *ngIf="hora.errors && hora.touched" class="p-1 text-danger">
+                    Preencha esse campo
+                </div>
+            </div>
+            <div class="col-md-3 mt-2">
+                <label for="desc" class="form-label">Tipo do Medicamento</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <select class="form-select" name="medicineType" #medicineType='ngModel'[(ngModel)]="medicine.type" required>
+                    <option value="CAPSULE">Cápsula</option>
+                    <option value="PILL">Comprimido</option>
+                    <option value="LIQUID">Líquido</option>
+                    <option value="CREAM">Creme</option>
+                    <option value="GEL">Gel</option>
+                    <option value="INHALATION">Inalação</option>
+                    <option value="INJECTION">Injeção</option>
+                    <option value="SPRAY">Spray</option>
+                  </select>
+            </div>
+            <div class="col-md-1 mt-2">
+                <label for="motivo" class="form-label">Dose</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <input type="text" class="form-control" name="quantity" #quantity='ngModel' [(ngModel)]="medicine.quantity" required>
+                <div *ngIf="quantity.errors && quantity.touched" class="p-1 text-danger">
+                    {{'Preencha esse campo'}}
+                </div>
+            </div>
+           <div class="col-md-2 mt-2">
+                <label for="desc" class="form-label">Unidade</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <select class="form-select" name="measurementUnit" #measurementUnit='ngModel' [(ngModel)]="medicine.measurementUnit">
+                    <option value="MILLIGRAM">mg</option>
+                    <option value="MICROGRAM">mcg</option>
+                    <option value="GRAM">g</option>
+                    <option value="MILLILITER">mL</option>
+                    <option value="PERCENTAGE">%</option>
+                  </select>
+            </div>
+            <div class="col-md-4 mt-2">
+                <label for="motivo" class="form-label">Observações</label>
+                <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10" class="d-inline-block align-text-top">
+                <input type="text" class="form-control" name="comments" #comments='ngModel' [(ngModel)]="medicine.comments" required minlength="10"
+                    maxlength="1000">
+                <div *ngIf="comments.errors && comments.touched" class="p-1 text-danger">
+                    {{comments.errors['required']?'Preencha esse campo':'Campo fora do tamanho obrigatório'}}
+                </div>
+            </div>
+            <div class="col-12 mt-5">
+                <button type="button" class="btn btn-secondary btn-lg" (click)="voltar()">Cancelar</button>
+                <button type="submit" class="btn btn-lg ms-2" [ngClass]="disabledAdd?'btn-outline-secondary':'btn-primary'" [disabled]="disabledAdd" id="add">Adicionar</button>
+                <button type="submit" class="btn btn-lg ms-2" [ngClass]="disabledSave?'btn-outline-secondary':'btn-success'" [disabled]="disabledSave" id="edit">Salvar</button>
+                <button type="submit" class="btn btn-lg ms-2" [ngClass]="disabledDelete?'btn-outline-secondary':'btn-danger'" [disabled]="disabledDelete" id="delete">Excluir</button>
+            </div>
+        </form>
+    </div>
+</div>
