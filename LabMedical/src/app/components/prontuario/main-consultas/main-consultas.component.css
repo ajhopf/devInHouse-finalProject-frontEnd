@@ -1,0 +1,4 @@
+.appointmentsList {
+    height: 60vh;
+    overflow: auto;
+}

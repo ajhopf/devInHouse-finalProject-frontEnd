@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./prontuario-eletronico.component.css']
 })
 export class ProntuarioEletronicoComponent {
+  patientId: string;
   pageProntuario = 'prontuario'
   exame: any
   consulta: any
@@ -18,4 +19,7 @@ export class ProntuarioEletronicoComponent {
     this.acao = acao
   }
 
+  onPatientSelect(event: string): void {0
+    this.patientId = event;
+  }
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MainProntuarioComponent } from './main-prontuario.component';
+import { ExamFormComponent } from './exam-form.component';
 
-describe('MainProntuarioComponent', () => {
-  let component: MainProntuarioComponent;
-  let fixture: ComponentFixture<MainProntuarioComponent>;
+describe('ExamFormComponent', () => {
+  let component: ExamFormComponent;
+  let fixture: ComponentFixture<ExamFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MainProntuarioComponent ]
+      declarations: [ ExamFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(MainProntuarioComponent);
+    fixture = TestBed.createComponent(ExamFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

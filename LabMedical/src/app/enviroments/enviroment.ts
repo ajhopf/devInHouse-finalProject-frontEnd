@@ -23,6 +23,15 @@ const URL_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas`
 const URL_PATIENT_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas?pacientId=`
 const URL_POST_APPOINTMENTS: string = `${URL_PRINCIPAL}/consultas/cadastrar`
 
+
+//Medicine Controller endpoints
+const URL_MEDICINES: string = `${URL_PRINCIPAL}/medicamentos`
+
+//Exam controller endpoints
+const URL_EXAMS: string = `${URL_PRINCIPAL}/exames`
+const URL_EXAMS_UPDATE: string = `${URL_PRINCIPAL}/exames/atualizar`
+const URL_EXAMS_REGISTER: string = `${URL_PRINCIPAL}/exames/cadastrar`
+
 const URL_POST_LOG: string = `${URL_PRINCIPAL}/logs/cadastrar`;
 const URL_LOGOUT: string = `${URL_PRINCIPAL}/auth/logout`
 const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
@@ -30,6 +39,9 @@ const URL_LISTAR_LOG: string = `${URL_PRINCIPAL}/logs/listar`
 
 //Config controller endpoints
 const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
+
+//Stats endpoints
+const URL_STATS:string = `${URL_PRINCIPAL}/estatisticas`
 
 const ROUTES: RouteModel[] = [
   {
@@ -116,15 +128,22 @@ export const environment = {
   URL_PATIENT_APPOINTMENTS: URL_PATIENT_APPOINTMENTS,
   URL_POST_APPOINTMENTS: URL_POST_APPOINTMENTS,
 
+  URL_MEDICINES: URL_MEDICINES,
+
   URL_GET_ALL_USERS: URL_GET_ALL_USERS,
   URL_POST_REGISTER_USERS: URL_POST_REGISTER_USERS,
   URL_GET_USER_BY_ID: URL_GET_USER_BY_ID,
   URL_PUT_UPDATE_USER: URL_PUT_UPDATE_USER,
   URL_DEL_USER_BY_ID: URL_DEL_USER_BY_ID,
 
+  URL_EXAMS: URL_EXAMS,
+  URL_EXAMS_UPDATE: URL_EXAMS_UPDATE,
+  URL_EXAMS_REGISTER: URL_EXAMS_REGISTER,
+
   URL_LOGOUT: URL_LOGOUT,
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
+  URL_STATS: URL_STATS,
   ROUTES: ROUTES
 };
 

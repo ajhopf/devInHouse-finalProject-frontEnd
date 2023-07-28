@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ExamService } from 'src/app/shared/services/exam.service';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main-exames',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-exames.component.css']
 })
 export class MainExamesComponent {
+  constructor(private examService: ExamService ){
 
+  }
+  
 }

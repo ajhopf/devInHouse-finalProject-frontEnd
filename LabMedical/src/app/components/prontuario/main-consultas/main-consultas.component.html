@@ -1,1 +1,41 @@
-<p>main-consultas works!</p>
+<section>
+  <div *ngIf="showPatientAppointments">
+	<div class="row">
+	  <h2 class="col-10">Consultas de {{ patientName }}</h2>
+	  <div class="col">
+		<button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar consulta</button>
+	  </div>
+	</div>
+	<hr>
+
+	<app-appointment-table [patientsAppointments]="patientsAppointments"
+						   [patientId]="+patientId"></app-appointment-table>
+  </div>
+
+  <div *ngIf="!showPatientAppointments">
+	<div class="row">
+	  <h2 class="col-8">Nova Consulta</h2>
+	  <div class="col d-flex justify-content-end">
+		<button class="btn btn-secondary" (click)="onReturn()">
+		  Cancelar
+		</button>
+	  </div>
+	</div>
+	<hr>
+	<div>
+	  <app-appointment-form
+		[patientId]="+patientId"
+		(appointmentAddedSavedOrDeleted)="onAppointmentAddedSavedOrDeleted()"
+	  >
+	  </app-appointment-form>
+	</div>
+  </div>
+</section>
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+<div class="container-fluid p-5" *ngIf="!openFormRegister">
+    <div class="d-flex flex-column justify-content-around child-container p-5">
+        <h4 class="text-center">Lista de Exames</h4>
+      <table class="table table-striped table-bordered">
+          <thead class="table-primary text-center">
+            <tr>
+              <th scope="col">Nome Exame</th>
+              <th scope="col">Data</th>
+              <th scope="col">Hora</th>
+              <th scope="col">Status</th>
+              <th scope="col">Anexo</th>
+              <th scope="col" *ngIf="pacientId">Opções</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="examList.length > 0; else empty">
+                <tr *ngFor="let exam of examList" class="text-center">
+                    <td>{{exam.name}}</td>
+                    <td>{{exam.date}}</td>
+                    <td>{{exam.time}}</td>
+                    <td>{{exam.status | statusName}}</td>
+                   <td *ngIf="exam.documentUrl; else noAnex">
+                    <a [href]="exam.documentUrl" target="_blank">
+                      <img class="img-fluid ms-1"
+                      width="30" height="30" [src]="ANEXO" alt="anexo">
+                    </a>
+                   </td>
+                   <td *ngIf="pacientId"><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
+                    width="30" height="30" (click)="examUpdate(exam.id)"></button></td>
+                  </tr>
+          </tbody>
+          <ng-template #noAnex>
+            <td>
+              -
+            </td>
+          </ng-template>
+          <ng-template #empty class="container">
+            <div class="text-center">
+                 <p>Não existem exames cadastrados para o paciente</p>
+            </div>
+        </ng-template>
+        </table>
+        <div *ngIf="pacientId">
+          <button type="button" class="btn btn-primary btn-lg " width='50' (click)="openForm(true)">Adicionar</button>
+        </div>
+    </div>
+  </div>
+ <app-exam-form *ngIf="openFormRegister" [ExamIdUpdate]="examIdUpdate" (closeModal)="openForm($event)"></app-exam-form>

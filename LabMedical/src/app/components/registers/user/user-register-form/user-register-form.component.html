@@ -63,12 +63,12 @@
         <label for="role" class="form-label">Tipo</label>
         <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
         class="d-inline-block align-text-top">
-        <select class="form-select" aria-label="role" name="role" #genero='ngModel'[(ngModel)]="user.role" required (click)="validForm()">
+        <select class="form-select" aria-label="role" name="role" #role='ngModel'[(ngModel)]="user.role" required (click)="validForm()">
           <option value="ROLE_NURSE">Enfermeiro</option>
           <option value="ROLE_DOCTOR">Médico</option>
           <option value="ROLE_ADMIN">Administrador</option>
         </select>
-        <div *ngIf="genero.errors && genero.touched" class="p-1 text-danger">
+        <div *ngIf="role.errors && role.touched" class="p-1 text-danger">
           Preencha esse campo
         </div>
       </div>

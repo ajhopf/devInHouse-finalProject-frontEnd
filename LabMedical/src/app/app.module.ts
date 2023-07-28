@@ -45,7 +45,6 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
-import { FormExerciseComponent } from './components/form-exercise/form-exercise.component';
 
 @NgModule({
   declarations: [
@@ -87,18 +86,37 @@ import { FormExerciseComponent } from './components/form-exercise/form-exercise.
     SystemCustomizationComponent,
     ModalComponent,
     FormExerciseComponent
+    ModalComponent,
+    TableMedicacaoComponent,
+    FormMedicacaoComponent,
+    ModalComponent,
+    AppointmentFormComponent,
+    AppointmentTableComponent,
+    AppointmentSortingPipe,
+    ModalComponent,
+    MeasurementUnitPipe,
+    MedicineTypePipe,
+    ExamTableComponent,
+    ExamFormComponent,
+    StatusPipe,
+    AlergiesListComponent,
+    SpecialCareListComponent,
+    AlergiesListComponent,
+    PatientNotSelectedComponent,
+    PatientSelectedComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        NgbModule,
-        HttpClientModule,
-        NgOptimizedImage,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot()
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NgbModule,
+    HttpClientModule,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    RouterOutlet
+  ],
   providers: [
     provideAnimations(), // required animations providers
     provideToastr(),
