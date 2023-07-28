@@ -1,10 +1,28 @@
-<section>
+<section class="simplifiedView">
   <ng-container *ngIf="patientId == undefined">
 	<p>Selecione um paciente</p>
   </ng-container>
 
   <ng-container *ngIf="patientId != undefined">
-	<app-alergies-list [alergiesList]="patient.alergies"></app-alergies-list>
-	<app-special-care-list [specialCareList]="patient.specialCare"></app-special-care-list>
+	<ng-container *ngIf="patient?.alergies != undefined && patient?.alergies != null">
+	  <app-alergies-list [alergiesList]="patient.alergies"></app-alergies-list>
+	</ng-container>
+	<ng-container *ngIf="patient?.specialCare != undefined && patient?.specialCare != null">
+	  <app-special-care-list [specialCareList]="patient.specialCare"></app-special-care-list>
+	</ng-container>
+
+
+	<hr>
+	<h3>Consultas</h3>
+	<hr>
+	<div *ngFor="let appointment of patientAppointments">
+	  <h4><span class="fw-bold">Motivo da Consulta: </span> {{ appointment.appointmentReason }}</h4>
+	  <p><span class="fw-bold">Data: </span>{{ appointment.appointmentDate | date: "dd/MM/yyyy"}}</p>
+	  <p><span class="fw-bold">Horário: </span>{{ appointment.time }}</p>
+	  <p><span class="fw-bold">Descrição do Problema: </span>{{ appointment.problemDescription }}</p>
+	  <p><span class="fw-bold">Dosagem e Precauções: </span>{{ appointment.dosageAndPrecautions }}</p>
+	  <button (click)="accessAppointment(appointment)">Acessar</button>
+	  <hr>
+	</div>
   </ng-container>
 </section>

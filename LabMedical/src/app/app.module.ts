@@ -57,6 +57,9 @@ import { ExamFormComponent } from './components/registers/exam/exam-form/exam-fo
 import { StatusPipe } from './shared/pipes/status.pipe';
 import { SpecialCareListComponent } from './components/prontuario/main-prontuario/special-care-list/special-care-list.component';
 import { AlergiesListComponent } from "./components/prontuario/main-prontuario/alergies-list/alergies-list.component";
+import { PatientNotSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-not-selected/patient-not-selected.component';
+import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component';
+import { RouterOutlet } from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -111,19 +114,22 @@ import { AlergiesListComponent } from "./components/prontuario/main-prontuario/a
     StatusPipe,
     AlergiesListComponent,
     SpecialCareListComponent,
-    AlergiesListComponent
+    AlergiesListComponent,
+    PatientNotSelectedComponent,
+    PatientSelectedComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        NgbModule,
-        HttpClientModule,
-        NgOptimizedImage,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        ToastrModule.forRoot()
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    NgbModule,
+    HttpClientModule,
+    NgOptimizedImage,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    RouterOutlet
+  ],
   providers: [
     provideAnimations(), // required animations providers
     provideToastr(),

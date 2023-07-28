@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-menu-prontuario',
@@ -10,12 +11,32 @@ export class MenuProntuarioComponent {
 
   userRole:any
 
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute) {
+  }
+
+
   ngOnInit(): void {
     this.userRole = JSON.parse(localStorage.getItem('session')).role
   }
-
   
   changePage(page:string){
-    this.menuProntuario.emit(page)
+    this.activatedRoute.paramMap.subscribe(params => {
+      let patientId = params.get('patientId')
+      let route;
+
+      if (page == "prontuario") {
+        route = `${patientId}/prontuario`
+      } else {
+        route = `${patientId}/prontuario/${page}`;
+      }
+
+      this.router.navigate([route])
+    })
+
+    // let route = `/prontuario/${page}`;
+    // this.router.navigate([route])
+    // this.menuProntuario.emit(page)
   }
 }
