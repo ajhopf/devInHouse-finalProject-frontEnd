@@ -61,6 +61,7 @@ import { AlergiesListComponent } from "./components/prontuario/main-prontuario/a
 import { PatientNotSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-not-selected/patient-not-selected.component';
 import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component';
 import { RouterOutlet } from "@angular/router";
+import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
 
 @NgModule({
   declarations: [
@@ -117,7 +118,8 @@ import { RouterOutlet } from "@angular/router";
     AlergiesListComponent,
     SpecialCareListComponent,
     PatientNotSelectedComponent,
-    PatientSelectedComponent
+    PatientSelectedComponent,
+    DietFormComponent
   ],
   imports: [
     BrowserModule,

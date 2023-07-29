@@ -1,4 +1,5 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DietModel } from 'src/app/shared/models/diet.model';
 import { Patient } from 'src/app/shared/models/patient.model';
 import { DietService } from 'src/app/shared/services/diet.service';
@@ -10,20 +11,23 @@ import { PacientService } from 'src/app/shared/services/pacient.service';
   styleUrls: ['./main-dietas.component.css']
 })
 export class MainDietasComponent {
-  @Input('patientId') patientId: string;
+  patientId: string;
   showPatientDiet: boolean = true;
   patientName: string;
   patientsDiets: DietModel[];
-  dietForEdition: DietModel;
 
   constructor(
     private dietService: DietService,
-    private patientService: PacientService
+    private patientService: PacientService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+  ngOnInit(): void {
+    let url = this.router.url;
+    let indexOfSecondBar = url.split("/", 2).join("/").length;
+    this.patientId = url.substring(1, indexOfSecondBar);
     if (this.patientId != undefined || this.patientId != null) {
       this.patientService.getPatient(+this.patientId).subscribe({
         next: (patient: Patient) => {
@@ -31,23 +35,31 @@ export class MainDietasComponent {
         },
         error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
-
-     this.onDietAddedSavedOrDeleted();
+     this.dietAddedSavedOrDeleted();
     }
+
+    this.activatedRoute.paramMap.subscribe({
+      next: params => {
+        let idConsulta = params.get('idDieta');
+
+        if (idConsulta) {
+          this.showPatientDiet = false;
+        }
+      }
+    })
   }
 
-  onAddNewAppointment() {
+  onAddNewDiet() {
     this.showPatientDiet = false;
   }
 
   onReturn() {
     this.showPatientDiet = true;
-    this.dietForEdition = undefined;
+    this.router.navigate([`${this.patientId}/prontuario/dietas`])
   }
 
-  onDietAddedSavedOrDeleted() {
+  dietAddedSavedOrDeleted() {
     this.showPatientDiet = true;
-    this.dietForEdition = undefined;
 
     this.dietService.getDietByPacientId(+this.patientId).subscribe({
       next: (value: DietModel[]) => {
@@ -55,10 +67,6 @@ export class MainDietasComponent {
       },
       error: err => console.log(err)
     })
-  }
-
-  onEditAppointmentId(dietId: number) {
-    this.dietForEdition = this.patientsDiets.find(diet => diet.id == dietId)
   }
 
 }

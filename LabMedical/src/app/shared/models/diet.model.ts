@@ -8,5 +8,5 @@ export interface DietModel{
     dietType: DietEnum,
     description: string,
     status: boolean,
-    patientId?: number
+    pacientId?: number
 }

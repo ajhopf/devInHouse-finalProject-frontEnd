@@ -28,7 +28,6 @@ export class MainConsultasComponent implements OnInit {
     let url = this.router.url;
     let indexOfSecondBar = url.split("/", 2).join("/").length;
     this.patientId = url.substring(1, indexOfSecondBar);
-
     if (this.patientId != undefined || this.patientId != null) {
       this.patientService.getPatient(+this.patientId).subscribe({
         next: (patient: Patient) => {

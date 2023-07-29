@@ -1,0 +1,157 @@
+<section>
+    <form #dietForm="ngForm" (ngSubmit)="onAddDiet()">
+        <div class="row m-0 mb-3">
+
+            <div class="col-12 col-md px-0 pe-lg-4">
+          <label
+            for="reason"
+            class="form-label">Nome da Dieta
+          </label>
+          <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+               class="d-inline-block align-text-top ms-2">
+          <input
+            #dietName="ngModel"
+            id="dietName"
+            name="dietName"
+            class="form-control"
+            [ngClass]="(dietName.invalid && dietName.touched) ? 'invalidInput' : '' "
+            type="text"
+            [(ngModel)]="diet.dietName"
+            required
+            maxlength="64" minlength="8">
+          <span
+            *ngIf="dietName.invalid && dietName.touched"
+            class="text-danger">
+                O nome da dieta deve ter entre 5 e 100 caracteres.
+            </span>
+        </div>
+        <div class="col-12 p-0 col-lg mt-3 mt-lg-0">
+          <div class="row m-0">
+            <div class="col-12 col-sm px-0 pe-sm-2 mb-3 mb-sm-0">
+              <label for="dietDate" class="form-label">
+                Data da dieta
+              </label>
+              <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+                   class="d-inline-block align-text-top ms-2">
+              <input
+                #dietDate="ngModel"
+                type="date"
+                id="dietDate"
+                name="dietDate"
+                class="form-control"
+                [ngClass]="(dietDate.invalid && dietDate.touched) ? 'invalidInput' : '' "
+                required
+                [(ngModel)]="diet.dietDate">
+              <span
+                *ngIf="dietDate.invalid && dietDate.touched"
+                class="text-danger">
+                    Selecione uma data válida
+                </span>
+            </div>
+            <div class="col-12 col-sm px-0 ps-sm-2">
+              <label for="dietTime" class="form-label">
+                Horário
+              </label>
+              <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+                   class="d-inline-block align-text-top ms-2">
+              <input
+                #dietTime="ngModel"
+                type="time"
+                id="dietTime"
+                name="dietTime"
+                class="form-control"
+                [ngClass]="(dietTime.invalid && dietTime.touched) ? 'invalidInput' : '' "
+                required
+                [(ngModel)]="diet.time"
+              >
+              <span
+                *ngIf="dietTime.invalid && dietTime.touched"
+                class="text-danger">
+                    Selecione um horário válido.
+                </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row m-0 mb-3">
+        <div class="col px-0">
+          <label
+            for="description"
+            class="form-label">
+            Descrição da Dieta
+          </label>
+          <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+               class="d-inline-block align-text-top ms-2">
+          <textarea
+            #description="ngModel"
+            id="description"
+            name="description"
+            class="form-control"
+            [ngClass]="(description.invalid && description.touched) ? 'invalidInput' : '' "
+            required minlength="16" maxlength="1024"
+            rows="8"
+            [(ngModel)]="diet.description" >
+          </textarea>
+  
+          <span
+            *ngIf="description.invalid && description.touched"
+            class="text-danger">
+                A descrição da dieta deve ter entre 5 e 100 caracteres.
+            </span>
+        </div>
+      </div>
+      <div class="col">
+        <label for="dietType" class="form-label">Tipo</label>
+        <img  [src]="MANDATORY" alt="Logo" width="10" height="10"
+        class="d-inline-block align-text-top">
+        <select class="form-select" aria-label="dietType" name="dietType" #role='ngModel'[(ngModel)]="diet.dietType" required>
+          <option value="LOW_CARB">Low Carb</option>
+          <option value="DASH">Dash</option>
+          <option value="PALEO">Paleo</option>
+          <option value="KETO">Keto</option>
+          <option value="DUKAN">Dukan</option>
+          <option value="MEDITERRANEAN">Mediterranean</option>
+          <option value="OTHER">Other</option>
+        </select>
+        <div *ngIf="dietTime.invalid && dietTime.touched" class="p-1 text-danger">
+          Preencha esse campo
+        </div>
+      </div>
+      <div class="col-12 col-md d-flex py-2 justify-content-center justify-content-lg-end me-2">
+        <div
+          [ngbTooltip]="dietForm.invalid && dietId ? 'Todos campos com marcação devem ser preenchidos' :
+          ''">
+          <button
+            type="button"
+            class="btn btn-warning mx-1"
+            [disabled]="!dietId && !dietForm.valid" (click)="onSaveDiet()">
+            Salvar
+          </button>
+        </div>
+        <div
+          class="d-flex">
+          <button
+            type="button"
+            class="btn btn-danger mx-1"
+            [disabled]="!dietId"
+            (click)="onDeleteDiet()"
+          >
+            Excluir
+          </button>
+        </div>
+        <div
+          class="d-flex"
+          placement="top-right"
+          [ngbTooltip]="dietForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
+        >
+          <button
+            [disabled]="dietForm.invalid || dietId"
+            class="btn btn-success mx-1"
+            type="submit"
+          >
+            Adicionar
+          </button>
+        </div>
+      </div> 
+    </form>
+  </section>

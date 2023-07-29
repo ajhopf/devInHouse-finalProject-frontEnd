@@ -1,27 +1,22 @@
-<section>
-    <ng-container *ngIf="patientId == undefined">
-      <p>Selecione um paciente</p>
-    </ng-container>
-  
-    <ng-container *ngIf="patientId != undefined">
-      <div *ngIf="showPatientDiet && !dietForEdition">
+<section>  
+      <div *ngIf="showPatientDiet">
         <div class="row">
           <h2 class="col-10">Dietas de {{ patientName }}</h2>
           <div class="col">
-            <button class="btn btn-secondary" (click)="onAddNewAppointment()">Adicionar dieta</button>
+            <button class="btn btn-secondary" (click)="onAddNewDiet()">Adicionar dieta</button>
           </div>
         </div>
         <hr>
   
         <app-diet-table
           [patientsDiets]="patientsDiets"
-          (editDiet)="onEditAppointmentId($event)">
+          [patientId]="patientId">
         </app-diet-table>
       </div>
   
-      <!-- <div *ngIf="!showPatientAppointments || appointmentForEdition">
+      <div *ngIf="!showPatientDiet">
         <div class="row">
-          <h2 class="col-8">Nova Consulta</h2>
+          <h2 class="col-8">Nova Dieta</h2>
           <div class="col d-flex justify-content-end">
             <button class="btn btn-secondary" (click)="onReturn()">
               Cancelar
@@ -30,13 +25,11 @@
         </div>
         <hr>
         <div>
-          <app-appointment-form
+          <app-diet-form 
             [patientId]="+patientId"
-            [dietForEdition]="dietForEdition"
-            (appointmentAddedSavedOrDeleted)="onAppointmentAddedSavedOrDeleted()"
+            (dietAddedSavedOrDeleted)="dietAddedSavedOrDeleted()"
             >
-          </app-appointment-form>
+          </app-diet-form>
         </div>
-      </div> -->
-    </ng-container>
+      </div>
   </section>
