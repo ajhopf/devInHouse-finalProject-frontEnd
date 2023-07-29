@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Appointment } from "../../../../shared/models/appointment.model";
 import { AppointmentsService } from "../../../../shared/services/appointments.service";
 import { ToastrService } from "ngx-toastr";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-appointment-table',
@@ -10,14 +11,18 @@ import { ToastrService } from "ngx-toastr";
 })
 export class AppointmentTableComponent {
   @Input() patientsAppointments: Appointment[];
+  @Input() patientId: number;
   @Output('editAppointment') editAppointment = new EventEmitter<any>();
 
-  constructor(private appointmentService: AppointmentsService, private toastr: ToastrService) {  }
+  constructor(
+    private appointmentService: AppointmentsService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {  }
 
 
   onEditAppointment(appointmentId: number) {
-    console.log(appointmentId)
-    this.editAppointment.emit(appointmentId);
+    this.router.navigate([`${this.patientId}/prontuario/consultas/${appointmentId}`])
   }
 
   onDeactivateAppointment(appointment: Appointment) {

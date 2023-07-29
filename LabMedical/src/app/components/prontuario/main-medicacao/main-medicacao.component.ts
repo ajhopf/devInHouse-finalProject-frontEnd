@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Component({
   selector: 'app-main-medicacao',
@@ -7,13 +8,20 @@ import { Component, Input } from '@angular/core';
 })
 export class MainMedicacaoComponent {
 
-  patientId:any = 'null'
+  @Input() patientId:any = 'null'
   @Input() template: string = 'table'
   @Input() medicineId: any
   @Input() acao: string = ''
 
+  constructor(private router: Router, private route:ActivatedRoute){}
+
   ngOnInit(){
-    this.patientId = localStorage.getItem('patientId')
+    let url = this.router.url;
+    let indexOfSecondBar = url.split("/", 2).join("/").length;
+    this.patientId = url.substring(1, indexOfSecondBar);
+    let idMedicacaoRoute = this.route.snapshot.params['idMedicacao']
+    if(idMedicacaoRoute)
+    this.changeTemplate('form',idMedicacaoRoute,'edit')
   }
 
   changeTemplate(template: string, medicineId: string, acao: string) {

@@ -10,7 +10,7 @@ import { Medicine } from 'src/app/shared/models/medicine.model';
 export class FormMedicacaoComponent {
   OBRIGATORIO = '../../../../../assets/images/obrigatorio.png'
 
-  patientId:any = null
+  @Input() patientId:any = null
   medicine:any = Medicine()
   @Input() medicineId:any = ''
   @Input() acao:string = ''
@@ -30,7 +30,6 @@ export class FormMedicacaoComponent {
   constructor(private medicineService:MedicineService){}
 
   ngOnInit(): void {
-    this.patientId = localStorage.getItem('patientId')
     if(this.medicineId !='' && this.medicineId!='-1'){
       this.setMedicine()
     }
@@ -93,6 +92,7 @@ export class FormMedicacaoComponent {
   salvar(campos:any,medicineId:number){
     this.medicineService.updateMedicine(medicineId,campos, true).subscribe({
       next: () => {
+        this.medicineService.getMedicines(this.patientId)
         alert('Consulta Salva!')
 			},
 			error: (err) => {
@@ -105,6 +105,7 @@ export class FormMedicacaoComponent {
   deletar(medicineId:number){
     this.medicineService.deleteMedicineById(medicineId).subscribe({
       next: () => {
+        this.medicineService.getMedicines(this.patientId)
         alert('Consulta Deletada!')
 			},
 			error: (err) => {

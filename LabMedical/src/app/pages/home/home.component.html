@@ -1,1 +1,56 @@
-<p>home works!</p>
+<div class="d-flex justify-content-center align-items-center mt-4">
+    <main style="width:95%; height:86vh;" class='d-flex flex-column justify-content-start align-items-between'>
+        <section class="d-flex mb-3 justify-content-between">
+            <div class="card flex-fill" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtPatients}}</h5>
+                    <p class="card-text">Pacientes</p>
+                </div>
+            </div>
+            <div  *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'" class="card flex-fill ms-3 me-3" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtUsers}}</h5>
+                    <p class="card-text">Usuários</p>
+                </div>
+            </div>
+            <div *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'" class="card flex-fill" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtAppointments}}</h5>
+                    <p class="card-text">Consultas</p>
+                </div>
+            </div>
+            <div *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'" class="card flex-fill ms-3 me-3" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtExams}}</h5>
+                    <p class="card-text">Exames</p>
+                </div>
+            </div>
+            <div class="card flex-fill me-3" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtMedicines}}</h5>
+                    <p class="card-text">Medicamentos</p>
+                </div>
+            </div>
+            <div class="card flex-fill me-3" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtDiets}}</h5>
+                    <p class="card-text">Dietas</p>
+                </div>
+            </div>
+            <div class="card flex-fill me-3" style="width: 15rem;">
+                <div class="card-body d-flex flex-column align-items-center">
+                    <h5 class="card-title">{{qtExercises}}</h5>
+                    <p class="card-text">Exercícios</p>
+                </div>
+            </div>
+        </section>
+        <section class="d-flex " style="height: 60vh;">
+            <div class="p-5 me-2 w-50" style="background-color:white">
+                <h5>Usuários</h5>
+            </div>
+            <div class="p-5 ms-2 w-50" style="background-color:white">
+                <h5>Pacientes</h5>
+            </div>
+        </section>
+    </main>
+</div>
