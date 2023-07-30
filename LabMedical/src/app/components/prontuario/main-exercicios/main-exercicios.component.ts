@@ -88,7 +88,11 @@ export class MainExerciciosComponent implements OnInit{
         next: (exercises: ExerciseModel[]) => {
           exercises.forEach(el => {
             if(el.id == exerciseId){
-              this.formExerciseService.openModal(this.patientId, el);
+              this.formExerciseService.openModal(this.patientId, el).subscribe({
+                next: () => {
+                  this.inicializeExercisesList();
+                }
+              });
             }
           })
         }
