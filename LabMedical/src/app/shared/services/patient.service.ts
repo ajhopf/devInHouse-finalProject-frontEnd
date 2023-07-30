@@ -8,7 +8,7 @@ import { environment } from "../../enviroments/enviroment";
 @Injectable({
 	providedIn: 'root'
 })
-export class PacientService {
+export class PatientService {
 	constructor(
 		private http: HttpClient,
 		private authenticationService: AuthenticationService
@@ -30,25 +30,28 @@ export class PacientService {
 
 	getPatient(pacientId: number): Observable<any> {
 		return this.http.get(
-			`${environment.URL_PATIENTS}/${pacientId}`,
+			`${ environment.URL_PATIENTS }/${ pacientId }`,
 			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
 		)
 	}
 
 	getPatientByName(pacient: Patient): Observable<any> {
-		return this.http.get(`${environment.URL_PATIENTS}?identification.pacientName=${ pacient.name }`)
+		return this.http.get(`${ environment.URL_PATIENTS }?identification.pacientName=${ pacient.name }`)
 	}
 
 
 	editPatient(patient: Patient): Observable<any> {
 		return this.http.put(
-			`${environment.URL_PATIENTS}/${ patient.id }`,
+			`${ environment.URL_PATIENTS }/${ patient.id }`,
 			patient,
 			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
 		)
 	}
 
 	deletePatient(patientId: string): Observable<any> {
-		return this.http.delete(`${environment.URL_PATIENTS}/${ patientId }`)
+		return this.http.delete(
+			`${ environment.URL_PATIENTS }/deletar/${ patientId }`,
+			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()}}
+		)
 	}
 }
