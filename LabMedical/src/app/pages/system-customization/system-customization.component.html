@@ -8,27 +8,27 @@
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="primaryColor" class="form-label">Cor Primária</label>
-    <input type="text" class="form-control" id="primaryColor" formControlName="primaryColor" [ngClass]="returnValidationClassForInput('primaryColor')">
+    <input type="color" class="form-control" id="primaryColor" formControlName="primaryColor" [ngClass]="returnValidationClassForInput('primaryColor')">
     <div *ngIf="systemConfigForm.controls['primaryColor'].invalid && checkIfInputIsUsed('primaryColor')">
       <div *ngIf="systemConfigForm.controls['primaryColor'].errors['required']">Cor Primária é obrigatória.</div>
       <div *ngIf="systemConfigForm.controls['primaryColor'].errors['pattern']">Cor Primária deve estar no formato hexadecimal.</div>
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="secondaryColor" class="form-label">Cor Secundária</label>
-    <input type="text" class="form-control" id="secondaryColor" formControlName="secondaryColor" [ngClass]="returnValidationClassForInput('secondaryColor')">
+    <input type="color" class="form-control" id="secondaryColor" formControlName="secondaryColor" [ngClass]="returnValidationClassForInput('secondaryColor')">
     <div *ngIf="systemConfigForm.controls['secondaryColor'].invalid &&  checkIfInputIsUsed('secondaryColor')">
       <div *ngIf="systemConfigForm.controls['secondaryColor'].errors['required']">Cor Secundária é obrigatória.</div>
       <div *ngIf="systemConfigForm.controls['secondaryColor'].errors['pattern']">Cor Secundária deve estar no formato hexadecimal.</div>
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-2">
     <label for="fontColor" class="form-label">Cor da Fonte</label>
-    <input type="text" class="form-control" id="fontColor" formControlName="fontColor" [ngClass]="returnValidationClassForInput('fontColor')">
+    <input type="color" class="form-control" id="fontColor" formControlName="fontColor" [ngClass]="returnValidationClassForInput('fontColor')">
     <div *ngIf="systemConfigForm.controls['fontColor'].invalid &&  checkIfInputIsUsed('fontColor')">
       <div *ngIf="systemConfigForm.controls['fontColor'].errors['required']">Cor da Fonte é obrigatória.</div>
       <div *ngIf="systemConfigForm.controls['fontColor'].errors['pattern']">Cor da Fonte deve estar no formato hexadecimal.</div>

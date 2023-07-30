@@ -45,6 +45,9 @@ const URL_SYSTEM_CONFIG: string = `${URL_PRINCIPAL}/config/sistema`
 //Stats endpoints
 const URL_STATS:string = `${URL_PRINCIPAL}/estatisticas`
 
+//Exercise endpoints
+const URL_EXERCISE: string = `${URL_PRINCIPAL}/exercicios`;
+const URL_GET_ALL_EXERCISE: string = `${URL_PRINCIPAL}/exercicios`;
 const ROUTES: RouteModel[] = [
   {
     url: "home",
@@ -118,6 +121,7 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/paciente.png"
   }
 ]
+
 export const environment = {
   production: false,
   URL_POST_LOGIN: URL_POST_LOGIN,
@@ -148,7 +152,10 @@ export const environment = {
   URL_LISTAR_LOG: URL_LISTAR_LOG,
   URL_SYSTEM_CONFIG: URL_SYSTEM_CONFIG,
   URL_STATS: URL_STATS,
-  ROUTES: ROUTES
+  ROUTES: ROUTES,
+
+  URL_EXERCISE: URL_EXERCISE,
+  URL_GET_ALL_EXERCISE: URL_GET_ALL_EXERCISE
 };
 
 /*
