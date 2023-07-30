@@ -1,3 +1,7 @@
 .form-control.invalidInput {
     border-color: red;
 }
+
+.bgWhite{
+    background-color: #ffffff;
+}

@@ -42,9 +42,9 @@ import { SystemCustomizationComponent } from './pages/system-customization/syste
 import {provideToastr, ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-browser/animations";
 import { ModalComponent } from './components/modal/modal.component';
-import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
+import { PacientFormComponent } from './components/registers/patient/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
-import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
+import { PatientComponent } from './pages/patient/patient.component';
 import { TableMedicacaoComponent } from './components/prontuario/medicacao/table-medicacao/table-medicacao.component';
 import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-medicacao/form-medicacao.component';
 import { AppointmentFormComponent } from './components/prontuario/main-consultas/appointment-form/appointment-form.component';
@@ -62,6 +62,7 @@ import { PatientNotSelectedComponent } from './pages/prontuario/prontuario-eletr
 import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component';
 import { RouterOutlet } from "@angular/router";
 import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
+import { PatientsListComponent } from './components/registers/patient/patients-list/patients-list.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,7 @@ import { DietFormComponent } from './components/registers/diet/diet-form/diet-fo
     ResetPasswordFormComponent,
     PacientFormComponent,
     ValidDobDirective,
-    TesteListagemPacientesComponent,
+    PatientComponent,
     ResetPasswordFormComponent,
     UserComponent,
     UsersTableComponent,
@@ -119,7 +120,8 @@ import { DietFormComponent } from './components/registers/diet/diet-form/diet-fo
     SpecialCareListComponent,
     PatientNotSelectedComponent,
     PatientSelectedComponent,
-    DietFormComponent
+    DietFormComponent,
+    PatientsListComponent
   ],
   imports: [
     BrowserModule,

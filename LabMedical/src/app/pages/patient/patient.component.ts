@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { PacientService } from "../../shared/services/pacient.service";
+import { PatientService } from "../../shared/services/patient.service";
 import { Router } from "@angular/router";
 
 @Component({
-  selector: 'app-teste-listagem-pacientes',
-  templateUrl: './teste-listagem-pacientes.component.html',
-  styleUrls: ['./teste-listagem-pacientes.component.css']
+  selector: 'app-patient',
+  templateUrl: './patient.component.html',
+  styleUrls: ['./patient.component.css']
 })
-export class TesteListagemPacientesComponent implements OnInit{
+export class PatientComponent implements OnInit{
   pacientList: any[] = []
 
   constructor(
-    private pacientService: PacientService,
+    private pacientService: PatientService,
     private router: Router
   ) {}
 

@@ -1,12 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PacientService } from "../../shared/services/pacient.service";
-import { Patient } from "../../shared/models/patient.model";
-import { ViacepService } from "../../shared/services/viacep.service";
-import { ActivatedRoute } from "@angular/router";
+import { PatientService } from "../../../../shared/services/patient.service";
+import { Patient } from "../../../../shared/models/patient.model";
+import { ViacepService } from "../../../../shared/services/viacep.service";
+import { ActivatedRoute, Router } from "@angular/router";
 import { NgForm } from "@angular/forms";
-import { RolesEnum } from "../../shared/enums/roles.enum";
-import { CivilStatusEnum } from "../../shared/enums/civil-status.enum";
-import { AppointmentsService } from "../../shared/services/appointments.service";
+import { RolesEnum } from "../../../../shared/enums/roles.enum";
+import { CivilStatusEnum } from "../../../../shared/enums/civil-status.enum";
+import { AppointmentsService } from "../../../../shared/services/appointments.service";
+import { ToastrService } from "ngx-toastr";
+import { ExamService } from "../../../../shared/services/exam.service";
+import { MedicineService } from "../../../../shared/services/medicine.service";
+import { DietService } from "../../../../shared/services/diet.service";
+import { combineLatest } from "rxjs";
 
 @Component({
 	selector: 'app-pacient-form',
@@ -14,7 +19,7 @@ import { AppointmentsService } from "../../shared/services/appointments.service"
 	styleUrls: ['./pacient-form.component.css']
 })
 export class PacientFormComponent implements OnInit {
-	@ViewChild('newPacient') newPacientForm: NgForm | undefined
+	@ViewChild('patientForm') newPacientForm: NgForm | undefined
 	MANDATORY: string = "../../../assets/images/obrigatorio.png"
 	pacientId: string = ''
 	hasRecords: boolean = false
@@ -55,10 +60,15 @@ export class PacientFormComponent implements OnInit {
 
 	constructor(
 		private viacep: ViacepService,
-		private pacientService: PacientService,
+		private pacientService: PatientService,
 		private route: ActivatedRoute,
-		private appointmentsService: AppointmentsService
-		// private examsDB: ExamsDbService,
+		private appointmentsService: AppointmentsService,
+		private examService: ExamService,
+		private medicineService: MedicineService,
+		// private exerciseSerivce: ExerciseService,
+		private dietService: DietService,
+		private router: Router,
+		private toastr: ToastrService
 	) {}
 
 	ngOnInit(): void {
@@ -81,17 +91,9 @@ export class PacientFormComponent implements OnInit {
 					}
 				}
 			)
+
+			this.fetchRecords(+this.pacientId);
 		}
-
-
-		//
-		// this.examsDB.getExamsByPacientId(this.userId).subscribe(
-		//   (exams: Exam[] ) => {
-		//     if (exams.length > 0) {
-		//       this.hasRecords = true
-		//     }
-		//   }
-		// )
 	}
 
 	onChangeHasAlergies(e: any) {
@@ -120,35 +122,50 @@ export class PacientFormComponent implements OnInit {
 		this.pacient.specialCare?.splice(index, 1)
 	}
 
-	onCreatePacient() {
+	onSavePatient() {
+		this.pacientId ? this.editPatient() : this.createPatient()
+	}
+
+	createPatient() {
 		this.pacientService.createPatient(this.pacient).subscribe({
 				next: response => {
 					console.log(response)
-					alert('Paciente cadastrado com sucesso')
+					this.toastr.success('Paciente cadastrado com sucesso')
+					this.navigateAway()
 				},
 				error: err => {
 					console.error(err.error)
-					alert('Paciente não cadastrado. Erro: ' + err.error)
+					this.toastr.error(err.error, 'Paciente não cadastrado')
 				}
 			}
 		)
 	}
 
-	onEditRegistration() {
+	editPatient() {
 		this.pacientService.editPatient(this.pacient).subscribe({
 			next: response => {
 				console.log(response)
-				alert('Paciente atualizado com sucesso')
+				this.toastr.success('Registro de paciente editado com sucesso')
+				this.navigateAway()
 			},
 			error: err => {
 				console.log(err)
-				alert('Paciente não atualizado. Erro: ' + err.error)
+				this.toastr.error(err.error, 'Paciente não atualizado')
 			}
 		})
 	}
 
 	onDeleteRegistration() {
-		console.log('deletou')
+		if (!this.hasRecords) {
+			this.pacientService.deletePatient(this.pacientId).subscribe(
+				() => {
+					this.toastr.success('Paciente deletado com sucesso')
+					this.navigateAway()
+				}
+			)
+		} else {
+			this.toastr.error('Paciente possui registros. Não foi possível deletar o paciente.')
+		}
 	}
 
 	formatCpf(): void {
@@ -187,4 +204,40 @@ export class PacientFormComponent implements OnInit {
 					alert('CEP inválido!')
 				})
 	}
+
+	navigateAway() {
+		this.router.navigateByUrl("pacientes/listar")
+	}
+
+	fetchRecords(pacientId: number) {
+		let hasAppointments: boolean;
+		let hasExams: boolean;
+		let hasMedicines: boolean;
+		let hasDiets: boolean;
+		//let hasExercises: boolean;
+
+		const appointment = this.appointmentsService.getAppointmentsByPacientId(pacientId);
+		const exams = this.examService.getExamListById(pacientId);
+		const medicines = this.medicineService.getMedicines(pacientId);
+		const diets = this.dietService.getDietByPacientId(pacientId);
+		// const exercises = this.exerciseService.getExercisesByPacientId(pacientId);
+
+		combineLatest([appointment, medicines, diets, exams])
+			.subscribe({
+				next: ([appointment, medicines, diets, exams]) => {
+					hasAppointments = appointment.length > 0;
+					hasMedicines = medicines.body.length > 0;
+					hasDiets = diets.length > 0;
+					hasExams = exams.body.length > 0;
+
+					if (hasAppointments || hasMedicines || hasDiets || hasExams) {
+						this.hasRecords = true
+					} else {
+						this.hasRecords = false
+					}
+				},
+				error: err => {console.log(err.error)}
+			});
+	}
+
 }
