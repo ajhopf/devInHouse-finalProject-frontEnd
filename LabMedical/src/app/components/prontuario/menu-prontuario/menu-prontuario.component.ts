@@ -10,6 +10,7 @@ export class MenuProntuarioComponent {
   @Output() menuProntuario:EventEmitter<string> = new EventEmitter()
 
   userRole:any
+  pageName: string = 'prontuario';
 
   constructor(
     private router: Router,
@@ -27,8 +28,10 @@ export class MenuProntuarioComponent {
       let route;
 
       if (page == "prontuario") {
+        this.pageName = "prontuario"
         route = `${patientId}/prontuario`
       } else {
+        this.pageName = page;
         route = `${patientId}/prontuario/${page}`;
       }
 
