@@ -1,1 +1,35 @@
-<p>main-dietas works!</p>
+<section>  
+      <div *ngIf="showPatientDiet">
+        <div class="row">
+          <h2 class="col-10">Dietas de {{ patientName }}</h2>
+          <div class="col">
+            <button class="btn btn-secondary" (click)="onAddNewDiet()">Adicionar dieta</button>
+          </div>
+        </div>
+        <hr>
+  
+        <app-diet-table
+          [patientsDiets]="patientsDiets"
+          [patientId]="patientId">
+        </app-diet-table>
+      </div>
+  
+      <div *ngIf="!showPatientDiet">
+        <div class="row">
+          <h2 class="col-8">Nova Dieta</h2>
+          <div class="col d-flex justify-content-end">
+            <button class="btn btn-secondary" (click)="onReturn()">
+              Cancelar
+            </button>
+          </div>
+        </div>
+        <hr>
+        <div>
+          <app-diet-form 
+            [patientId]="+patientId"
+            (dietAddedSavedOrDeleted)="dietAddedSavedOrDeleted()"
+            >
+          </app-diet-form>
+        </div>
+      </div>
+  </section>

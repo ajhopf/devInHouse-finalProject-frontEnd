@@ -1,3 +1,4 @@
+import { DietService } from 'src/app/shared/services/diet.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from "../../../shared/models/patient.model";
 import { PacientService } from "../../../shared/services/pacient.service";
@@ -7,6 +8,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { ExamService } from "../../../shared/services/exam.service";
 import { ExamModel } from "../../../shared/models/exam.model";
 import { MedicineService } from "../../../shared/services/medicine.service";
+import { DietModel } from 'src/app/shared/models/diet.model';
 
 @Component({
 	selector: 'app-main-prontuario',
@@ -23,6 +25,7 @@ export class MainProntuarioComponent implements OnInit {
 	emptyExams: boolean = false;
 	patientMedications: any;
 	emptyMedications: boolean = false;
+	patientDiets: DietModel[];
 	emptyDiets: boolean = true;
 	emptyExercises: boolean = true;
 
@@ -30,6 +33,7 @@ export class MainProntuarioComponent implements OnInit {
 		private patientService: PacientService,
 		private appointmentsService: AppointmentsService,
 		private examsService: ExamService,
+		private dietService: DietService,
 		private medicationService: MedicineService,
 		private activatedRoute: ActivatedRoute,
 		private router: Router
@@ -56,7 +60,7 @@ export class MainProntuarioComponent implements OnInit {
 
 					this.examsService.getExamListById(+this.patientId)
 						.subscribe({
-							next: (exams: any) => this.patientExams = exams.body,
+							next: (exams: any) => this.patientExams = exams,
 							error: () => { console.log('aqui'); this.emptyExams = true}
 						})
 
@@ -65,6 +69,13 @@ export class MainProntuarioComponent implements OnInit {
 							this.patientMedications = medications.body
 							this.patientMedications.length == 0 ? this.emptyMedications = true : ''
 						})
+					
+					this.dietService.getDietByPacientId(+this.patientId).subscribe({
+						next: (diets: DietModel[]) => {
+							this.patientDiets = diets
+							this.patientDiets.length == 0 ? this.emptyDiets = true : this.emptyDiets = false
+						}
+					})
 				}
 			}
 		)
@@ -79,7 +90,11 @@ export class MainProntuarioComponent implements OnInit {
 	}
 
 	accessMedication(medication: any) {
-		this.router.navigate([`${this.patientId}/prontuario/${medication.id}`])
+		this.router.navigate([`${this.patientId}/prontuario/medicacao/${medication.id}`])
+	}
+
+	accessDiet(diet: any) {
+		this.router.navigate([`${this.patientId}/prontuario/dietas/${diet.id}`])
 	}
 
 }

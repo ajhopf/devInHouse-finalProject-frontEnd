@@ -70,7 +70,7 @@
 			<div *ngIf="!emptyExams">
 			  <div *ngFor="let exam of patientExams">
 				<h4><span class="fw-bold">Nome do Exame: </span> {{ exam.name }}</h4>
-				<p><span class="fw-bold">Data: </span>{{ exam.date }}</p>
+				<p><span class="fw-bold">Data: </span>{{ exam.examDate }}</p>
 				<p><span class="fw-bold">Horário: </span>{{ exam.time }}</p>
 				<p><span class="fw-bold">Tipo do Exame: </span>{{ exam.type }}</p>
 				<p><span class="fw-bold">Laboratório: </span>{{ exam.laboratory }}</p>
@@ -142,6 +142,17 @@
 			<div *ngIf="emptyDiets">
 			  <p>Paciente não possui dietas cadastradas</p>
 			</div>
+			<div *ngIf="!emptyDiets">
+				<div *ngFor="let diet of patientDiets">
+				  <h4><span class="fw-bold">Nome da Dieta: </span> {{ diet.dietName  }}</h4>
+				  <p><span class="fw-bold">Data: </span>{{ diet.dietDate }}</p>
+				  <p><span class="fw-bold">Horário: </span>{{ diet.time }}</p>
+				  <p><span class="fw-bold">Tipo: </span>{{ diet.dietType }}</p>
+				  <p><span class="fw-bold">Descrição: </span>{{ diet.description }}</p>
+				  <button class="btn btn-secondary" (click)="accessDiet(diet)">Acessar</button>
+				  <hr>
+				</div>
+			  </div>
 		  </div>
 		</div>
 	  </div>
