@@ -108,7 +108,7 @@
 			  <p>Paciente não possui medicações cadastrados</p>
 			</div>
 			<div *ngIf="!emptyMedications">
-			  <div *ngFor="let medication of patientMedications">
+			  <div *ngFor="let medication of patientMedications | medicineSorting">
 				<h4><span class="fw-bold">Nome da Medicação: </span> {{ medication.medicineName  }}</h4>
 				<p><span class="fw-bold">Data: </span>{{ medication.medicineDate }}</p>
 				<p><span class="fw-bold">Horário: </span>{{ medication.time }}</p>

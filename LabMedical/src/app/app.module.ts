@@ -65,6 +65,7 @@ import { RouterOutlet } from "@angular/router";
 import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
 import { PatientsTableComponent } from './components/registers/patient/patients-list/patients-table.component';
 import { ExamSortingPipe } from './shared/pipes/exam-sorting.pipe';
+import { MedicineSortingPipe } from './shared/pipes/medicine-sorting.pipe';
 
 @NgModule({
   declarations: [
@@ -123,7 +124,8 @@ import { ExamSortingPipe } from './shared/pipes/exam-sorting.pipe';
     PatientSelectedComponent,
     DietFormComponent,
     PatientsTableComponent,
-    ExamSortingPipe
+    ExamSortingPipe,
+    MedicineSortingPipe
   ],
   imports: [
     BrowserModule,
