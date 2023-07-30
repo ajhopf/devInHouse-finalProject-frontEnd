@@ -19,7 +19,7 @@
 	  <tr *ngFor="let patient of patientList" class="text-center">
 		<td>{{patient.name}}</td>
 		<td>{{patient.email}}</td>
-		<td>{{patient.isActive}}</td>
+		<td>{{patient.isActive ? 'Ativo' : 'Inativo'}}</td>
 		<td>
 		  <button type="button" class="btn btn-link" (click)="onEditPatient(patient.id)"><img
 		  src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
