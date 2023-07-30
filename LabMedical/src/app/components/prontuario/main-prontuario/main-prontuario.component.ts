@@ -9,6 +9,8 @@ import { ExamService } from "../../../shared/services/exam.service";
 import { ExamModel } from "../../../shared/models/exam.model";
 import { MedicineService } from "../../../shared/services/medicine.service";
 import { DietModel } from 'src/app/shared/models/diet.model';
+import { ExerciseService } from "../../../shared/services/exercise.service";
+import { ExerciseModel } from "../../../shared/models/exercise.model";
 
 @Component({
 	selector: 'app-main-prontuario',
@@ -27,6 +29,7 @@ export class MainProntuarioComponent implements OnInit {
 	emptyMedications: boolean = false;
 	patientDiets: DietModel[];
 	emptyDiets: boolean = true;
+	patientExercises: ExerciseModel[];
 	emptyExercises: boolean = true;
 
 	constructor(
@@ -35,6 +38,7 @@ export class MainProntuarioComponent implements OnInit {
 		private examsService: ExamService,
 		private dietService: DietService,
 		private medicationService: MedicineService,
+		private exerciseService: ExerciseService,
 		private activatedRoute: ActivatedRoute,
 		private router: Router
 	) {
@@ -61,7 +65,6 @@ export class MainProntuarioComponent implements OnInit {
 					this.examsService.getExamListById(+this.patientId)
 						.subscribe((exams: any) => {
 							this.patientExams = exams
-							console.log(exams)
 							this.patientExams.length == 0 ? this.emptyExams = true : ''
 						})
 
@@ -75,6 +78,14 @@ export class MainProntuarioComponent implements OnInit {
 						next: (diets: DietModel[]) => {
 							this.patientDiets = diets
 							this.patientDiets.length == 0 ? this.emptyDiets = true : this.emptyDiets = false
+						}
+					})
+
+					this.exerciseService.getExercisesByPatient(this.patientId).subscribe({
+						next: (exercises: ExerciseModel[]) => {
+							console.log(exercises)
+							this.patientExercises = exercises
+							this.patientExercises.length == 0 ? this.emptyExercises = true : this.emptyExercises = false
 						}
 					})
 				}
@@ -96,6 +107,10 @@ export class MainProntuarioComponent implements OnInit {
 
 	accessDiet(diet: any) {
 		this.router.navigate([`${ this.patientId }/prontuario/dietas/${ diet.id }`])
+	}
+
+	accessExercise(exercise: any) {
+		this.router.navigate([`${ this.patientId }/prontuario/exercicios/${ exercise.id }`])
 	}
 
 }
