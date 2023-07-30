@@ -1,20 +1,10 @@
-<form id="system-config-form" class="row g-3 bg-light bg-gradient p-3 rounded-1" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
-
-  <div class="col-md-3">
-    <label for="exerciseName" class="form-label">Nome da Série de Exercícios</label>
-    <input type="text" class="form-control" [ngClass]="returnValidationClassForInput('exerciseName')" id="exerciseName" formControlName="exerciseName">
-    <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['exerciseName'].invalid && checkIfInputIsUsed('exerciseName')">
-      <div *ngIf="exerciseForm.controls['exerciseName'].errors['required']">Nome é obrigatório.</div>
-      <div *ngIf="exerciseForm.controls['exerciseName'].errors['minlength'] || exerciseForm.controls['exerciseName'].errors['maxlength']">Nome deve ter entre 5 e 100 caracteres.</div>
-    </div>
-  </div>
-
-  <div class="col-md-3">
-    <label for="description" class="form-label">Descrição</label>
-    <textarea type="text" class="form-control" [ngClass]="returnValidationClassForInput('description')" id="description" formControlName="description"></textarea>
-    <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['description'].invalid && checkIfInputIsUsed('description')">
-      <div *ngIf="exerciseForm.controls['description'].errors['required']">Descrição é obrigatória.</div>
-      <div *ngIf="exerciseForm.controls['description'].errors['minlength'] || exerciseForm.controls['description'].errors['maxlength']">Descrição deve ter entre 10 e 1000 caracteres.</div>
+<form id="system-config-form" class="row g-3 bg-light bg-gradient p-3 rounded-1 d-flex" [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+  <div class="col-md-4">
+    <label for="exerciseSeriesName" class="form-label">Nome da Série de Exercícios</label>
+    <input type="text" class="form-control" [ngClass]="returnValidationClassForInput('exerciseSeriesName')" id="exerciseSeriesName" formControlName="exerciseSeriesName">
+    <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['exerciseSeriesName'].invalid && checkIfInputIsUsed('exerciseSeriesName')">
+      <div *ngIf="exerciseForm.controls['exerciseSeriesName'].errors['required']">Nome é obrigatório.</div>
+      <div *ngIf="exerciseForm.controls['exerciseSeriesName'].errors['minlength'] || exerciseForm.controls['exerciseSeriesName'].errors['maxlength']">Nome deve ter entre 5 e 100 caracteres.</div>
     </div>
   </div>
 
@@ -27,7 +17,7 @@
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div *ngIf="exercise.id" class="col-md-3">
     <label for="dateCreated" class="form-label">Data criação</label>
     <input type="date" class="form-control" [ngClass]="returnValidationClassForInput('dateCreated')" id="dateCreated" formControlName="dateCreated">
     <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['dateCreated'].invalid && checkIfInputIsUsed('dateCreated')">
@@ -35,7 +25,7 @@
     </div>
   </div>
 
-  <div class="col-md-3">
+  <div *ngIf="exercise.id" class="col-md-3">
     <label for="timeCreated" class="form-label">Hora criação</label>
     <input type="time" class="form-control" [ngClass]="returnValidationClassForInput('timeCreated')" id="timeCreated" formControlName="timeCreated">
     <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['timeCreated'].invalid && checkIfInputIsUsed('timeCreated')">
@@ -54,10 +44,24 @@
     </div>
   </div>
 
-  <button type="submit" class="btn btn-primary col-md-1 ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
-  <button type="button"
-          class="btn btn-primary col-md-3 ms-2">
-    Deletar
-  </button>
+  <div class="col-md-6">
+    <label for="description" class="form-label">Descrição</label>
+    <textarea type="text" class="form-control" [ngClass]="returnValidationClassForInput('description')" id="description" formControlName="description"></textarea>
+    <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['description'].invalid && checkIfInputIsUsed('description')">
+      <div *ngIf="exerciseForm.controls['description'].errors['required']">Descrição é obrigatória.</div>
+      <div *ngIf="exerciseForm.controls['description'].errors['minlength'] || exerciseForm.controls['description'].errors['maxlength']">Descrição deve ter entre 10 e 1000 caracteres.</div>
+    </div>
+  </div>
+
+  <div class="col-md-12 d-flex flex-row-reverse">
+    <button
+      *ngIf="exercise.id"
+      type="button"
+      class="btn btn-warning ms-2">
+      Deletar
+    </button>
+    <button *ngIf="!exercise.id" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
+    <button *ngIf="exercise.id" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Atualizar</button>
+  </div>
 </form>
 

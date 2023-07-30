@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ConfigService} from "../../shared/services/config.service";
 import {ToastrService} from "ngx-toastr";
@@ -6,6 +6,9 @@ import {ModalService} from "../../shared/services/modal.service";
 import {SystemConfigModel} from "../../shared/models/system-config.model";
 import {ExercisetypeEnum} from "../../shared/enums/exercisetype.enum";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {ExerciseService} from "../../shared/services/exercise.service";
+import {ExerciseModel} from "../../shared/models/exercise.model";
+
 
 @Component({
   selector: 'app-form-exercise',
@@ -13,9 +16,12 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
   styleUrls: ['./form-exercise.component.css']
 })
 export class FormExerciseComponent {
+  @Input() exercise: ExerciseModel;
+  @Input() patientId: number;
   exerciseForm: FormGroup;
   constructor(private formBuilder: FormBuilder, public activeModal: NgbActiveModal,
-              private toastr: ToastrService, private modalService: ModalService) {
+              private toastr: ToastrService, private modalService: ModalService,
+              private exerciseService: ExerciseService) {
   }
 
   ngOnInit(): void {
@@ -24,19 +30,18 @@ export class FormExerciseComponent {
 
   private inicializeForm() {
     this.exerciseForm = this.formBuilder.group({
-      exerciseName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      exerciseSeriesName: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]],
       timesPerWeek: ['', [Validators.required, Validators.min(1), Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
-      dateCreated: ['', [Validators.required]],
-      timeCreated: ['', [Validators.required]],
+      dateCreated: [''],
+      timeCreated: [''],
       exerciseType: ['', [Validators.required]],
     })
+    this.exerciseForm.patchValue(this.exercise);
   }
 
   onSubmit(): void {
-    //serve para fechar o modal angular
-    this.activeModal.close();
-    console.log(this.exerciseForm)
+
   }
 
   checkIfInputIsUsed(inputName: string): boolean {
