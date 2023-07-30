@@ -12,6 +12,7 @@ import { ExamService } from "../../../../shared/services/exam.service";
 import { MedicineService } from "../../../../shared/services/medicine.service";
 import { DietService } from "../../../../shared/services/diet.service";
 import { combineLatest } from "rxjs";
+import { ExerciseService } from "../../../../shared/services/exercise.service";
 
 @Component({
 	selector: 'app-pacient-form',
@@ -65,7 +66,7 @@ export class PacientFormComponent implements OnInit {
 		private appointmentsService: AppointmentsService,
 		private examService: ExamService,
 		private medicineService: MedicineService,
-		// private exerciseSerivce: ExerciseService,
+		private exerciseService: ExerciseService,
 		private dietService: DietService,
 		private router: Router,
 		private toastr: ToastrService
@@ -217,23 +218,24 @@ export class PacientFormComponent implements OnInit {
 		let hasExams: boolean;
 		let hasMedicines: boolean;
 		let hasDiets: boolean;
-		//let hasExercises: boolean;
+		let hasExercises: boolean;
 
 		const appointment = this.appointmentsService.getAppointmentsByPacientId(pacientId);
 		const exams = this.examService.getExamListById(pacientId);
 		const medicines = this.medicineService.getMedicines(pacientId);
 		const diets = this.dietService.getDietByPacientId(pacientId);
-		// const exercises = this.exerciseService.getExercisesByPacientId(pacientId);
+		const exercises = this.exerciseService.getExercisesByPatient(pacientId.toString());
 
-		combineLatest([appointment, medicines, diets, exams])
+		combineLatest([appointment, medicines, diets, exams, exercises])
 			.subscribe({
-				next: ([appointment, medicines, diets, exams]) => {
+				next: ([appointment, medicines, diets, exams, exercises]) => {
 					hasAppointments = appointment.length > 0;
 					hasMedicines = medicines.body.length > 0;
 					hasDiets = diets.length > 0;
 					hasExams = exams.length > 0;
+					hasExercises = exercises.length > 0;
 
-					if (hasAppointments || hasMedicines || hasDiets || hasExams) {
+					if (hasAppointments || hasMedicines || hasDiets || hasExams || hasExercises) {
 						this.hasRecords = true
 					} else {
 						this.hasRecords = false
