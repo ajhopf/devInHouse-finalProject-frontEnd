@@ -10,7 +10,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let medicine of medicines">
+        <tr *ngFor="let medicine of medicines" [className]="medicine.status ? '' : 'text-decoration-line-through'">
             <td>{{medicine.medicineName}}</td>
             <td>{{medicine.type|medicineType}}</td>
             <td>{{medicine.quantity}}</td>

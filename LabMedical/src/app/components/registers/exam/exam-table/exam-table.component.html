@@ -24,6 +24,7 @@
 	  </button>
 	  <button
 		(click)="onDeactivateExam(exam)"
+		[hidden]="!exam.status"
 		[ngbTooltip]="exam.status ? 'Desativar exame' : 'Reativar exame'"
 		type="button"
 		class="btn btn-link">
