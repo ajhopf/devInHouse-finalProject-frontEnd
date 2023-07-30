@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AppointmentsService } from "../../../shared/services/appointments.service";
 import { Appointment } from "../../../shared/models/appointment.model";
-import { PacientService } from "../../../shared/services/pacient.service";
+import { PatientService } from "../../../shared/services/patient.service";
 import { Patient } from "../../../shared/models/patient.model";
 import { ActivatedRoute, Router } from "@angular/router";
 
@@ -18,7 +18,7 @@ export class MainConsultasComponent implements OnInit {
 
   constructor(
     private appointmentsService: AppointmentsService,
-    private patientService: PacientService,
+    private patientService: PatientService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {

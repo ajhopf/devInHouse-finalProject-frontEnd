@@ -1,7 +1,7 @@
 import { DietService } from 'src/app/shared/services/diet.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Patient } from "../../../shared/models/patient.model";
-import { PacientService } from "../../../shared/services/pacient.service";
+import { PatientService } from "../../../shared/services/patient.service";
 import { AppointmentsService } from "../../../shared/services/appointments.service";
 import { Appointment } from "../../../shared/models/appointment.model";
 import { ActivatedRoute, Router } from "@angular/router";
@@ -30,7 +30,7 @@ export class MainProntuarioComponent implements OnInit {
 	emptyExercises: boolean = true;
 
 	constructor(
-		private patientService: PacientService,
+		private patientService: PatientService,
 		private appointmentsService: AppointmentsService,
 		private examsService: ExamService,
 		private dietService: DietService,
@@ -59,9 +59,9 @@ export class MainProntuarioComponent implements OnInit {
 						})
 
 					this.examsService.getExamListById(+this.patientId)
-						.subscribe({
-							next: (exams: any) => this.patientExams = exams.body,
-							error: () => { console.log('aqui'); this.emptyExams = true}
+						.subscribe((exams: any) => {
+							this.patientExams = exams.body
+							this.patientExams.length == 0 ? this.emptyExams = true : ''
 						})
 
 					this.medicationService.getMedicines(+this.patientId)
@@ -69,7 +69,7 @@ export class MainProntuarioComponent implements OnInit {
 							this.patientMedications = medications.body
 							this.patientMedications.length == 0 ? this.emptyMedications = true : ''
 						})
-					
+
 					this.dietService.getDietByPacientId(+this.patientId).subscribe({
 						next: (diets: DietModel[]) => {
 							this.patientDiets = diets
@@ -90,11 +90,11 @@ export class MainProntuarioComponent implements OnInit {
 	}
 
 	accessMedication(medication: any) {
-		this.router.navigate([`${this.patientId}/prontuario/medicacao/${medication.id}`])
+		this.router.navigate([`${ this.patientId }/prontuario/medicacao/${ medication.id }`])
 	}
 
 	accessDiet(diet: any) {
-		this.router.navigate([`${this.patientId}/prontuario/dietas/${diet.id}`])
+		this.router.navigate([`${ this.patientId }/prontuario/dietas/${ diet.id }`])
 	}
 
 }

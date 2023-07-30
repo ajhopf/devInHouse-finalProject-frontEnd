@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
 import { ActivatedRoute, Router } from "@angular/router";
-import { PacientService } from "../../../shared/services/pacient.service";
+import { PatientService } from "../../../shared/services/patient.service";
 import { Patient } from "../../../shared/models/patient.model";
 
 @Component({
@@ -20,7 +20,7 @@ export class BarraPacienteComponent implements OnInit, OnDestroy {
   selectedPatient: Patient;
 
   constructor(
-		private patientService:PacientService,
+		private patientService:PatientService,
 		private medicineService:MedicineService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute){}

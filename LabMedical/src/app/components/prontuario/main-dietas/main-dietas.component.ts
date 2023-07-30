@@ -1,9 +1,9 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DietModel } from 'src/app/shared/models/diet.model';
 import { Patient } from 'src/app/shared/models/patient.model';
 import { DietService } from 'src/app/shared/services/diet.service';
-import { PacientService } from 'src/app/shared/services/pacient.service';
+import { PatientService } from 'src/app/shared/services/patient.service';
 
 @Component({
   selector: 'app-main-dietas',
@@ -18,7 +18,7 @@ export class MainDietasComponent {
 
   constructor(
     private dietService: DietService,
-    private patientService: PacientService,
+    private patientService: PatientService,
     private activatedRoute: ActivatedRoute,
     private router: Router
   ) {
@@ -33,7 +33,7 @@ export class MainDietasComponent {
         next: (patient: Patient) => {
           this.patientName = patient.name;
         },
-        error: err => alert("Erro ao buscar paciente com o id " + this.patientId)
+        error: () => alert("Erro ao buscar paciente com o id " + this.patientId)
       })
      this.dietAddedSavedOrDeleted();
     }
