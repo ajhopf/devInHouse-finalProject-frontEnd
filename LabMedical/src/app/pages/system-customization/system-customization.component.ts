@@ -44,7 +44,7 @@ export class SystemCustomizationComponent implements OnInit {
     })
     this.systemConfigForm = this.formBuilder.group({
       companyName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(20)]],
-      logoUrl: ['', [Validators.required, Validators.pattern('(https?|data):[^\\s/$.?#].[^\\s]*')]],
+      logoUrl: ['', [Validators.required, Validators.pattern('^https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,}$')]],
       primaryColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
       secondaryColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],
       fontColor: ['', [Validators.required, Validators.pattern('^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$')]],

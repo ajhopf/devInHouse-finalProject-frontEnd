@@ -45,7 +45,32 @@ import { ModalComponent } from './components/modal/modal.component';
 import { PacientFormComponent } from './pages/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
 import { TesteListagemPacientesComponent } from './pages/teste-listagem-pacientes/teste-listagem-pacientes.component';
-
+import {
+  AppointmentTableComponent
+} from "./components/prontuario/main-consultas/appointment-table/appointment-table.component";
+import {FormExerciseComponent} from "./components/form-exercise/form-exercise.component";
+import {TableMedicacaoComponent} from "./components/prontuario/medicacao/table-medicacao/table-medicacao.component";
+import {FormMedicacaoComponent} from "./components/prontuario/medicacao/form-medicacao/form-medicacao.component";
+import {
+  AppointmentFormComponent
+} from "./components/prontuario/main-consultas/appointment-form/appointment-form.component";
+import {AppointmentSortingPipe} from "./shared/pipes/appointment-sorting.pipe";
+import {MeasurementUnitPipe} from "./shared/pipes/measurement-unit.pipe";
+import {MedicineTypePipe} from "./shared/pipes/medicine-type.pipe";
+import {ExamTableComponent} from "./components/registers/exam/exam-table/exam-table.component";
+import {ExamFormComponent} from "./components/registers/exam/exam-form/exam-form.component";
+import {StatusPipe} from "./shared/pipes/status.pipe";
+import {AlergiesListComponent} from "./components/prontuario/main-prontuario/alergies-list/alergies-list.component";
+import {
+  SpecialCareListComponent
+} from "./components/prontuario/main-prontuario/special-care-list/special-care-list.component";
+import {
+  PatientNotSelectedComponent
+} from "./pages/prontuario/prontuario-eletronico/patient-not-selected/patient-not-selected.component";
+import {
+  PatientSelectedComponent
+} from "./pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component";
+import {RouterOutlet} from "@angular/router";
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,15 +110,12 @@ import { TesteListagemPacientesComponent } from './pages/teste-listagem-paciente
     CalculoIdadePipe,
     SystemCustomizationComponent,
     ModalComponent,
-    FormExerciseComponent
-    ModalComponent,
+    FormExerciseComponent,
     TableMedicacaoComponent,
     FormMedicacaoComponent,
-    ModalComponent,
     AppointmentFormComponent,
     AppointmentTableComponent,
     AppointmentSortingPipe,
-    ModalComponent,
     MeasurementUnitPipe,
     MedicineTypePipe,
     ExamTableComponent,
