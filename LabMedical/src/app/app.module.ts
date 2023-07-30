@@ -64,6 +64,7 @@ import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletroni
 import { RouterOutlet } from "@angular/router";
 import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
 import { PatientsTableComponent } from './components/registers/patient/patients-list/patients-table.component';
+import { ExamSortingPipe } from './shared/pipes/exam-sorting.pipe';
 
 @NgModule({
   declarations: [
@@ -121,7 +122,8 @@ import { PatientsTableComponent } from './components/registers/patient/patients-
     PatientNotSelectedComponent,
     PatientSelectedComponent,
     DietFormComponent,
-    PatientsTableComponent
+    PatientsTableComponent,
+    ExamSortingPipe
   ],
   imports: [
     BrowserModule,

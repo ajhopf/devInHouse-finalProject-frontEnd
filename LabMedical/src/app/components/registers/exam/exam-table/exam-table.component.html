@@ -8,7 +8,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let exam of patientsExams; let i = index"
+  <tr *ngFor="let exam of patientsExams | examSorting; let i = index"
 	  [className]="exam.status ? '' : 'text-decoration-line-through'">
 	<td>{{exam.name}}</td>
 	<td>{{exam.examDate | date:"dd/MM/yyyy" }}</td>
