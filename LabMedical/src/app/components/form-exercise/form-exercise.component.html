@@ -17,7 +17,7 @@
     </div>
   </div>
 
-  <div *ngIf="exercise.id" class="col-md-3">
+  <div *ngIf="exercise" class="col-md-3">
     <label for="dateCreated" class="form-label">Data criação</label>
     <input type="date" class="form-control" [ngClass]="returnValidationClassForInput('dateCreated')" id="dateCreated" formControlName="dateCreated">
     <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['dateCreated'].invalid && checkIfInputIsUsed('dateCreated')">
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div *ngIf="exercise.id" class="col-md-3">
+  <div *ngIf="exercise" class="col-md-3">
     <label for="timeCreated" class="form-label">Hora criação</label>
     <input type="time" class="form-control" [ngClass]="returnValidationClassForInput('timeCreated')" id="timeCreated" formControlName="timeCreated">
     <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['timeCreated'].invalid && checkIfInputIsUsed('timeCreated')">
@@ -37,7 +37,7 @@
     <label for="exerciseType" class="form-label">Tipo exercicio</label>
     <select class="form-select" [ngClass]="returnValidationClassForInput('exerciseType')" id="exerciseType" formControlName="exerciseType">
       <option value="">Selecione o tipo de exercício</option>
-      <option *ngFor="let exerciseType of Object.values(ExercisetypeEnum)">{{ exerciseType }}</option>
+      <option value="{{exerciseType}}" *ngFor="let exerciseType of Object.values(ExercisetypeEnum)">{{ exerciseType }}</option>
     </select>
       <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['exerciseType'].invalid && checkIfInputIsUsed('exerciseType')">
       <div *ngIf="exerciseForm.controls['exerciseType'].errors['required']">Tipo é obrigatório.</div>
@@ -55,13 +55,13 @@
 
   <div class="col-md-12 d-flex flex-row-reverse">
     <button
-      *ngIf="exercise.id"
+      *ngIf="exercise"
       type="button"
       class="btn btn-warning ms-2">
       Deletar
     </button>
-    <button *ngIf="!exercise.id" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
-    <button *ngIf="exercise.id" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Atualizar</button>
+    <button *ngIf="!exercise" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
+    <button *ngIf="exercise" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Atualizar</button>
   </div>
 </form>
 

@@ -41,7 +41,7 @@ export class FormExerciseComponent {
   }
 
   onSubmit(): void {
-
+    console.log(this.exerciseForm.value)
   }
 
   checkIfInputIsUsed(inputName: string): boolean {

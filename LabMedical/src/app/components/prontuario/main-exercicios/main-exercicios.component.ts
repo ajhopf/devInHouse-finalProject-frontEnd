@@ -6,6 +6,7 @@ import {PacientService} from "../../../shared/services/pacient.service";
 import {Patient} from "../../../shared/models/patient.model";
 import {ExerciseService} from "../../../shared/services/exercise.service";
 import {ToastrService} from "ngx-toastr";
+import {Appointment} from "../../../shared/models/appointment.model";
 
 @Component({
   selector: 'app-main-exercicios',
@@ -68,6 +69,23 @@ export class MainExerciciosComponent implements OnInit{
         })
       }
     })
+    let exerciseId: number;
+    this.activatedRoute.paramMap.subscribe({
+      next: params => {
+        exerciseId = parseInt(params.get('idExercicio'))
+      }
+    })
+    if(exerciseId) {
+      this.exerciseService.getAll().subscribe({
+        next: (exercises: ExerciseModel[]) => {
+          exercises.forEach(el => {
+            if(el.id == exerciseId){
+              this.formExerciseService.openModal(this.patientId, el);
+            }
+          })
+        }
+      })
+    }
   }
 
   private inicializeExercisesList() {
