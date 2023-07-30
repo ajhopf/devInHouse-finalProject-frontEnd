@@ -55,11 +55,13 @@ import { MedicineTypePipe } from './shared/pipes/medicine-type.pipe';
 import { ExamTableComponent } from './components/registers/exam/exam-table/exam-table.component';
 import { ExamFormComponent } from './components/registers/exam/exam-form/exam-form.component';
 import { StatusPipe } from './shared/pipes/status.pipe';
+import { DietTableComponent } from './components/registers/diet/diet-table/diet-table.component';
 import { SpecialCareListComponent } from './components/prontuario/main-prontuario/special-care-list/special-care-list.component';
 import { AlergiesListComponent } from "./components/prontuario/main-prontuario/alergies-list/alergies-list.component";
 import { PatientNotSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-not-selected/patient-not-selected.component';
 import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component';
 import { RouterOutlet } from "@angular/router";
+import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
 
 @NgModule({
   declarations: [
@@ -112,11 +114,12 @@ import { RouterOutlet } from "@angular/router";
     ExamTableComponent,
     ExamFormComponent,
     StatusPipe,
+    DietTableComponent,
     AlergiesListComponent,
     SpecialCareListComponent,
-    AlergiesListComponent,
     PatientNotSelectedComponent,
-    PatientSelectedComponent
+    PatientSelectedComponent,
+    DietFormComponent
   ],
   imports: [
     BrowserModule,

@@ -19,7 +19,7 @@ export class ProntuarioEletronicoComponent {
     this.acao = acao
   }
 
-  onPatientSelect(event: string): void {0
+  onPatientSelect(event: string): void {
     this.patientId = event;
   }
 }
