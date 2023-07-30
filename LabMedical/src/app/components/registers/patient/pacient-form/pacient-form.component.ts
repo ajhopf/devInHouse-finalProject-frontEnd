@@ -231,7 +231,7 @@ export class PacientFormComponent implements OnInit {
 					hasAppointments = appointment.length > 0;
 					hasMedicines = medicines.body.length > 0;
 					hasDiets = diets.length > 0;
-					hasExams = exams.body.length > 0;
+					hasExams = exams.length > 0;
 
 					if (hasAppointments || hasMedicines || hasDiets || hasExams) {
 						this.hasRecords = true
