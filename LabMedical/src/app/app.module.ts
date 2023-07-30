@@ -62,7 +62,7 @@ import { PatientNotSelectedComponent } from './pages/prontuario/prontuario-eletr
 import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletronico/patient-selected/patient-selected.component';
 import { RouterOutlet } from "@angular/router";
 import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
-import { PatientsListComponent } from './components/registers/patient/patients-list/patients-list.component';
+import { PatientsTableComponent } from './components/registers/patient/patients-list/patients-table.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +121,7 @@ import { PatientsListComponent } from './components/registers/patient/patients-l
     PatientNotSelectedComponent,
     PatientSelectedComponent,
     DietFormComponent,
-    PatientsListComponent
+    PatientsTableComponent
   ],
   imports: [
     BrowserModule,

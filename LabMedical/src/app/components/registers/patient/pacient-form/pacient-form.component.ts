@@ -157,12 +157,15 @@ export class PacientFormComponent implements OnInit {
 
 	onDeleteRegistration() {
 		if (!this.hasRecords) {
-			this.pacientService.deletePatient(this.pacientId).subscribe(
-				() => {
-					this.toastr.success('Paciente deletado com sucesso')
-					this.navigateAway()
-				}
-			)
+			let confirmed = confirm("Deseja excluir permanentemente o paciente?")
+			if (confirmed) {
+				this.pacientService.deletePatient(this.pacientId).subscribe(
+					() => {
+						this.toastr.success('Paciente deletado com sucesso')
+						this.navigateAway()
+					}
+				)
+			}
 		} else {
 			this.toastr.error('Paciente possui registros. Não foi possível deletar o paciente.')
 		}

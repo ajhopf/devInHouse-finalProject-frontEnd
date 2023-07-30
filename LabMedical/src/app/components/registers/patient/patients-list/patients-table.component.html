@@ -19,10 +19,26 @@
 	  <tr *ngFor="let patient of patientList" class="text-center">
 		<td>{{patient.name}}</td>
 		<td>{{patient.email}}</td>
-		<td>{{patient.isActive ? 'Ativo' : 'Inativo'}}</td>
-		<td><button type="button" class="btn btn-link" (click)="onEditPatient(patient.id)"><img
+		<td>{{patient.isActive}}</td>
+		<td>
+		  <button type="button" class="btn btn-link" (click)="onEditPatient(patient.id)"><img
 		  src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
-																							width="30" height="30"></button></td>
+																							width="30" height="30">
+		  </button>
+		  <button
+			[hidden]="!patient.isActive"
+			(click)="onDeactivatePatient(patient)"
+			[ngbTooltip]="patient.isActive ? 'Desativar paciente' : 'Reativar paciente'"
+			type="button"
+			class="btn btn-link">
+			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-slash-circle"
+				 viewBox="0 0 16 16">
+			  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+			  <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z"/>
+			</svg>
+		  </button>
+
+		</td>
 	  </tr>
 	  </tbody>
 	  <ng-template #empty class="container">
