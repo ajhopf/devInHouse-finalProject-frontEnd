@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/shared/services/user.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserModel } from 'src/app/shared/models/user.model';
@@ -20,7 +21,7 @@ export class UserRegisterFormComponent implements OnInit{
   canDelete: boolean = false
   isEditing: boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute) {
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) {
     
   }
 
@@ -48,28 +49,28 @@ export class UserRegisterFormComponent implements OnInit{
         }
         this.userService.updateUser(this.user.id, newUser).subscribe(({
           next: (response:string) => {
-            alert(response);
+            this.toastr.success(response);
             this.navigate()
           },
           error: (err: HttpErrorResponse) => {
-              alert(`${err.error}`);
+            this.toastr.error(`${err.error}`);
           }        
         }));
       }else{
         this.userService.saveUser(this.user).subscribe(({
           next:() =>{
-            alert("Usuário salvo com sucesso!");
+            this.toastr.success("Usuário salvo com sucesso!");
             this.cleanForm();
             this.formValid = false;
           },
           error: (err) => {
-            alert(`Erro ao realizar cadastro. ${err.error}`);
+            this.toastr.error(`Erro ao realizar cadastro. ${err.error}`);
             console.error({status: err.status, message: err.error});
           }
         }));
       }
     }else{
-      alert('O formulário não é válido, campos obrigatórios devem ser preenchidos. Não será realizado o salvamento do usuário.');
+      this.toastr.error('O formulário não é válido, campos obrigatórios devem ser preenchidos. Não será realizado o salvamento do usuário.');
     };
   }
 
@@ -90,7 +91,7 @@ export class UserRegisterFormComponent implements OnInit{
         this.canDelete = true
 			},
 			error: (err) => {
-				alert('Erro de solicitação de usuário')
+				this.toastr.error('Erro de solicitação de usuário')
 				console.error({status: err.status, message: err.error})
 			}
 		})
@@ -103,11 +104,11 @@ export class UserRegisterFormComponent implements OnInit{
   deleteUser(id: number){
     this.userService.deleteUserById(id).subscribe(({
       next: (response: string) =>{
-        alert(response)
+        this.toastr.success(response)
         this.navigate()
       },
       error: (err) =>{
-        alert(err)
+        this.toastr.error(err)
       }
     }))
   }

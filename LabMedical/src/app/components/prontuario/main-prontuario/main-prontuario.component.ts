@@ -60,7 +60,7 @@ export class MainProntuarioComponent implements OnInit {
 
 					this.examsService.getExamListById(+this.patientId)
 						.subscribe({
-							next: (exams: any) => this.patientExams = exams.body,
+							next: (exams: any) => this.patientExams = exams,
 							error: () => { console.log('aqui'); this.emptyExams = true}
 						})
 

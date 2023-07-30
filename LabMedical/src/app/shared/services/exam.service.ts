@@ -18,17 +18,7 @@ export class ExamService {
     getExamListById(idPacient: number): Observable<any>{
         return this.http.get(`${environment.URL_EXAMS}`,
             {
-                observe: 'response',
                 params: {pacientId: idPacient},
-                headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
-            }
-        )
-    }
-
-    getAllExams(): Observable<any>{
-        return this.http.get(`${environment.URL_EXAMS}`,
-            {
-                observe: 'response',
                 headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
             }
         )
@@ -37,7 +27,6 @@ export class ExamService {
     getExam(): Observable<any>{
         return this.http.get(`${environment.URL_EXAMS}`,
             {
-                observe: 'response',
                 headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
             }
         )
@@ -48,8 +37,7 @@ export class ExamService {
             `${environment.URL_EXAMS_REGISTER}`,
             exam,
             {
-                observe: 'response',
-                headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
+              headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
             }
         )
     }
@@ -59,7 +47,6 @@ export class ExamService {
             `${environment.URL_EXAMS_UPDATE}/${id}`,
             exam,
             {
-                observe: 'response',
                 headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
             }
         )
@@ -69,7 +56,6 @@ export class ExamService {
         return this.http.delete(
             `${environment.URL_EXAMS}/${id}`,
             {
-                observe: 'response',
                 headers: {'Authorization': `Bearer ${this.authenticationService.getToken()}`}
             }
         )
