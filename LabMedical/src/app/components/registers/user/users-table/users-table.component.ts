@@ -1,5 +1,6 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';
@@ -11,7 +12,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UsersTableComponent implements OnInit {
   users: UserModel[] =[]
-  constructor(private userService: UserService, private router: Router){
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService){
     
   }
 
@@ -25,7 +26,7 @@ export class UsersTableComponent implements OnInit {
 				this.users = response.body
 			},
 			error: (err) => {
-				alert('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
+				this.toastr.error('Credenciais inválidas. Tente resetar sua senha ou entre em contato com um administrador do sistema.')
 				console.error({status: err.status, message: err.error})
 			}
 		})

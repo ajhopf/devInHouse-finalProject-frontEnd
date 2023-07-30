@@ -44,6 +44,7 @@ import {BrowserAnimationsModule, provideAnimations} from "@angular/platform-brow
 import { ModalComponent } from './components/modal/modal.component';
 import { PacientFormComponent } from './components/registers/patient/pacient-form/pacient-form.component';
 import { ValidDobDirective } from "./shared/validators/date-of-birth/valid-dob.directive";
+import {FormExerciseComponent} from "./components/form-exercise/form-exercise.component";
 import { PatientComponent } from './pages/patient/patient.component';
 import { TableMedicacaoComponent } from './components/prontuario/medicacao/table-medicacao/table-medicacao.component';
 import { FormMedicacaoComponent } from './components/prontuario/medicacao/form-medicacao/form-medicacao.component';
@@ -103,13 +104,12 @@ import { PatientsTableComponent } from './components/registers/patient/patients-
     CalculoIdadePipe,
     SystemCustomizationComponent,
     ModalComponent,
+    FormExerciseComponent,
     TableMedicacaoComponent,
     FormMedicacaoComponent,
-    ModalComponent,
     AppointmentFormComponent,
     AppointmentTableComponent,
     AppointmentSortingPipe,
-    ModalComponent,
     MeasurementUnitPipe,
     MedicineTypePipe,
     ExamTableComponent,

@@ -97,7 +97,7 @@ export class PatientsTableComponent implements OnInit {
       (response) => {
         let exams: ExamModel[] = response.body;
         exams.forEach(exam => {
-          let date = exam.date.split('/')
+          let date = exam.examDate.split('/')
           let updatedExam = {
             ...exam,
             status: false,

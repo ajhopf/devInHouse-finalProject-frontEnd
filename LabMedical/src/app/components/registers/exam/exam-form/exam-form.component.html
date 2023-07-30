@@ -1,84 +1,204 @@
-<div>
-    <div style="min-height: 50vh; position:relative;" class="m-5 bgWhite">
-      <div style="max-height:100%; overflow-x: hidden; overflow-y:scroll;">
-        <form class="row g-3 p-5" #signIn="ngForm">
-          <h5>Cadastro de Exame</h5>
-          <div class="col-md-8">
-            <label for="nome" class="form-label">Nome do Exame</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name="nome" #nome='ngModel'[(ngModel)]="exam.name" required minlength="8" maxlength="64"  (input)="validForm()">
-            <div *ngIf="nome.errors && nome.touched" class="p-1 text-danger">
-              {{nome.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 64 caracteres'}}
-            </div>
-          </div>
-          <div class="col-md-4">
-            <label for="data" class="form-label">Data</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="date" class="form-control" name='data' #data='ngModel' [(ngModel)]="exam.date" required>
-            <div *ngIf="data.errors && data.touched" class="p-1 text-danger">
-                Preencha esse campo
-            </div>
-          </div>
-          <div class="col-md-3">
-            <label for="horario" class="form-label">Horário</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="time" class="form-control" name='horario' #horario='ngModel' [(ngModel)]="exam.time" required>
-            <div *ngIf="horario.errors && horario.touched" class="p-1 text-danger">
-                Preencha esse campo
-            </div>
-          </div>
-          <div class="col-md-3">
-            <label for="Tipo" class="form-label">Tipo</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name='Tipo' [(ngModel)]="exam.type" #Tipo="ngModel" required minlength="4" maxlength="34"  (input)="validForm()">
-            <div *ngIf="Tipo.errors && Tipo.touched" class="p-1 text-danger">
-              {{Tipo.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
-            </div>
-          </div>
-          <div class="col-md-3">
-            <label for="laboratorio" class="form-label">Laboratório</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <input type="text" class="form-control" name='laboratorio' [(ngModel)]="exam.laboratory" #laboratorio="ngModel" required minlength="4" maxlength="34" (input)="validForm()">
-            <div *ngIf="laboratorio.errors && laboratorio.touched" class="p-1 text-danger">
-              {{laboratorio.errors['required']?'Preencha esse campo':'Minímo de 8 e máximo de 34 caracteres'}}
-          </div>
-          </div>
-          <div class="col-md-3">
-            <label for="role" class="form-label">Status</label>
-            <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-            class="d-inline-block align-text-top">
-            <select class="form-select" aria-label="status" name="status" #status='ngModel'[(ngModel)]="exam.status" required (click)="validForm()">
-              <option value="true" selected>Ativo</option>
-              <option value="false" [disabled]="!isEditing">Inativo</option>
-            </select>
-            <div *ngIf="status.errors && status.touched" class="p-1 text-danger">
-              Preencha esse campo
-            </div>
-          </div>
-          <div class="col-md-12">
-              <label for="resultado" class="form-label">Resultado</label>
-              <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
-              class="d-inline-block align-text-top">
-              <textarea class="form-control" name='resultado' [(ngModel)]="exam.result" #resultado="ngModel" required minlength="16" maxlength="1024" (input)="validForm()"></textarea>
-              <div *ngIf="resultado.errors && resultado.touched" class="p-1 text-danger">
-                  {{resultado.errors['required']?'Preencha esse campo':'Minímo de 16 e máximo de 1024 caracteres'}}
-              </div>
-          </div>
-          <div class="col-md-12">
-            <label for="url" class="form-label">URL do documento</label>
-            <input type="text" class="form-control" name='url' [(ngModel)]="exam.documentUrl">
-          </div>       
-          <div class="col-md-6 d-flex justify-content-start">
-              <app-button-forms [label]="'Salvar'" [type]="'btn-primary'" (click)="registerExam()" [disabled]="!formValid" [ngStyle]="{'cursor': formValid ? 'pointer': 'not-allowed'}"></app-button-forms>
-              <app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="modalClose()"></app-button-forms>
-              <app-button-forms [label]="'Deletar'" [type]="'btn-danger'"  [disabled]="!isEditing" [ngStyle]="{'cursor': isEditing ? 'pointer': 'not-allowed'}" (click)="deleteExam()"></app-button-forms>
-          </div>
-        </form>
+<section>
+  <form class="row g-3 p-5" #examForm="ngForm"  (ngSubmit)="onAddExam()">
+   <!--Appointment reason, date and time-->
+   <div class="row m-0 mb-3">
+    <!--reason-->
+    <div class="col-12 col-md px-0 pe-lg-4">
+      <label
+        for="reason"
+        class="form-label">Nome da Dieta
+      </label>
+      <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+           class="d-inline-block align-text-top ms-2">
+      <input
+        #name="ngModel"
+        id="name"
+        name="name"
+        class="form-control"
+        [ngClass]="(name.invalid && name.touched) ? 'invalidInput' : '' "
+        type="text"
+        [(ngModel)]="exam.name"
+        required
+        maxlength="64" minlength="8">
+      <span
+        *ngIf="name.invalid && name.touched"
+        class="text-danger">
+      O motivo da consulta deve conter ao menos 8 caracteres.
+    </span>
+    </div>
+    <!--Date and time-->
+    <div class="col-12 p-0 col-lg mt-3 mt-lg-0">
+      <div class="row m-0">
+        <!--Date-->
+        <div class="col-12 col-sm px-0 pe-sm-2 mb-3 mb-sm-0">
+          <label for="examDate" class="form-label">
+            Data doE Exame
+          </label>
+          <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+               class="d-inline-block align-text-top ms-2">
+          <input
+            #examDate="ngModel"
+            type="date"
+            id="examDate"
+            name="appointmexamDateentDate"
+            class="form-control"
+            [ngClass]="(examDate.invalid && examDate.touched) ? 'invalidInput' : '' "
+            required
+            [(ngModel)]="exam.examDate">
+          <span
+            *ngIf="examDate.invalid && examDate.touched"
+            class="text-danger">
+        Selecione uma data válida
+      </span>
+        </div>
+        <!--Time-->
+        <div class="col-12 col-sm px-0 ps-sm-2">
+          <label for="examTime" class="form-label">
+            Horário
+          </label>
+          <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+               class="d-inline-block align-text-top ms-2">
+          <input
+            #time="ngModel"
+            type="time"
+            id="examTime"
+            name="examTime"
+            class="form-control"
+            [ngClass]="(time.invalid && time.touched) ? 'invalidInput' : '' "
+            required
+            [(ngModel)]="exam.time"
+          >
+          <span
+            *ngIf="time.invalid && time.touched"
+            class="text-danger">
+        Selecione um horário válido.
+      </span>
+        </div>
       </div>
     </div>
   </div>
+  <div class="row m-0 mb-3">
+    <div class="col px-0 pe-sm-2">
+        <label
+          for="type"
+          class="form-label">
+          Tipo
+        </label>
+        <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+            class="d-inline-block align-text-top ms-2">
+        <input
+          #type="ngModel"
+          id="type"
+          name="type"
+          class="form-control"
+          [ngClass]="(type.invalid && type.touched) ? 'invalidInput' : '' "
+          required minlength="4" maxlength="32"
+          [(ngModel)]="exam.type" >
+          <span
+          *ngIf="type.invalid && type.touched"
+          class="text-danger">
+        O tipo deve conter ao menos 4 caracteres.
+      </span>
+    </div>
+    <div class="col px-0 ps-sm-2">
+      <label
+        for="laboratory"
+        class="form-label">
+        Laboratório
+      </label>
+      <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+          class="d-inline-block align-text-top ms-2">
+      <input
+        #laboratory="ngModel"
+        id="laboratory"
+        name="laboratory"
+        class="form-control"
+        [ngClass]="(laboratory.invalid && laboratory.touched) ? 'invalidInput' : '' "
+        required minlength="4" maxlength="32"
+        [(ngModel)]="exam.laboratory" >
+      <span
+        *ngIf="laboratory.invalid && laboratory.touched"
+        class="text-danger">
+        O tipo deve conter ao menos 4 caracteres.
+      </span>
+    </div>
+  </div>
+  <div class="row m-0">
+    <div class="col px-0 pe-sm-2">
+      <label
+        for="url"
+        class="form-label">
+        URL do Documento
+      </label>
+      <input
+        #url="ngModel"
+        id="url"
+        name="url"
+        class="form-control"
+        [(ngModel)]="exam.documentUrl" >
+    </div>
+  </div>
+  <div class="row m-0 mb-3">
+    <div class="col px-0">
+      <label
+        for="result"
+        class="form-label">
+        Resutado
+      </label>
+      <img [src]="OBRIGATORIO" alt="Logo" width="10" height="10"
+           class="d-inline-block align-text-top ms-2">
+      <textarea
+        #result="ngModel"
+        id="result"
+        name="result"
+        class="form-control"
+        [ngClass]="(result.invalid && result.touched) ? 'invalidInput' : '' "
+        required minlength="16" maxlength="1024"
+        rows="8"
+        [(ngModel)]="exam.result" >
+      </textarea>
+
+      <span
+        *ngIf="result.invalid && result.touched"
+        class="text-danger">
+    A descrição deve conter ao menos 16 caracteres.
+    </span>
+    </div>
+  </div>
+  
+  <div class="col-12 col-md d-flex py-2 justify-content-center justify-content-lg-end me-2">
+    <div [ngbTooltip]="examForm.invalid && examId ? 'Todos campos com marcação devem ser preenchidos' : ''">
+      <button
+        type="button"
+        class="btn btn-warning mx-1"
+        [disabled]="!examId && !examForm.valid" (click)="onSaveExam()">
+        Salvar
+      </button>
+    </div>
+    <div
+      class="d-flex">
+      <button
+        type="button"
+        class="btn btn-danger mx-1"
+        [disabled]="!examId"
+        (click)="onDeleteExam()"
+      >
+        Excluir
+      </button>
+    </div>
+    <div
+      class="d-flex"
+      placement="top-right"
+      [ngbTooltip]="examForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''"
+    >
+      <button
+        [disabled]="examForm.invalid || examId"
+        class="btn btn-success mx-1"
+        type="submit"
+      >
+        Adicionar
+      </button>
+    </div>
+  </div>
+</form>
+</section>>

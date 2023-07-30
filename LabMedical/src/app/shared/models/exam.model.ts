@@ -1,7 +1,7 @@
 export interface ExamModel{
     id?: number,
     name: string,
-    date: string,
+    examDate: string,
     time: string,
     type: string,
     laboratory: string,

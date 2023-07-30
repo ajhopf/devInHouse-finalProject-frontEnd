@@ -1,47 +1,50 @@
-<div class="container-fluid p-5" *ngIf="!openFormRegister">
-    <div class="d-flex flex-column justify-content-around child-container p-5">
-        <h4 class="text-center">Lista de Exames</h4>
-      <table class="table table-striped table-bordered">
-          <thead class="table-primary text-center">
-            <tr>
-              <th scope="col">Nome Exame</th>
-              <th scope="col">Data</th>
-              <th scope="col">Hora</th>
-              <th scope="col">Status</th>
-              <th scope="col">Anexo</th>
-              <th scope="col" *ngIf="pacientId">Opções</th>
-            </tr>
-          </thead>
-          <tbody *ngIf="examList.length > 0; else empty">
-                <tr *ngFor="let exam of examList" class="text-center">
-                    <td>{{exam.name}}</td>
-                    <td>{{exam.date}}</td>
-                    <td>{{exam.time}}</td>
-                    <td>{{exam.status | statusName}}</td>
-                   <td *ngIf="exam.documentUrl; else noAnex">
-                    <a [href]="exam.documentUrl" target="_blank">
-                      <img class="img-fluid ms-1"
-                      width="30" height="30" [src]="ANEXO" alt="anexo">
-                    </a>
-                   </td>
-                   <td *ngIf="pacientId"><button type="button" class="btn btn-link"><img src="../../../../../assets/images/ver.png" class="img-fluid ms-1"
-                    width="30" height="30" (click)="examUpdate(exam.id)"></button></td>
-                  </tr>
-          </tbody>
-          <ng-template #noAnex>
-            <td>
-              -
-            </td>
-          </ng-template>
-          <ng-template #empty class="container">
-            <div class="text-center">
-                 <p>Não existem exames cadastrados para o paciente</p>
-            </div>
-        </ng-template>
-        </table>
-        <div *ngIf="pacientId">
-          <button type="button" class="btn btn-primary btn-lg " width='50' (click)="openForm(true)">Adicionar</button>
-        </div>
-    </div>
-  </div>
- <app-exam-form *ngIf="openFormRegister" [ExamIdUpdate]="examIdUpdate" (closeModal)="openForm($event)"></app-exam-form>
+<table class="table table-striped table-bordered examTable">
+  <thead class="table-primary">
+  <tr>
+	<th scope="col">Nome do Exame</th>
+	<th scope="col">Data</th>
+	<th scope="col">Horário</th>
+	<th scope="col">Opções</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let exam of patientsExams; let i = index"
+	  [className]="exam.status ? '' : 'text-decoration-line-through'">
+	<td>{{exam.name}}</td>
+	<td>{{exam.examDate | date:"dd/MM/yyyy" }}</td>
+	<td>{{exam.time}}</td>
+	<td>
+	  <button
+		(click)="onEditExam(exam.id)"
+		[ngbTooltip]="'Editar exame'"
+		type="button"
+		class="btn btn-link">
+		<img alt="edit appointment" src="../../../../../assets/images/ver.png" class="img-fluid ms-1" width="30"
+			 height="30">
+	  </button>
+	  <button
+		(click)="onDeactivateExam(exam)"
+		[ngbTooltip]="exam.status ? 'Desativar exame' : 'Reativar exame'"
+		type="button"
+		class="btn btn-link">
+		<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-slash-circle"
+			 viewBox="0 0 16 16">
+		  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+		  <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z"/>
+		</svg>
+	  </button>
+    <a
+    *ngIf="exam.documentUrl"
+    [href]="exam.documentUrl"
+    target="_blank"
+		[ngbTooltip]="exam.documentUrl ? 'Abrir anexo' : ''"
+		type="button"
+		class="btn btn-link">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" 
+    stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path></svg>
+	  </a>
+	</td>
+  </tr>
+  </tbody>
+</table>

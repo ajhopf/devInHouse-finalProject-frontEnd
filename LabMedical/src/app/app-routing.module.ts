@@ -28,6 +28,7 @@ import { MainMedicacaoComponent } from "./components/prontuario/main-medicacao/m
 import { MainDietasComponent } from "./components/prontuario/main-dietas/main-dietas.component";
 import { MainExerciciosComponent } from "./components/prontuario/main-exercicios/main-exercicios.component";
 import { PatientsTableComponent } from "./components/registers/patient/patients-list/patients-table.component";
+import {FormExerciseComponent} from "./components/form-exercise/form-exercise.component";
 
 const routes: Routes = [
 	{

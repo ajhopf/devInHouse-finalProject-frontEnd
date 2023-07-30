@@ -1,1 +1,35 @@
-<app-exam-table></app-exam-table>
+<section>
+    <div *ngIf="showPatientExam">
+      <div class="row">
+        <h2 class="col-10">Exames de {{ patientName }}</h2>
+        <div class="col">
+          <button class="btn btn-secondary" (click)="onAddNewExam()">Adicionar consulta</button>
+        </div>
+      </div>
+      <hr>
+  
+      <app-exam-table
+        [patientsExams]="patientExams"
+        [patientId]="+patientId">
+    </app-exam-table>
+    </div>
+  
+    <div *ngIf="!showPatientExam">
+      <div class="row">
+        <h2 class="col-8">Novo Exame</h2>
+        <div class="col d-flex justify-content-end">
+          <button class="btn btn-secondary" (click)="onReturn()">
+            Cancelar
+          </button>
+        </div>
+      </div>
+      <hr>
+      <div>
+        <app-exam-form
+          [patientId]="+patientId"
+          (examAddedSavedOrDeleted)="onExamAddedSavedOrDeleted()"
+        >
+        </app-exam-form>
+      </div>
+    </div>
+  </section>

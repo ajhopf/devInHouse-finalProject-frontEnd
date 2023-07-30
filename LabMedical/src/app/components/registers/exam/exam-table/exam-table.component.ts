@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ExamModel } from 'src/app/shared/models/exam.model';
 import { ExamService } from 'src/app/shared/services/exam.service';
 
@@ -7,66 +9,39 @@ import { ExamService } from 'src/app/shared/services/exam.service';
   templateUrl: './exam-table.component.html',
   styleUrls: ['./exam-table.component.css']
 })
-export class ExamTableComponent implements OnInit, OnChanges {
-  pacientId: number =  parseInt(localStorage.getItem('patientId'))
-  examList: ExamModel[] = [];
-  ANEXO: string = '../../../assets/images/document.png'
-  examIdUpdate: number = null
-  openFormRegister = false;
+export class ExamTableComponent   {
+  @Input() patientsExams: ExamModel[]
+  @Input() patientId: number
 
- 
-  constructor(private examService: ExamService){
+  constructor(
+    private examService: ExamService,
+    private router: Router,
+    private toastr: ToastrService
+    ){
   
   }
   
-
-  ngOnInit(): void {
-       this.renderPage()
-  }
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes)
+  onEditExam(examId: number){
+    this.router.navigate([`${this.patientId}/prontuario/exames/${examId}`])
   }
 
-  examUpdate(id: number){
-    this.examIdUpdate = id
-    this.openForm(true)
-  }
+  onDeactivateExam(exam: ExamModel){
+    exam.status = !exam.status;
 
-  renderPage(){
-    if(!this.pacientId){
-      this.allExams()
-    }else{
-      this.onLoad()
+    let toastrMessage: string;
+
+    if (exam.status) {
+      toastrMessage = "Exame reativado"
+    } else {
+      toastrMessage = "Exame desativado"
     }
+
+    this.examService.putUpdateExam(exam.id, exam).subscribe({
+      next: () => {
+        exam.status ? this.toastr.success(toastrMessage) : this.toastr.warning(toastrMessage)
+      },
+      error: err => this.toastr.error(err.message)
+    })
   }
-
-  onLoad(){
-    this.examService.getExamListById(this.pacientId).subscribe((
-      {
-        next: (response) =>{
-          this.examList = response.body
-        }
-      }
-    ))
-  }
-
-  allExams(){
-    this.examService.getAllExams().subscribe((
-      {
-        next: (response) =>{
-          this.examList = response.body
-        }
-      }
-    ))
-  }
-
-  openForm(open: boolean){
-    this.openFormRegister = open
-    this.renderPage()
-  }
-
-
-
- 
+  
 }
