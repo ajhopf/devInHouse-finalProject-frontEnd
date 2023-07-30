@@ -17,7 +17,7 @@ export class DietService{
     getDietByPacientId(patientId: number): Observable<any> {
         return this.http.get(
 			`${ environment.URL_DIETS }`,
-			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()},params: {pacientId: patientId}}
+			{headers: {"Authorization": "Bearer " + this.authenticationService.getToken()},params: {pacient: patientId}}
 		)
     }
 
