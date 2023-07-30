@@ -144,9 +144,9 @@
 			  <p>Paciente não possui dietas cadastradas</p>
 			</div>
 			<div *ngIf="!emptyDiets">
-			  <div *ngFor="let diet of patientDiets">
+			  <div *ngFor="let diet of patientDiets | dietSorting">
 				<h4><span class="fw-bold">Nome da Dieta: </span> {{ diet.dietName  }}</h4>
-				<p><span class="fw-bold">Data: </span>{{ diet.dietDate }}</p>
+				<p><span class="fw-bold">Data: </span>{{ diet.dietDate | date: "dd/MM/yyyy"}}</p>
 				<p><span class="fw-bold">Horário: </span>{{ diet.time }}</p>
 				<p><span class="fw-bold">Tipo: </span>{{ diet.dietType }}</p>
 				<p><span class="fw-bold">Descrição: </span>{{ diet.description }}</p>
