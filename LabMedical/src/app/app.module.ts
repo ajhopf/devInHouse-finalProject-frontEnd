@@ -64,6 +64,10 @@ import { PatientSelectedComponent } from './pages/prontuario/prontuario-eletroni
 import { RouterOutlet } from "@angular/router";
 import { DietFormComponent } from './components/registers/diet/diet-form/diet-form.component';
 import { PatientsTableComponent } from './components/registers/patient/patients-list/patients-table.component';
+import { ExamSortingPipe } from './shared/pipes/exam-sorting.pipe';
+import { MedicineSortingPipe } from './shared/pipes/medicine-sorting.pipe';
+import { DietSortingPipe } from './shared/pipes/diet-sorting.pipe';
+import { ExerciseSortingPipe } from './shared/pipes/exercise-sorting.pipe';
 
 @NgModule({
   declarations: [
@@ -121,7 +125,11 @@ import { PatientsTableComponent } from './components/registers/patient/patients-
     PatientNotSelectedComponent,
     PatientSelectedComponent,
     DietFormComponent,
-    PatientsTableComponent
+    PatientsTableComponent,
+    ExamSortingPipe,
+    MedicineSortingPipe,
+    DietSortingPipe,
+    ExerciseSortingPipe
   ],
   imports: [
     BrowserModule,

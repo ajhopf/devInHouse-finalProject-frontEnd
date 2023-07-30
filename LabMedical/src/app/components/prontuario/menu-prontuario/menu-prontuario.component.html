@@ -2,29 +2,37 @@
     <div class="m-2">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
             <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                <button class="btn" style="text-decoration: none;" (click)="changePage('prontuario')">Visão
+                <button [ngClass]="pageName == 'prontuario' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                        style="text-decoration:
+                none;"
+                        (click)="changePage('prontuario')">Visão
                     Simplificada</button>
             </li>
             <ng-container *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'">
                 <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                    <button class="btn" style="text-decoration: none;" (click)="changePage('consultas')">Consultas
+                    <button [ngClass]="pageName == 'consultas' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                            style="text-decoration: none;" (click)="changePage('consultas')">Consultas
                     </button>
 
                 </li>
             </ng-container>
             <ng-container *ngIf="userRole=='ROLE_ADMIN'||userRole=='ROLE_DOCTOR'">
                 <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                    <button class="btn" style="text-decoration: none;" (click)="changePage('exames')">Exames</button>
+                    <button [ngClass]="pageName == 'exames' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                            style="text-decoration: none;" (click)="changePage('exames')">Exames</button>
                 </li>
             </ng-container>
             <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                <button class="btn" style="text-decoration: none;" (click)="changePage('medicacao')">Medicação</button>
+                <button [ngClass]="pageName == 'medicacao' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                        style="text-decoration: none;" (click)="changePage('medicacao')">Medicação</button>
             </li>
             <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                <button class="btn" style="text-decoration: none;" (click)="changePage('dietas')">Dietas</button>
+                <button [ngClass]="pageName == 'dietas' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                        style="text-decoration: none;" (click)="changePage('dietas')">Dietas</button>
             </li>
             <li class="nav-item d-flex justify-content-start align-items-center ms-3">
-                <button class="btn" style="text-decoration: none;" (click)="changePage('exercicios')">Exercícios</button>
+                <button [ngClass]="pageName == 'exercicios' ? 'btn btn-secondary w-100' : 'btn w-100'"
+                        style="text-decoration: none;" (click)="changePage('exercicios')">Exercícios</button>
             </li>
         </ul>
     </div>

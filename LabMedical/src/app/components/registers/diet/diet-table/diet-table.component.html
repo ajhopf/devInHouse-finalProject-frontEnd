@@ -10,7 +10,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let diet of patientsDiets ; let i = index"
+    <tr *ngFor="let diet of patientsDiets | dietSorting; let i = index"
         [className]="diet.status ? '' : 'text-decoration-line-through'">
       <td>{{diet.dietName}}</td>
       <td>{{diet.dietDate | date:"dd/MM/yyyy" }}</td>
@@ -28,6 +28,7 @@
         </button>
         <button
           (click)="onDeactivateDiet(diet)"
+          [hidden]="!diet.status"
           [ngbTooltip]="diet.status ? 'Desativar dieta' : 'Reativar dieta'"
           type="button"
           class="btn btn-link">

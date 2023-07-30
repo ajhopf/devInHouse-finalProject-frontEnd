@@ -20,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let exercise of exercisesOfPetient;"
+    <tr *ngFor="let exercise of exercisesOfPetient | exerciseSorting;"
         [className]="exercise.status ? '' : 'text-decoration-line-through'">
       <td>{{exercise.exerciseSeriesName}}</td>
       <td>{{exercise.timesPerWeek}}</td>
