@@ -1,0 +1,44 @@
+<table class="table table-striped table-bordered dietTable">
+    <thead class="table-primary">
+    <tr>
+      <th scope="col">Nome da Dieta</th>
+      <th scope="col">Data</th>
+      <th scope="col">Horário</th>
+      <th scope="col">Tipo</th>
+      <th scope="col">Status</th>
+      <th scope="col">Opções</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let diet of patientsDiets | dietSorting; let i = index"
+        [className]="diet.status ? '' : 'text-decoration-line-through'">
+      <td>{{diet.dietName}}</td>
+      <td>{{diet.dietDate | date:"dd/MM/yyyy" }}</td>
+      <td>{{diet.time}}</td>
+      <td>{{diet.dietType}}</td>
+      <td>{{diet.status | statusName}}</td>
+      <td>
+        <button
+          (click)="onEditDiet(diet.id)"
+          [ngbTooltip]="'Editar dieta'"
+          type="button"
+          class="btn btn-link">
+          <img alt="edit diet" src="../../../../../assets/images/ver.png" class="img-fluid ms-1" width="30"
+               height="30">
+        </button>
+        <button
+          (click)="onDeactivateDiet(diet)"
+          [hidden]="!diet.status"
+          [ngbTooltip]="diet.status ? 'Desativar dieta' : 'Reativar dieta'"
+          type="button"
+          class="btn btn-link">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="black" class="bi bi-slash-circle"
+               viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z"/>
+          </svg>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>

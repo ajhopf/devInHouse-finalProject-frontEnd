@@ -1,0 +1,15 @@
+.menu {
+  grid-row: 1 / span 2;
+  overflow: hidden;
+}
+.content {
+  overflow: auto;
+  background-color: rgb(190,190,190);
+}
+.grid-container {
+  display: grid;
+  height: 100vh;
+  grid-template-columns: min-content auto;
+  grid-template-rows: 45px auto;
+
+}

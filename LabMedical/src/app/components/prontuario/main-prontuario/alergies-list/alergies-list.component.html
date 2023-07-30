@@ -1,0 +1,9 @@
+<div>
+  <h3>Lista de Alergias</h3>
+  <ul *ngIf=alergiesList.length >
+	<li *ngFor="let alergie of alergiesList">
+	  {{ alergie }}
+	</li>
+  </ul>
+  <p *ngIf="alergiesList.length == 0">Paciente não possui alergias.</p>
+</div>

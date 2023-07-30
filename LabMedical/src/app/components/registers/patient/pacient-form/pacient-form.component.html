@@ -1,0 +1,569 @@
+<section style="min-height: 50vh; position:relative;" class="m-5 bgWhite">
+  <div style="max-height:100%; overflow-x: hidden;">
+	<form
+	  class="row g-3 p-5"
+	  (ngSubmit)="createPatient()"
+      #patientForm="ngForm">
+	  <h2 class="col-12 col-md mb-3 mb-md-0">Identificação</h2>
+	  <!--Nome,genero, dob-->
+	  <div class="row">
+		<!--Pacient Name-->
+		<div class="col-12 col-md-6 my-3">
+		  <label
+			class="form-label"
+			for="pacientName">
+			Nome
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+            #pacientName="ngModel"
+			type="text"
+			class="form-control"
+			[ngClass]="(pacientName.invalid && pacientName.touched) ? 'invalidInput' : ''"
+			id="pacientName"
+			name="pacientName"
+			[(ngModel)]="pacient.name"
+			required
+			maxlength="64"
+			minlength="8"
+			placeholder="Nome Completo">
+		  <span *ngIf="pacientName.invalid && pacientName.touched" class="text-danger">
+	  		O nome do paciente deve ter ao menos 8 caracteres
+		</span>
+		</div>
+		<!--Pacient Gender-->
+		<div class="col-12 col-sm mb-3 mt-sm-3">
+		  <label
+			for="pacientGender"
+			class="form-label">
+			Gênero
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <select
+			id="pacientGender"
+			name="pacientGender"
+			class="form-select"
+			required
+			[(ngModel)]="pacient.gender">
+			<option value="feminino" selected="selected">Feminino</option>
+			<option value="masculino">Masculino</option>
+			<option value="nao-binario">Não Binário</option>
+		  </select>
+		</div>
+		<!--Date of birth-->
+		<div class="col-12 col-sm mb-3 mt-sm-3">
+		  <label for="dateOfBirth" class="form-label">
+			Data de nascimento
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+			type="date"
+			id="dateOfBirth"
+			name="dateOfBirth"
+			class="form-control"
+			[ngClass]="(dob.errors?.['invalidDob'] && dob.touched) ? 'invalidInput' : ''"
+			required
+			[(ngModel)]="pacient.dob"
+            #dob="ngModel"
+			appValidDob
+		  >
+		  <p
+			*ngIf="dob.errors?.['invalidDob'] && dob.touched"
+			class="text-danger">
+			A data de nascimento deve ser menor que a data atual
+		  </p>
+		</div>
+	  </div>
+	  <!--Cpf, rg, civil status-->
+	  <div class="row">
+		<!--CPF-->
+		<div class="col-12 col-sm mb-3">
+		  <label for="pacientCpf" class="form-label">
+			Cpf
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+            #cpf="ngModel"
+			[ngClass]="cpf.invalid && cpf.touched ? 'form-control invalidInput' : 'form-control'"
+			type="text"
+			id="pacientCpf"
+			name="pacientCpf"
+			minlength="14"
+			maxlength="14"
+			placeholder="000.000.000-00"
+			required
+			pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$"
+			[(ngModel)]="pacient.cpf"
+			(change)="formatCpf()">
+		  <span *ngIf="cpf.invalid && cpf.touched" class="text-danger">
+		  Digite um cpf válido
+		</span>
+		</div>
+		<!--Rg-->
+		<div class="col-12 col-lg mb-3">
+		  <div class="row">
+			<div class="col-12 col-sm">
+			  <label
+				for="pacientRg"
+				class="form-label">
+				RG
+			  </label>
+			  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+				   class="d-inline-block align-text-top ms-2">
+			  <input
+				type="text"
+				id="pacientRg"
+				class="form-control"
+				[ngClass]="(rgNumber.invalid && rgNumber.touched) ? 'invalidInput' : ''"
+				name="pacientRg"
+				minlength="1"
+				maxlength="20"
+				required
+				[(ngModel)]="pacient.rg"
+				placeholder="999999 SSP/SC"
+                #rgNumber="ngModel">
+			  <span
+				*ngIf="rgNumber.invalid && rgNumber.touched"
+				class="text-danger d-block mb-3">
+			  	Rg deve ter entre 1 e 20 caracteres
+			  </span>
+			</div>
+		  </div>
+		</div>
+		<!--Civil Status-->
+		<div class="col mb-3">
+		  <label
+			for="civilStatus"
+			class="form-label">
+			Estado Civil
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <select
+			id="civilStatus"
+			name="civilStatus"
+			class="form-select"
+			required
+			[(ngModel)]="pacient.civilStatus">
+			<option value="{{ civilStatusEnum.CIVIL_STATUS_SINGLE }}" selected="selected">Solteiro(a)</option>
+			<option value="{{ civilStatusEnum.CIVIL_STATUS_MARRIED }}">Casado(a)</option>
+			<option value="{{ civilStatusEnum.CIVIL_STATUS_DIVORCED }}">Divorciado(a)</option>
+			<option value="{{ civilStatusEnum.CIVIL_STATUS_WIDOWED }}">Viúvo(a)</option>
+		  </select>
+		</div>
+	  </div>
+	  <!--Naturality, email-->
+	  <div class="row">
+		<!--Naturality-->
+		<div class="col-12 col-md mb-3">
+		  <label
+			for="nationality"
+			class="form-label">
+			Naturalidade
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+            #nationality="ngModel"
+			type="text"
+			class="form-control"
+			[ngClass]="(nationality.invalid && nationality.touched) ? 'invalidInput': ''"
+			id="nationality"
+			name="birthPlace"
+			minlength="8"
+			maxlength="64"
+			placeholder="Naturalidade"
+			required
+			[(ngModel)]="pacient.nationality">
+		  <span *ngIf="nationality.invalid && nationality.touched" class="text-danger">
+	  		Naturalidade deve ter entre 8 e 64 caracteres
+		</span>
+		</div>
+		<!--Email-->
+		<div class="col-12 col-md mb-3">
+		  <label for="email" class="form-label">
+			Email
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+            #email="ngModel"
+			type="text"
+			class="form-control"
+			[ngClass]="(email.invalid && email.touched) ? 'invalidInput' : ''"
+			id="email"
+			name="email"
+			placeholder="email@email.com"
+			email
+			required
+			[(ngModel)]="pacient.email">
+
+		  <span
+			*ngIf="email.invalid && email.touched"
+			class="text-danger">
+	  		Email inválido
+		  </span>
+		</div>
+	  </div>
+	  <!--Phone, Emergency contact-->
+	  <div class="row">
+		<!--Phone-->
+		<div class="col-12 col-md mb-3">
+		  <label for="phoneNumber" class="form-label">
+			Telefone
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+			type="text"
+			id="phoneNumber"
+			class="form-control"
+			name="phoneNumber"
+			[(ngModel)]="pacient.phone"
+            #phoneNumber="ngModel"
+			required
+			placeholder="(DD) 9 9999-99999"
+			pattern="^\(\d{2}\) \d \d{4}-\d{5}$"
+		  >
+		  <span *ngIf="phoneNumber.invalid && phoneNumber.touched" class="p-1 text-danger">
+		  {{'Campo fora do formato obrigatório: (DD) 9 9999-99999'}}
+		</span>
+		</div>
+		<!--Emergency Contact-->
+		<div class="col-12 col-md mb-3">
+		  <label for="emergencyContact" class="form-label">
+			Contato de Emergência
+		  </label>
+		  <img [src]="MANDATORY" alt="Logo" width="10" height="10"
+			   class="d-inline-block align-text-top ms-2">
+		  <input
+			id="emergencyContact"
+			type="text"
+			class="form-control"
+			name="emergencyContact"
+			[(ngModel)]="pacient.emergencyContact"
+            #emergencyContact="ngModel"
+			placeholder="(DD) 9 9999-99999"
+			required
+			pattern="^\(\d{2}\) \d \d{4}-\d{5}$">
+		  <span *ngIf="emergencyContact.invalid && emergencyContact.touched" class="p-1 text-danger">
+		  {{'Campo fora do formato obrigatório: (DD) 9 9999-99999'}}
+		</span>
+		</div>
+	  </div>
+	  <hr>
+	  <h2>Informações complementares</h2>
+	  <!--Alergies-->
+	  <div class="row mb-3">
+		<div class="col-4">
+		  <p>Paciente possui alergias?</p>
+		  <div>
+			<div class="form-check">
+			  <input
+				class="form-check-input"
+				type="radio"
+				id="hasAlergy"
+				name="allergy"
+				value="yes"
+				checked
+				(change)="onChangeHasAlergies($event)"
+			  >
+			  <label class="form-check-label" for="hasAlergy">Sim</label>
+			</div>
+			<div class="form-check">
+			  <input
+				class="form-check-input"
+				type="radio"
+				id="noAllergy"
+				name="allergy"
+				value="no"
+				(change)="onChangeHasAlergies($event)"
+			  >
+			  <label class="form-check-label" for="noAllergy">Não</label>
+			</div>
+		  </div>
+		</div>
+		<div *ngIf="hasAlergies" class="col">
+		  <div class="row text-center">
+			<div class="col justify-content-center">
+			  <label class="form-label" for="allergy">Alergia</label>
+			  <input class="form-control mb-3" type="text" id="allergy" [(ngModel)]="allergy" name="allergy">
+			  <button type="button" class="btn btn-secondary w-100" (click)="onAddAllergy(allergy)">Adicionar
+				alergia
+			  </button>
+			</div>
+			<div class="col">
+			  <p class="mb-2">Lista de alergias:</p>
+			  <ul *ngFor="let allergyItem of pacient.alergies; let i = index" class="list-group">
+				<li class="list-group-item d-flex justify-content-between">
+				  <p class="mb-0">{{ allergyItem }}</p>
+				  <span class="badge bg-danger align-items-center rounded-5 d-flex btn" (click)="onRemoveAllergy(i)">
+					X
+				  </span>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <hr>
+	  <!--Special Care-->
+	  <div class="row mb-3">
+		<div class="col-4">
+		  <p>Paciente necessita de cuidados especiais?</p>
+		  <div>
+			<div class="form-check">
+			  <input
+				class="form-check-input"
+				type="radio"
+				id="hasSpecialCare"
+				name="specialCares"
+				value="yes"
+				checked
+				(change)="onChangeHasSpecialCare($event)"
+			  >
+			  <label class="form-check-label" for="hasSpecialCare">Sim</label>
+			</div>
+			<div class="form-check">
+			  <input
+				class="form-check-input"
+				type="radio"
+				id="noSpecialCare"
+				name="specialCares"
+				value="no"
+				(change)="onChangeHasSpecialCare($event)"
+			  >
+			  <label class="form-check-label" for="noSpecialCare">Não</label>
+			</div>
+		  </div>
+		</div>
+		<div *ngIf="hasSpecialCare" class="col">
+		  <div class="row text-center">
+			<div class="col justify-content-center">
+			  <label class="form-label" for="allergy">Cuidado Especial</label>
+			  <input class="form-control mb-3" type="text" id="specialCare" [(ngModel)]="specialCare" name="specialCare">
+			  <button type="button" class="btn btn-secondary w-100" (click)="onAddSpecialCare(specialCare)">Adicionar
+				cuidado especial
+			  </button>
+			</div>
+			<div class="col">
+			  <p class="mb-2">Lista de Cuidados Especiais:</p>
+			  <ul *ngFor="let specialCareItem of pacient.specialCare; let i = index" class="list-group">
+				<li class="list-group-item d-flex justify-content-between">
+				  <p class="mb-0">{{ specialCareItem }}</p>
+				  <span class="badge bg-danger align-items-center rounded-5 d-flex btn" (click)="onRemoveSpecialCare(i)">
+					X
+				  </span>
+				</li>
+			  </ul>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	  <hr>
+	  <!--Health Insurance-->
+	  <h2>Convênio</h2>
+	  <div class="row">
+		<div class="col-12 col-md mb-3">
+		  <label for="insurance" class="form-label">
+			Convênio
+		  </label>
+		  <input
+			type="text"
+			class="form-control"
+			id="insurance"
+			name="insurance"
+			placeholder="Convênio"
+			[(ngModel)]="pacient.healthInsurance">
+		</div>
+		<!--insurance number-->
+		<div class="col-12 col-sm mb-3">
+		  <label for="insuranceNumber" class="form-label">
+			Número do Convênio
+		  </label>
+		  <input
+			type="text"
+			class="form-control"
+			id="insuranceNumber"
+			name="insuranceNumber"
+			placeholder="Número do Convênio"
+			[(ngModel)]="pacient.healthInsuranceNumber">
+		</div>
+		<!--insurance validity-->
+		<div class="col-12 col-sm mb-3">
+		  <label for="insuranceValidity" class="form-label">
+			Validade do Convênio
+		  </label>
+		  <input
+			type="date"
+			class="form-control"
+			id="insuranceValidity"
+			name="insuranceValidity"
+			[(ngModel)]="pacient.healthInsuranceExpirationDate">
+		</div>
+	  </div>
+	  <hr>
+	  <!--Address-->
+	  <h2>Endereço</h2>
+	  <div class="d-flex flex-column">
+		<!--Cep, City, State-->
+		<div class="row">
+		  <!--Cep-->
+		  <div class="col-12 col-sm mb-3">
+			<label for="cep" class="form-label">
+			  CEP
+			</label>
+			<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+				 class="d-inline-block align-text-top ms-2">
+			<input
+			  id="cep"
+			  class="form-control"
+			  type="text" ngModel name="cep" [(ngModel)]="pacient.address.cep" (change)="getAdress()">
+		  </div>
+		  <!--City-->
+		  <div class="col-12 col-sm mb-3">
+			<label for="city" class="form-label">
+			  Cidade
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="city"
+			  name="city"
+			  placeholder="Cidade"
+			  [(ngModel)]="pacient.address.city"
+			  disabled
+			  required>
+		  </div>
+		  <!--State-->
+		  <div class="col-12 col-sm mb-3">
+			<label for="state" class="form-label">
+			  Estado
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="state"
+			  name="state"
+			  placeholder="UF"
+			  [(ngModel)]="pacient.address.state"
+			  disabled
+			  required>
+		  </div>
+		</div>
+		<!--street, number, complement-->
+		<div class="row">
+		  <!--Street-->
+		  <div class="col-12 col-lg mb-3">
+			<label for="street" class="form-label">
+			  Logradouro
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="street"
+			  name="street"
+			  placeholder="Logradouro"
+			  [(ngModel)]="pacient.address.street"
+			  disabled
+			  required>
+		  </div>
+		  <!--Number-->
+		  <div class="col-12 col-sm mb-3">
+			<label for="houseNumber" class="form-label">
+			  Número
+			</label>
+			<img [src]="MANDATORY" alt="Logo" width="10" height="10"
+				 class="d-inline-block align-text-top ms-2">
+			<input
+              #houseNumber="ngModel"
+			  type="text"
+			  class="form-control"
+			  [ngClass]="(houseNumber.invalid && houseNumber.touched) ? 'invalidInput' : ''"
+			  id="houseNumber"
+			  name="houseNumber"
+			  ngModel
+			  required
+			  placeholder="Número"
+			  [(ngModel)]="pacient.address.houseNumber">
+			<span *ngIf="houseNumber.invalid && houseNumber.touched" class="text-danger">
+			É necessário adicionar o número da casa
+		  </span>
+		  </div>
+		  <!--Complement-->
+		  <div class="col-12 col-sm mb-3">
+			<label for="complemento" class="form-label">
+			  Complemento
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="complemento"
+			  name="complemento"
+			  placeholder="Complemento"
+			  [(ngModel)]="pacient.address.complement">
+		  </div>
+		</div>
+		<!--Distric, Reference-->
+		<div class="row">
+		  <!--Distritc-->
+		  <div class="col-12 col-md mb-3">
+			<label for="district" class="form-label">
+			  Bairro
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="district"
+			  name="district"
+			  placeholder="Bairro"
+			  [(ngModel)]="pacient.address.district"
+			  disabled
+			  required>
+		  </div>
+		  <!--Reference-->
+		  <div class="col-12 col-md mb-3">
+			<label for="reference" class="form-label">
+			  Ponto de Referência
+			</label>
+			<input
+			  type="text"
+			  class="form-control"
+			  id="reference"
+			  name="reference"
+			  placeholder="Referência"
+			  [(ngModel)]="pacient.address.referencePoint"
+			>
+		  </div>
+		</div>
+	  </div>
+	  <div class="col-md-3 d-flex justify-content-between">
+		<div [ngbTooltip]="patientForm.invalid ? 'Todos campos com marcação devem ser preenchidos' : ''">
+		  <app-button-forms
+			[label]="'Salvar'"
+			[type]="'btn-primary'"
+			[disabled]="patientForm.invalid"
+			(click)="onSavePatient()">
+		  </app-button-forms>
+		</div>
+
+		<app-button-forms [label]="'Cancelar'" [type]="'btn-warning'" (click)="navigateAway()"></app-button-forms>
+		<div [ngbTooltip]="this.hasRecords ? 'Não é possível deletar o paciente pois este possui registros' : ''">
+		  <app-button-forms
+			[label]="'Deletar'"
+			[type]="'btn-danger'"
+			[disabled]="!this.pacientId || this.hasRecords"
+			(click)="onDeleteRegistration()">
+		  </app-button-forms>
+		</div>
+	  </div>
+	</form>
+  </div>
+</section>
+
+
+

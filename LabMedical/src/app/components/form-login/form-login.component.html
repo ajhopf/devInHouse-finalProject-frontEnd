@@ -1,0 +1,30 @@
+<form class="rounded p-md-5 p-3" (ngSubmit)="onLogin()" #loginForm='ngForm' >
+  <div>
+	<div class="mb-3">
+	  <label for="email" class="form-label">Email</label>
+	  <input id="email" type="email" class="form-control" name="email" aria-describedby="emailHelp" ngModel required>
+	</div>
+	<div class="mb-3">
+	  <label for="password" class="form-label">Senha</label>
+	  <input id="password" type="password" class="form-control" name="password" ngModel required>
+	</div>
+  </div>
+  <div>
+	<app-reset-password></app-reset-password>
+  </div>
+  <div>
+	<button
+	  class="btn btn-primary btn-lg w-100 mb-2"
+	  type="submit"
+	  [disabled]="!loginForm.valid">
+	  Login
+	</button>
+	<app-simple-modal
+	  [header]="'Cadastro de novo usuário'"
+	  [text]="'Para realizar o cadastro de um novo usuário entre em contato com um administrador.'"
+	  [buttonText]="'Cadastrar novo usuário'"
+	></app-simple-modal>
+  </div>
+</form>
+
+

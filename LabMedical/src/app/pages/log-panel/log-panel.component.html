@@ -1,0 +1,90 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-3">
+      <div class="mb-3">
+        <label for="selectLogsPerPageList" class="form-label">Quantidade de logs por pagina</label>
+        <select
+          style="width: 70px"
+          id="selectLogsPerPageList"
+          class="form-select"
+          [(ngModel)]="selectedLogsPerPage"
+          (change)="selectChanges()"
+        >
+          <option
+            *ngFor="let quantity of logsPerPageList"
+            value="{{quantity}}"
+          >{{quantity}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="col-2">
+      <div class="mb-3">
+        <label for="selectPage" class="form-label">Selecione uma pagina</label>
+        <select
+          style="width: 70px"
+          id="selectPage"
+          class="form-select"
+          [(ngModel)]="selectedPage"
+          (change)="selectChanges()"
+        >
+          <option
+            *ngFor="let page of pageList"
+            value="{{page}}"
+          >{{page}}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Description</th>
+          <th>Created</th>
+          <th>Log Type</th>
+          <th>Log Origin</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let log of logs">
+          <td>{{ log.id }}</td>
+          <td>{{ log.description }}</td>
+          <td>{{ log.createdDate }}</td>
+          <td>{{ log.logType }}</td>
+          <td>{{ log.logOrigin }}</td>
+        </tr>
+        </tbody>
+      </table>
+      >
+    </div>
+  </div>
+</div>
+
+
+<!--<div class="dropdown">-->
+<!--  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--    Logs por página-->
+<!--  </button>-->
+<!--  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--    <a class="dropdown-item" *ngFor="let quantity of logsPerPageList" [class.active]="quantity === selectedLogsPerPage" (click)="selecteLogsPerPage(quantity)">{{ quantity }}</a>-->
+<!--  </div>-->
+<!--</div>-->
+<!--  <div class="mb-3">-->
+<!--    <label for="selectPage" class="form-label">Selecione uma pagina</label>-->
+<!--    <select-->
+<!--      id="selectPage"-->
+<!--      class="form-select"-->
+<!--      [(ngModel)]="selectedPage"-->
+<!--      (change)="selectChanges()"-->
+<!--    >-->
+<!--      <option-->
+<!--        *ngFor="let page of pageList"-->
+<!--        value="{{page}}"-->
+<!--      >{{page}}-->
+<!--      </option>-->
+<!--    </select>-->
+<!--  </div>-->
