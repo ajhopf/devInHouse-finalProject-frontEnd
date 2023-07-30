@@ -1,7 +1,6 @@
 import { ToastrService } from 'ngx-toastr';
-import { error } from '@angular/compiler-cli/src/transformers/util';
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserModel } from 'src/app/shared/models/user.model';
 import { UserService } from 'src/app/shared/services/user.service';

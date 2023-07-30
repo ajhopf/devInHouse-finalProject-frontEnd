@@ -2,7 +2,7 @@ import { ExamService } from 'src/app/shared/services/exam.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { ExamModel } from 'src/app/shared/models/exam.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PacientService } from 'src/app/shared/services/pacient.service';
+import { PatientService } from 'src/app/shared/services/patient.service';
 import { Patient } from 'src/app/shared/models/patient.model';
 
 @Component({
@@ -18,7 +18,7 @@ export class MainExamesComponent {
   constructor(
     private examService: ExamService, 
     private router: Router, 
-    private patientService: PacientService,
+    private patientService: PatientService,
     private activatedRoute: ActivatedRoute
     ){}
 

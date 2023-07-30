@@ -50,7 +50,7 @@ export class ExerciseService {
     )
   }
 
-  getExercisesByPatient(patientId: string) {
+  getExercisesByPatient(patientId: string): Observable<any> {
     let user = this.userService.getUser()
     return this.http.get(
       `${environment.URL_EXERCISE}/patientId/${patientId}`,

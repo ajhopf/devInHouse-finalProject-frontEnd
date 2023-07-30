@@ -62,7 +62,7 @@ const ROUTES: RouteModel[] = [
   },
   {
     url: "log/panel",
-    category: "Cadastros",
+    category: "Sistema",
     title: "Logs do Sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
@@ -91,7 +91,7 @@ const ROUTES: RouteModel[] = [
   },
   {
     url: "costumizacao",
-    category: "Cadastros",
+    category: "Sistema",
     title: "Customização do Sistema",
     roles: [
       RolesEnum.ROLE_ADMIN
@@ -99,20 +99,9 @@ const ROUTES: RouteModel[] = [
     icon: "./assets/images/custom.png"
   },
   {
-    url: "home/pacient-form",
+    url: "pacientes",
     category: "Cadastros",
-    title: "Cadastro de Paciente",
-    roles: [
-      RolesEnum.ROLE_DOCTOR,
-      RolesEnum.ROLE_ADMIN,
-      RolesEnum.ROLE_NURSE
-    ],
-    icon: "./assets/images/paciente.png"
-  },
-  {
-    url: "home/listagem-paciente-teste",
-    category: "Cadastros",
-    title: "Listagem de Pacientes",
+    title: "Pacientes",
     roles: [
       RolesEnum.ROLE_DOCTOR,
       RolesEnum.ROLE_ADMIN,
@@ -120,6 +109,18 @@ const ROUTES: RouteModel[] = [
     ],
     icon: "./assets/images/paciente.png"
   }
+  // ,
+  // {
+  //   url: "home/listagem-paciente-teste",
+  //   category: "Cadastros",
+  //   title: "Listagem de Pacientes",
+  //   roles: [
+  //     RolesEnum.ROLE_DOCTOR,
+  //     RolesEnum.ROLE_ADMIN,
+  //     RolesEnum.ROLE_NURSE
+  //   ],
+  //   icon: "./assets/images/paciente.png"
+  // }
 ]
 
 export const environment = {

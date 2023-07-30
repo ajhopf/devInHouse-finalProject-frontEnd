@@ -10,7 +10,7 @@ export function createDoBValidator():  ValidatorFn {
 			return null
 		}
 
-		const isBeforeToday = inputValue < today
+		const isBeforeToday = inputValue <= today
 
 		return !isBeforeToday ? { invalidDob: true } : null
 	}

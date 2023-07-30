@@ -9,8 +9,7 @@ import { RolesEnum } from "./shared/enums/roles.enum";
 import { RoleGuard } from "./shared/guards/role.guard";
 import { UsersTableComponent } from './components/registers/user/users-table/users-table.component';
 import { UserRegisterFormComponent } from './components/registers/user/user-register-form/user-register-form.component';
-import { PacientFormComponent } from "./pages/pacient-form/pacient-form.component";
-import { TesteListagemPacientesComponent } from "./pages/teste-listagem-pacientes/teste-listagem-pacientes.component";
+import { PacientFormComponent } from "./components/registers/patient/pacient-form/pacient-form.component";
 import { LogPanelComponent } from "./pages/log-panel/log-panel.component";
 import {
 	ProntuarioEletronicoComponent
@@ -28,6 +27,7 @@ import { MainExamesComponent } from "./components/prontuario/main-exames/main-ex
 import { MainMedicacaoComponent } from "./components/prontuario/main-medicacao/main-medicacao.component";
 import { MainDietasComponent } from "./components/prontuario/main-dietas/main-dietas.component";
 import { MainExerciciosComponent } from "./components/prontuario/main-exercicios/main-exercicios.component";
+import { PatientsTableComponent } from "./components/registers/patient/patients-list/patients-table.component";
 import {FormExerciseComponent} from "./components/form-exercise/form-exercise.component";
 
 const routes: Routes = [
@@ -39,30 +39,6 @@ const routes: Routes = [
 			{
 				path: '',
 				component: HomeComponent
-			}, {
-				path: 'pacient-form',
-				component: PacientFormComponent,
-				title: 'Formulário de Paciente',
-				canActivate: [RoleGuard],
-				data: {
-					requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR]
-				}
-			}, {
-				path: 'pacient-form/:id',
-				component: PacientFormComponent,
-				title: 'Atualizar Formulário de Paciente',
-				canActivate: [RoleGuard],
-				data: {
-					requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR]
-				}
-			}, {
-				path: 'listagem-paciente-teste',
-				component: TesteListagemPacientesComponent,
-				title: 'Lista de Pacientes Teste',
-				canActivate: [RoleGuard],
-				data: {
-					requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_NURSE, RolesEnum.ROLE_DOCTOR]
-				}
 			}
 		]
 	},
@@ -88,6 +64,30 @@ const routes: Routes = [
 			{
 				path: 'buscar/:id',
 				component: UserRegisterFormComponent
+			}
+		]
+	}, {
+		path: 'pacientes',
+		canActivate: [AuthGuard, RoleGuard],
+		title: 'Listagem de Pacientes',
+		data: {
+			requiredRoles: [RolesEnum.ROLE_ADMIN, RolesEnum.ROLE_DOCTOR, RolesEnum.ROLE_NURSE]
+		},
+		component: FullLayoutComponent, children: [
+			{
+				path: '', redirectTo: 'listar', pathMatch: 'full'
+			},
+			{
+				path: 'listar',
+				component: PatientsTableComponent
+			},
+			{
+				path: 'cadastrar',
+				component: PacientFormComponent
+			},
+			{
+				path: 'editar/:id',
+				component: PacientFormComponent
 			}
 		]
 	},

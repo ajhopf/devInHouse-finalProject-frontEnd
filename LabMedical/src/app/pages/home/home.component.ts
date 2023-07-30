@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { StatsService } from 'src/app/shared/services/stats.service';
-import { PacientService } from "../../shared/services/pacient.service";
+import { PatientService } from "../../shared/services/patient.service";
 import { Router } from "@angular/router";
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -22,7 +22,7 @@ export class HomeComponent {
   pacientList: any[] = []
   userList:any[] = []
 
-  constructor(private statsService:StatsService, private pacientService: PacientService,private userService:UserService,private router: Router){}
+  constructor(private statsService:StatsService, private pacientService: PatientService, private userService:UserService, private router: Router){}
 
   ngOnInit(){
     this.userRole = JSON.parse(localStorage.getItem('session')).role 

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormExerciseService} from "../../../shared/services/form-exercise.service";
 import {ExerciseModel} from "../../../shared/models/exercise.model";
 import {ActivatedRoute, Router} from "@angular/router";
-import {PacientService} from "../../../shared/services/pacient.service";
+import {PatientService} from "../../../shared/services/patient.service";
 import {Patient} from "../../../shared/models/patient.model";
 import {ExerciseService} from "../../../shared/services/exercise.service";
 import {ToastrService} from "ngx-toastr";
@@ -19,7 +19,7 @@ export class MainExerciciosComponent implements OnInit{
   patientId: string;
   constructor(public formExerciseService: FormExerciseService,
               private activatedRoute: ActivatedRoute,
-              private patientService: PacientService,
+              private patientService: PatientService,
               private exerciseService: ExerciseService,
               private router: Router,
               private toastr: ToastrService) {

@@ -63,13 +63,19 @@ export class AppointmentFormComponent implements OnInit{
 	}
 
 	onAddAppointment() {
+		console.log(this.appointment)
+
 		this.appointmentsService.addAppointment(this.appointment).subscribe({
 			next: () => {
 				this.appointmentAddedSavedOrDeleted.emit();
 				this.appointmentForm.reset();
 				this.toastr.success("Consulta cadastrada com sucesso.", "Operação Realizada")
 			},
-			error: err => this.toastr.error("Consulta não cadastrada. Erro: " + err.message, "Operação não realizada")
+			error: err => {
+				console.log(err)
+				this.toastr.error("Consulta não cadastrada. Erro: " + err.message, "Operação não realizada")
+
+			}
 		})
 
 	}

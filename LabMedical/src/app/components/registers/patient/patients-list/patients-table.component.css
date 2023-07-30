@@ -1,0 +1,9 @@
+.userSearch{
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.child-container{
+    background-color: white;
+    min-height: 50vh;
+}

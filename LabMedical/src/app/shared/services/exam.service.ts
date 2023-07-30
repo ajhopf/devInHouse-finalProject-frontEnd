@@ -1,9 +1,9 @@
 
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { environment } from 'src/app/enviroments/enviroment';
 import { AuthenticationService } from './authentication.service';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ExamModel } from '../models/exam.model';
 
 @Injectable({
