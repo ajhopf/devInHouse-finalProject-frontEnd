@@ -57,11 +57,12 @@
     <button
       *ngIf="exercise"
       type="button"
+      (click)="onDelete()"
       class="btn btn-warning ms-2">
       Deletar
     </button>
-    <button *ngIf="!exercise" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
-    <button *ngIf="exercise" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Atualizar</button>
+    <button [ngStyle]="{'visibility': exercise ? 'hidden' : 'visible'}" type="submit" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid || !exerciseForm.dirty">Enviar</button>
+    <button *ngIf="exercise" (click)="onUpdate()" class="btn btn-primary ms-2" [disabled]="exerciseForm.invalid">Atualizar</button>
   </div>
 </form>
 

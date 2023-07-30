@@ -41,9 +41,45 @@ export class FormExerciseComponent {
   }
 
   onSubmit(): void {
-    console.log(this.exerciseForm.value)
+    if(this.exercise){
+      return
+    }
+    let exercise: ExerciseModel = this.exerciseForm.value;
+    exercise.patientId = this.patientId;
+    exercise.dateCreated = new Date().toISOString();
+    exercise.timeCreated = new Date().toLocaleTimeString('pt-BR', {timeZone: 'America/Sao_Paulo'}).slice(0, 5) + ':00';
+    this.exerciseService.createExercise(exercise).subscribe({
+      next: () => {
+        this.toastr.success("Exercício criado com sucesso")
+        this.activeModal.close()
+      },
+      error: err => this.toastr.error(err.message)
+    })
   }
 
+  onUpdate(): void {
+    let exercise: ExerciseModel = this.exerciseForm.value;
+    exercise.id = this.exercise.id;
+    exercise.patientId = this.patientId;
+    exercise.status = this.exercise.status;
+    this.exerciseService.updateExercise(exercise).subscribe({
+      next: () => {
+        this.toastr.success("Exercício atualizado com sucesso")
+        this.activeModal.close()
+      },
+      error: err => this.toastr.error(err.message)
+    })
+  }
+
+  onDelete() {
+    this.exerciseService.deleteExercise(this.exercise.id).subscribe({
+      next: () => {
+        this.toastr.success("Exercício excluído com sucesso")
+        this.activeModal.close()
+      },
+      error: err => this.toastr.error(err.message)
+    })
+  }
   checkIfInputIsUsed(inputName: string): boolean {
     return this.exerciseForm.controls[inputName].dirty || this.exerciseForm.controls[inputName].touched
   }
@@ -56,4 +92,5 @@ export class FormExerciseComponent {
 
   protected readonly ExercisetypeEnum = ExercisetypeEnum;
   protected readonly Object = Object;
+
 }

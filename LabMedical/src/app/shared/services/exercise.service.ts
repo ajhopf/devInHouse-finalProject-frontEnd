@@ -73,4 +73,16 @@ export class ExerciseService {
       }
     )
   }
+
+  deleteExercise(id: number) {
+    let user = this.userService.getUser()
+    return this.http.delete(
+      `${environment.URL_EXERCISE}/${id}`,
+      {
+        headers :  {
+          'Authorization': `Bearer ${user.access_token}`
+        }
+      }
+    )
+  }
 }

@@ -26,21 +26,29 @@ export class MainExerciciosComponent implements OnInit{
   }
 
   onEditExercise(exercise: ExerciseModel) {
-    this.formExerciseService.openModal(this.patientId, exercise);
+    this.formExerciseService.openModal(this.patientId, exercise).subscribe({
+      next: () => {
+        this.inicializeExercisesList();
+      }
+    });
   }
 
   onNewExercise() {
-    this.formExerciseService.openModal(this.patientId);
+    this.formExerciseService.openModal(this.patientId).subscribe({
+      next: () => {
+        this.inicializeExercisesList();
+      }
+    });
   }
 
   onDeactivateExercise(exercise: ExerciseModel) {
     exercise.status = !exercise.status;
     this.exerciseService.updateExercise(exercise).subscribe({
       next: () => {
-        this.toastr.success("Exercício desativado")
+        this.toastr.success("Exercício alterado")
       },
       error: () =>
-        this.toastr.error("Erro ao desativar exercício")
+        this.toastr.error("Erro ao alterar exercício")
     })
   }
 
