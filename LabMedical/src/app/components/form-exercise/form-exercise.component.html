@@ -37,7 +37,13 @@
     <label for="exerciseType" class="form-label">Tipo exercicio</label>
     <select class="form-select" [ngClass]="returnValidationClassForInput('exerciseType')" id="exerciseType" formControlName="exerciseType">
       <option value="">Selecione o tipo de exercício</option>
-      <option value="{{exerciseType}}" *ngFor="let exerciseType of Object.values(ExercisetypeEnum)">{{ exerciseType }}</option>
+      <option value="AEROBIC_ENDURANCE">Resistência Aeróbica</option>
+      <option value="MUSCULAR_ENDURANCE">Resistência Muscular</option>
+      <option value="FLEXIBILITY">Flexibilidade</option>
+      <option value="STRENGTH">Força</option>
+      <option value="AGILITY">Agilidade</option>
+      <option value="OTHER">Outro</option>
+      
     </select>
       <div ngClass="invalid-feedback" *ngIf="exerciseForm.controls['exerciseType'].invalid && checkIfInputIsUsed('exerciseType')">
       <div *ngIf="exerciseForm.controls['exerciseType'].errors['required']">Tipo é obrigatório.</div>

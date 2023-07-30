@@ -65,7 +65,7 @@ export class HomeComponent {
   }
 
   onSeePatient(id: number) {
-    this.router.navigate([`home/pacient-form/${id}`])
+    this.router.navigate([`pacientes/editar/${id}`])
   }
 
   onSeeUser(id:number){
