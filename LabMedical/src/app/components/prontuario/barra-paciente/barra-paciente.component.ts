@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { PatientService } from 'src/app/shared/services/patient.service';
 import { MedicineService } from 'src/app/shared/services/medicine.service';
 import { ActivatedRoute, Router } from "@angular/router";
 import { PacientService } from "../../../shared/services/pacient.service";
