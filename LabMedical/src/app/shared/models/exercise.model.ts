@@ -7,6 +7,7 @@ export interface ExerciseModel {
   timeCreated?: string
   exerciseType?: ExercisetypeEnum
   timesPerWeek?: number
-  exerciseName?: string
+  exerciseSeriesName?: string
   patientId?: number
+  status?: boolean
 }
