@@ -178,9 +178,9 @@
 			  <p>Paciente não possui exercícios cadastrados</p>
 			</div>
 			<div *ngIf="!emptyExercises">
-			  <div *ngFor="let exercise of patientExercises">
+			  <div *ngFor="let exercise of patientExercises | exerciseSorting">
 				<h4><span class="fw-bold">Nome da série de exercícios: </span> {{ exercise.exerciseSeriesName  }}</h4>
-				<p><span class="fw-bold">Data: </span>{{ exercise.dateCreated }}</p>
+				<p><span class="fw-bold">Data: </span>{{ exercise.dateCreated | date: "dd/MM/yyyy"}}</p>
 				<p><span class="fw-bold">Horário: </span>{{ exercise.timeCreated }}</p>
 				<p><span class="fw-bold">Quantidade por semana: </span>{{ exercise.timesPerWeek }}</p>
 				<p><span class="fw-bold">Tipo: </span>{{ exercise.exerciseType }}</p>

@@ -67,6 +67,7 @@ import { PatientsTableComponent } from './components/registers/patient/patients-
 import { ExamSortingPipe } from './shared/pipes/exam-sorting.pipe';
 import { MedicineSortingPipe } from './shared/pipes/medicine-sorting.pipe';
 import { DietSortingPipe } from './shared/pipes/diet-sorting.pipe';
+import { ExerciseSortingPipe } from './shared/pipes/exercise-sorting.pipe';
 
 @NgModule({
   declarations: [
@@ -127,7 +128,8 @@ import { DietSortingPipe } from './shared/pipes/diet-sorting.pipe';
     PatientsTableComponent,
     ExamSortingPipe,
     MedicineSortingPipe,
-    DietSortingPipe
+    DietSortingPipe,
+    ExerciseSortingPipe
   ],
   imports: [
     BrowserModule,
