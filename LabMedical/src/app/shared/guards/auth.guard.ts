@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthenticationService } from "../services/authentication.service";
+import { FirebaseAuthService } from '../services/firebase-auth.service';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-	constructor(private authenticationService: AuthenticationService, private router: Router) {}
+  constructor(private authenticationService: AuthenticationService, private router: Router) { }
 
-	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-		const token = this.authenticationService.getToken();
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    const token = this.authenticationService.getToken();
 
-		if (token && this.authenticationService.isTokenValid(token)) {
-			return true;
-		}
+    if (token && this.authenticationService.isTokenValid(token)) {
+      return true;
+    }
 
-		this.router.navigate(['/public/login']);
-		return false;
-	}
+    this.router.navigate(['/public/login']);
+    return false;
+  }
 }
+
